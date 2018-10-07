@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{ed4adaa8-7db7-4d04-9d23-6bb77826fac3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\GameTime">
+      <UniqueIdentifier>{a067e297-be42-4147-b8d2-f54185b585d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Graphics">
+      <UniqueIdentifier>{d373397a-fc1e-4a56-82e1-206567677931}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Animation">
+      <UniqueIdentifier>{11474764-9099-4c99-bd1b-a1f2f0493939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Objects">
+      <UniqueIdentifier>{2a3b3cb6-9c57-4d5c-a728-276c0d0de4a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\KeyBoard">
+      <UniqueIdentifier>{fbe5f40b-7348-4cb3-8b83-0f083b6b97fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork\Collision">
+      <UniqueIdentifier>{4c9151dd-fc7f-47d2-bf06-94961b167777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{459540f0-db93-4898-8b3a-983600f62d44}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="WindowGame.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="Constant.h" />
+    <ClInclude Include="GameTime.h">
+      <Filter>FrameWork\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimeLoop.h">
+      <Filter>FrameWork\GameTime</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>FrameWork\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="RectF.h">
+      <Filter>FrameWork\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Animate.h">
+      <Filter>FrameWork\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>FrameWork\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>FrameWork\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyBoard.h">
+      <Filter>FrameWork\KeyBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyGame.h">
+      <Filter>FrameWork\KeyBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>FrameWork\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="OldRestore.h">
+      <Filter>FrameWork\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>FrameWork\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableObject.h">
+      <Filter>FrameWork\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>FrameWork\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WindowGame.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="GameTime.cpp">
+      <Filter>FrameWork\GameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimeLoop.cpp">
+      <Filter>FrameWork\GameTime</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>FrameWork\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>FrameWork\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="RectF.cpp">
+      <Filter>FrameWork\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Animate.cpp">
+      <Filter>FrameWork\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>FrameWork\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>FrameWork\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyBoard.cpp">
+      <Filter>FrameWork\KeyBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyGame.cpp">
+      <Filter>FrameWork\KeyBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="Box.cpp">
+      <Filter>FrameWork\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="OldRestore.cpp">
+      <Filter>FrameWork\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>FrameWork\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawableObject.cpp">
+      <Filter>FrameWork\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>FrameWork\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
