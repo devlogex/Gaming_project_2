@@ -5,11 +5,13 @@
 #include "Texture.h"
 #include "KeyGame.h"
 #include "GameTime.h"
-
+#include "Megaman.h"
+#include "MegamanXScene.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	WINDOW->initHandleWindows(hInstance, nCmdShow);
 
+	MegamanXScene::changeScene(new MegamanXScene());
 
 	KeyBoard::Create(hInstance, WINDOW->getHandleWindow());
 
@@ -35,7 +37,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 				KEYBOARD->updateKeyBoard();
 				KEY->update();
 
+				CURSCENE->update();
+
 				GRAPHICS->BeginGraphics();
+				
+				CURSCENE->draw();
 
 				GRAPHICS->EndGraphics();
 				GRAPHICS->PresentBackBuffer();
@@ -52,8 +58,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	delete WINDOW;
 	delete GRAPHICS;
 
-	//if (CastleVaniaScene::curScene != 0)
-	//	delete CastleVaniaScene::curScene;
+	if (MegamanXScene::curScene != 0)
+		delete MegamanXScene::curScene;
 
 	return nCmdShow;
 }

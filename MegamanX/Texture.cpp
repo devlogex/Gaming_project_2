@@ -9,7 +9,7 @@ Texture::Texture(const char * filepath, D3DCOLOR transColor)
 
 void Texture::Init(const char * filepath, D3DCOLOR transColor)
 {
-	direction = Left;
+	direction = Right;
 	HRESULT result;
 	D3DXIMAGE_INFO info;
 	result = D3DXGetImageInfoFromFile(filepath, &info);

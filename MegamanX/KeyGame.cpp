@@ -12,18 +12,18 @@ KeyGame * KeyGame::getInstance()
 
 void KeyGame::update()
 {
-	keyUp = key->IsKeyDown(DIK_UP) || key->IsKeyDown(DIK_W);
-	keyDown = key->IsKeyDown(DIK_DOWN) || key->IsKeyDown(DIK_S);
-	keyLeft = key->IsKeyDown(DIK_LEFT) || key->IsKeyDown(DIK_A);
-	keyRight = key->IsKeyDown(DIK_RIGHT) || key->IsKeyDown(DIK_D);
-	keyJum = key->IsKeyDown(DIK_SPACE);
-	keyAttack = key->IsKeyDown(DIK_Z);
+	keyLeft = key->IsKeyDown(DIK_LEFT);
+	keyRight = key->IsKeyDown(DIK_RIGHT);
+	keyJum = key->IsKeyDown(DIK_SPACE)|| key->IsKeyDown(DIK_X);
+	keyAttack = key->IsKeyDown(DIK_C);
 	keyMove = keyLeft || keyRight;
+	keySlide = key->IsKeyDown(DIK_Z);
 }
 KeyGame::KeyGame()
 {
 	key = KEYBOARD;
-
+	canChangeKeyLeft = true;
+	canChangeKeyRight = true;
 }
 
 

@@ -17,10 +17,6 @@ void Animate::init(fstream & fs)
 	}
 }
 
-void Animate::next(int & curFrame)
-{
-	curFrame = (curFrame + 1) % nFrame;
-}
 
 Animate::Animate()
 {

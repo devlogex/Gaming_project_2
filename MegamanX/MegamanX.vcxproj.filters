@@ -13,9 +13,6 @@
     <Filter Include="FrameWork\Animation">
       <UniqueIdentifier>{11474764-9099-4c99-bd1b-a1f2f0493939}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork\Objects">
-      <UniqueIdentifier>{2a3b3cb6-9c57-4d5c-a728-276c0d0de4a8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="FrameWork\KeyBoard">
       <UniqueIdentifier>{fbe5f40b-7348-4cb3-8b83-0f083b6b97fa}</UniqueIdentifier>
     </Filter>
@@ -24,6 +21,15 @@
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{459540f0-db93-4898-8b3a-983600f62d44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{6da2dd66-e4df-4bfc-938f-72ec87132c88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Megaman">
+      <UniqueIdentifier>{45f8514d-1d0e-4ec3-85f1-add0449dfaa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{2a3b3cb6-9c57-4d5c-a728-276c0d0de4a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,7 +50,7 @@
       <Filter>FrameWork\Animation</Filter>
     </ClInclude>
     <ClInclude Include="RectF.h">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="Animate.h">
       <Filter>FrameWork\Animation</Filter>
@@ -62,23 +68,53 @@
       <Filter>FrameWork\KeyBoard</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="OldRestore.h">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="BaseObject.h">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>FrameWork\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h" />
     <ClInclude Include="Map.h">
       <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadNode.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadTree.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectsCategory.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h" />
+    <ClInclude Include="Megaman.h">
+      <Filter>Megaman</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MovableObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MegamanXScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -99,7 +135,7 @@
       <Filter>FrameWork\Animation</Filter>
     </ClCompile>
     <ClCompile Include="RectF.cpp">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="Animate.cpp">
       <Filter>FrameWork\Animation</Filter>
@@ -117,23 +153,52 @@
       <Filter>FrameWork\KeyBoard</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="OldRestore.cpp">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="BaseObject.cpp">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="DrawableObject.cpp">
-      <Filter>FrameWork\Objects</Filter>
+      <Filter>Objects</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>FrameWork\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Map.cpp">
       <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadNode.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadTree.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectsCategory.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Megaman.cpp">
+      <Filter>Megaman</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MovableObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MegamanXScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

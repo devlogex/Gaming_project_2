@@ -149,6 +149,7 @@
     <ClInclude Include="Animate.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
     <ClInclude Include="DrawableObject.h" />
@@ -158,11 +159,20 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KeyGame.h" />
+    <ClInclude Include="List.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Megaman.h" />
+    <ClInclude Include="MegamanXScene.h" />
+    <ClInclude Include="MovableObject.h" />
+    <ClInclude Include="ObjectsCategory.h" />
     <ClInclude Include="OldRestore.h" />
+    <ClInclude Include="QuadNode.h" />
+    <ClInclude Include="QuadTree.h" />
     <ClInclude Include="RectF.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteManager.h" />
+    <ClInclude Include="Stage.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="WindowGame.h" />
   </ItemGroup>
@@ -170,6 +180,7 @@
     <ClCompile Include="Animate.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -180,10 +191,18 @@
     <ClCompile Include="KeyGame.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Megaman.cpp" />
+    <ClCompile Include="MegamanXScene.cpp" />
+    <ClCompile Include="MovableObject.cpp" />
+    <ClCompile Include="ObjectsCategory.cpp" />
     <ClCompile Include="OldRestore.cpp" />
+    <ClCompile Include="QuadNode.cpp" />
+    <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RectF.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="SpriteManager.cpp" />
+    <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="WindowGame.cpp" />
   </ItemGroup>

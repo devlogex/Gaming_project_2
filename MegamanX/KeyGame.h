@@ -14,14 +14,15 @@ private:
 public:
 	static KeyGame*getInstance();
 
-	bool keyUp;
-	bool keyDown;
 	bool keyLeft;
 	bool keyRight;
 	bool keyJum;
 	bool keyAttack;
+	bool keySlide;
 	bool keyMove;
 
+	bool canChangeKeyLeft;
+	bool canChangeKeyRight;
 	void update();
 
 	~KeyGame();

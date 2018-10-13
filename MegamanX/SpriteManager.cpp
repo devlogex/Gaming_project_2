@@ -12,7 +12,7 @@ SpriteManager * SpriteManager::getInstance()
 SpriteManager::SpriteManager()
 {
 	sprites = new Sprite*[SPR_COUNT];
-	sprites[SPR_MAIN] = new Sprite("Image\\run.png", "Image\\run.txt");
+	sprites[SPR_MAIN] = new Sprite("Data\\Megaman\\megaman.png", "Data\\Megaman\\megaman.txt");
 
 }
 

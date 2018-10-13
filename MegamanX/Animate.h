@@ -10,7 +10,6 @@ public:
 	int nFrame;
 
 	void init(fstream &fs);
-	void next(int &curFrame);
 	Animate();
 	~Animate();
 };

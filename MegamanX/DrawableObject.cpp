@@ -1,18 +1,19 @@
 #include "DrawableObject.h"
 #include"GameState.h"
-
+#include"Map.h"
+#include"Megaman.h"
 
 void DrawableObject::setSprite()
 {
-	sprite = SPRITEMANAGER->sprites[id % 100];
+	/*sprite = SPRITEMANAGER->sprites[id % 100];*/
 }
 
 void DrawableObject::setPauseAnimation(bool pauseAnimation, int frameIndex)
 {
-	if (pauseAnimation)
-		curFrame = frameIndex;
+	//if (pauseAnimation)
+	//	curFrame = frameIndex;
 
-	this->pauseAnimation = pauseAnimation;
+	//this->pauseAnimation = pauseAnimation;
 }
 
 void DrawableObject::changeAction(int newAction)
@@ -23,43 +24,31 @@ void DrawableObject::changeAction(int newAction)
 
 void DrawableObject::update()
 {
-	if (!alive)
-		return;
-
-	if (sprite == 0)
-		return;
-
 	BaseObject::update();
-
-	//if (this->collisionType == CT_ENEMY && GameState::curState == PAUSE_ENEMY)
-	//	return;
-
-	if (!pauseAnimation)
+	if (delayAnimation.canCreateFrame())
 	{
-		if (delayAnimation.canCreateFrame())
+		if (curAnimation != nextAnimation)
 		{
-			if (curFrame == sprite->animates[curAnimation].nFrame - 1)
-			{
-				curAnimation = nextAnimation;
-				/*curFrame = sprite->animates[curAnimation].nFrame - 1;*/  curFrame = 0;  // My fixed
-			}
-
-			sprite->animates[curAnimation].next(curFrame);
+			curAnimation = nextAnimation;
+			curFrame = 0;
 		}
+		else
+			if (curFrame++ == sprite->animates[curAnimation].nFrame - 1)
+				if (curAnimation == MA_RUN || curAnimation == MA_STAND)
+					curFrame = curFrame % sprite->animates[curAnimation].nFrame;
+				else
+					curFrame=sprite->animates[curAnimation].nFrame - 1;
 	}
-
 }
 
 void DrawableObject::draw()
 {
-	if (!alive)
-		return;
-
-	if (sprite == 0)
-		return;
-
 	int xInViewport, yInViewport;
-	TileMap::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
+	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
+
+	int updateY = sprite->animates[curAnimation].frames[curFrame].height - height;
+	yInViewport -= updateY;
+
 	int trucQuay = xInViewport + width / 2;
 
 	if (direction != sprite->image->direction)
@@ -83,12 +72,12 @@ void DrawableObject::draw()
 
 void DrawableObject::restore(BaseObject* obj)
 {
-	setSprite();
-	OldRestore::restore(obj);
-	alive = true;
-	curAnimation = 0;
-	nextAnimation = 0;
-	curFrame = 0;
+	//setSprite();
+	//OldRestore::restore(obj);
+	//alive = true;
+	//curAnimation = 0;
+	//nextAnimation = 0;
+	//curFrame = 0;
 }
 
 DrawableObject::DrawableObject()
@@ -99,8 +88,8 @@ DrawableObject::DrawableObject()
 	curFrame = 0;
 	delayAnimation.minFrameTime = ANIMATE_DELAY_TIME_DEFAULT;
 	delayAnimation.maxFrameTime = 2 * ANIMATE_DELAY_TIME_DEFAULT;
-	pauseAnimation = false;
-	alive = true;
+	//pauseAnimation = false;
+	//alive = true;
 }
 
 DrawableObject::~DrawableObject()

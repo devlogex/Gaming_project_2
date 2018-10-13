@@ -52,17 +52,6 @@ BaseObject::BaseObject()
 
 void BaseObject::updateLocation()
 {
-	if (!alive)
-		return;
-
-	if (isCollisionCross && !isCollision)
-	{
-		if (abs(dx) > abs(dy))
-			dy = 0;
-		else
-			dx = 0;
-	}
-
 	x += dx;
 	y += dy;
 }
