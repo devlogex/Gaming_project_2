@@ -21,8 +21,10 @@ public:
 	bool keySlide;
 	bool keyMove;
 
-	bool canChangeKeyLeft;
-	bool canChangeKeyRight;
+	bool blockKeyLeft;
+	bool blockKeyRight;
+	bool blockKeyJump;
+	bool blockKeySlide;
 	void update();
 
 	~KeyGame();

@@ -22,8 +22,10 @@ void KeyGame::update()
 KeyGame::KeyGame()
 {
 	key = KEYBOARD;
-	canChangeKeyLeft = true;
-	canChangeKeyRight = true;
+	blockKeyLeft = false;
+	blockKeyRight = false;
+	blockKeyJump = false;
+	blockKeySlide = false;
 }
 
 

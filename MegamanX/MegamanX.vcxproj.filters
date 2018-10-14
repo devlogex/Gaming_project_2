@@ -36,7 +36,6 @@
     <ClInclude Include="WindowGame.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
-    <ClInclude Include="Constant.h" />
     <ClInclude Include="GameTime.h">
       <Filter>FrameWork\GameTime</Filter>
     </ClInclude>
@@ -116,6 +115,7 @@
     <ClInclude Include="MegamanXScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Constant.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">

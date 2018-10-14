@@ -10,10 +10,11 @@
 #define BACK_WIDTH			VIEWPORT_WIDTH
 #define BACK_HEIGHT			VIEWPORT_HEIGHT
 #define GRAVITY				550
-#define X_MAP				22
-#define Y_MAP				0
-#define MEGAMAN_VX_RUN		60
-#define MEGAMAN_VX_SLIDE	120
+#define X_MAP				17
+#define Y_MAP				476
+#define MEGAMAN_VX_RUN		80
+#define MEGAMAN_VX_SLIDE	160
+#define MEGAMAN_VY_JUMP		-300
 
 #define WINDOW				WindowGame::getInstance()
 #define GRAPHICS			Graphics::getInstance()
@@ -26,7 +27,7 @@
 #define CURSCENE			MegamanXScene::curScene
 #define MEGAMAN				Megaman::getInstance()
 
-#define FRAME_RATE			(80.0f)  // Số frame load trên một giây (frame/giây)
-#define MIN_FRAME_RATE		(60.0f)
+#define FRAME_RATE			(20.0f)  // Số frame load trên một giây (frame/giây)
+#define MIN_FRAME_RATE		(10.0f)
 #define MIN_FRAME_TIME		(1.0f/FRAME_RATE)	// thời gian load một frame (giây/frame)
 #define MAX_FRAME_TIME		(1.0f/MIN_FRAME_TIME)

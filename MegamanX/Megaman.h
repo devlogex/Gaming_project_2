@@ -23,6 +23,7 @@ public:
 	static Megaman*getInstance();
 
 	void update();
+	void updateAnimation();
 	void updateLocation();
 	void draw();
 

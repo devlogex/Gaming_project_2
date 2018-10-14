@@ -2,6 +2,7 @@
 #include"GameState.h"
 #include"Map.h"
 #include"Megaman.h"
+#include"KeyGame.h"
 
 void DrawableObject::setSprite()
 {
@@ -34,10 +35,22 @@ void DrawableObject::update()
 		}
 		else
 			if (curFrame++ == sprite->animates[curAnimation].nFrame - 1)
+			{
 				if (curAnimation == MA_RUN || curAnimation == MA_STAND)
 					curFrame = curFrame % sprite->animates[curAnimation].nFrame;
 				else
-					curFrame=sprite->animates[curAnimation].nFrame - 1;
+					curFrame = sprite->animates[curAnimation].nFrame - 1;
+
+				if (curAnimation == MA_SLIDE)
+				{
+					curFrame = 0;
+					curAnimation = MA_STAND;
+					vx = 0.0f;
+
+					//block keySlide
+					KEY->blockKeySlide = true;
+				}
+			}
 	}
 }
 

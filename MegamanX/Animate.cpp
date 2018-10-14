@@ -5,8 +5,9 @@
 void Animate::init(fstream & fs)
 {
 	int id;
+	int d;
 	fs >> id >> nFrame;
-
+	
 	frames = new RectF[nFrame];
 	for (int i = 0; i < nFrame; i++)
 	{

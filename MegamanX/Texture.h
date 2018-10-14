@@ -13,8 +13,8 @@ private:
 	LPDIRECT3DTEXTURE9 texture;
 
 public:
-	int Width, Height;
 	Direction direction;
+	int Width, Height;
 	Texture(const char* filepath, D3DCOLOR transColor);
 	void Init(const char* filepath, D3DCOLOR transColor);
 	void RenderTexture(int x, int y, RECT *r);
