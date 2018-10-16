@@ -15,14 +15,16 @@ Megaman::Megaman()
 	sprite = SPRITEMANAGER->sprites[SPR_MAIN];
 	width = 35;
 	height = 44;
-	x = 124;
-	y = 644;
+	x = 334;
+	y = 373;
+
+	blockDirection = false;
 }
 
 void Megaman::update()
 {
 	//update blockKey
-	if (KEY->blockKeyLeft && (KEY->keyRight|| KEY->keyJum))
+	if (KEY->blockKeyLeft && (KEY->keyRight || KEY->keyJum))
 		KEY->blockKeyLeft = false;
 	if (KEY->blockKeyRight && (KEY->keyLeft || KEY->keyJum))
 		KEY->blockKeyRight = false;
@@ -32,8 +34,9 @@ void Megaman::update()
 	if (!KEY->keySlide)
 		KEY->blockKeySlide = false;
 
+
 	// block key
-	if (isOnGround) 
+	if (isOnGround)
 	{
 		if (KEY->blockKeyLeft)
 			KEY->keyLeft = false;
@@ -51,12 +54,39 @@ void Megaman::update()
 		KEY->keySlide = false;
 
 	// update direction 
-	if (KEY->keyLeft)
-		direction = Left;
-	if (KEY->keyRight)
-		direction = Right;
-	if (KEY->keyMove)
-		vx = direction * MEGAMAN_VX_RUN;
+	if (blockDirection)
+	{
+		if ((KEY->keyLeft && direction == Right) || (KEY->keyRight && direction == Left) && vx != 0)
+		{
+			if (curAnimation == MA_JUMP)
+				vx = vx - direction * MEGAMAN_VX_RUN * GAME_TIME->frameTime;
+			else
+				if (curAnimation == MA_HIGHJUMP)
+					vx = vx - direction * MEGAMAN_VX_SLIDE * GAME_TIME->frameTime;
+		}
+		else
+			blockDirection = false;
+	}
+	else
+	{
+		if (KEY->keyLeft)
+			direction = Left;
+		if (KEY->keyRight)
+			direction = Right;
+		if (KEY->keyMove)
+		{
+			if (curAnimation == MA_SLIDE || curAnimation == MA_HIGHJUMP)
+				vx = direction * MEGAMAN_VX_SLIDE;
+			else
+				vx = direction * MEGAMAN_VX_RUN;
+		}
+		else
+			if (!curAnimation == MA_SLIDE)
+				vx = 0;
+	}
+
+
+
 	// update animation
 	updateAnimation();
 
@@ -69,7 +99,7 @@ void Megaman::updateAnimation()
 {
 	if (isOnGround)
 	{
-		if (curAnimation == MA_JUMP)
+		if (curAnimation == MA_JUMP || curAnimation == MA_HIGHJUMP)
 		{
 			if (KEY->keyMove)
 			{
@@ -101,7 +131,7 @@ void Megaman::updateAnimation()
 				vx = 0;
 				vy = MEGAMAN_VY_JUMP;
 			}
-			changeAction(MA_JUMP);
+			changeAction(MA_HIGHJUMP);
 		}
 		else
 			if (KEY->keySlide)
@@ -146,7 +176,10 @@ void Megaman::updateAnimation()
 				direction = direction == Left ? Right : Left;
 				vx = direction * MEGAMAN_VX_SLIDE;
 				vy = MEGAMAN_VY_JUMP;
-				changeAction(MA_JUMP);
+				changeAction(MA_HIGHJUMP);
+
+				//block direction
+				blockDirection = true;
 			}
 			else
 				if (KEY->keyJum)
@@ -155,19 +188,26 @@ void Megaman::updateAnimation()
 					vx = direction * MEGAMAN_VX_RUN;
 					vy = MEGAMAN_VY_JUMP;
 					changeAction(MA_JUMP);
+
+					//block direction
+					blockDirection = true;
 				}
 		}
 		else
 		{
-			if (curAnimation == MA_JUMP)
-			{
-				if (!KEY->keyJum && vy < 0)
-				{
-					vy = 0.0f;
-				}
-			}
+			if (curAnimation == MA_HIGHJUMP && KEY->keyMove && !blockDirection)
+				vx = direction*MEGAMAN_VX_SLIDE;
 			else
-				changeAction(MA_JUMP);
+				if (curAnimation == MA_JUMP)
+				{
+					if (!KEY->keyJum && vy < 0)
+					{
+						vy = 0.0f;
+					}
+				}
+				else
+					changeAction(MA_JUMP);
+
 		}
 	}
 }
@@ -215,15 +255,12 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 		if (direction == Left && x == other->right())
 			KEY->blockKeyLeft = true;
 		else
-			if(direction == Right && right() == other->x)
+			if (direction == Right && right() == other->x)
 				KEY->blockKeyRight = true;
 	}
-	//block keyJump
-	if (other->collisionType == CT_GROUND && KEY->keyJum )
-		KEY->blockKeyJump = true;
 
 	// climb
-	if (((nx==1 &&KEY->keyLeft)||(nx==-1 && KEY->keyRight)) && curAnimation != MA_RUN && curAnimation != MA_SLIDE && curAnimation != MA_STAND && other->collisionType == CT_GROUND)
+	if (((nx == 1 && KEY->keyLeft) || (nx == -1 && KEY->keyRight)) && curAnimation != MA_RUN && curAnimation != MA_SLIDE && curAnimation != MA_STAND && other->collisionType == CT_GROUND)
 	{
 		vy = 0;
 
@@ -235,10 +272,12 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	}
 
 	// update .....
-	if(other->collisionType==CT_GROUND)
+	if (other->collisionType == CT_GROUND)
 		MovableObject::onCollision(other, nx, ny);
 
-
+	//block keyJump
+	if (dy > 0)
+		KEY->blockKeyJump = true;
 }
 
 

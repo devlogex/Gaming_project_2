@@ -6,6 +6,7 @@ enum MEGAMAN_ACTION
 	MA_APPEAR,
 	MA_STAND,
 	MA_JUMP,
+	MA_HIGHJUMP,
 	MA_RUN,
 	MA_SLIDE,
 	MA_CLIMB,
@@ -21,6 +22,8 @@ private:
 
 public:
 	static Megaman*getInstance();
+
+	bool blockDirection;
 
 	void update();
 	void updateAnimation();
