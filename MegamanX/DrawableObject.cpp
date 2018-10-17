@@ -36,20 +36,13 @@ void DrawableObject::update()
 		else
 			if (curFrame++ == sprite->animates[curAnimation].nFrame - 1)
 			{
-				if (curAnimation == MA_RUN || curAnimation == MA_STAND)
-					curFrame = curFrame % sprite->animates[curAnimation].nFrame;
+				if (curAnimation == MA_STAND || curAnimation == MA_RUN)
+					curFrame = (curFrame+1) % sprite->animates[curAnimation].nFrame;
 				else
 					curFrame = sprite->animates[curAnimation].nFrame - 1;
-
+				
 				if (curAnimation == MA_SLIDE)
-				{
-					curFrame = 0;
-					curAnimation = MA_STAND;
-					vx = 0.0f;
-
-					//block keySlide
-					KEY->blockKeySlide = true;
-				}
+					MEGAMAN->canSlide = false;
 			}
 	}
 }

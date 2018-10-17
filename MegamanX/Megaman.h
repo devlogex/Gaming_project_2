@@ -6,13 +6,12 @@ enum MEGAMAN_ACTION
 	MA_APPEAR,
 	MA_STAND,
 	MA_JUMP,
-	MA_HIGHJUMP,
 	MA_RUN,
 	MA_SLIDE,
-	MA_CLIMB,
-	MA_NEARDEATH,
-	MA_DIE,
-	MA_DISAPPEAR
+	MA_WALL,
+	MA_JUMPWALL,
+	MA_HIGHJUMPWALL,
+	MA_HIGHJUMP
 };
 class Megaman: public MovableObject
 {
@@ -23,7 +22,10 @@ private:
 public:
 	static Megaman*getInstance();
 
-	bool blockDirection;
+	bool canJump;
+	bool canSlide;
+	bool canMoveLeft;
+	bool canMoveRight;
 
 	void update();
 	void updateAnimation();
