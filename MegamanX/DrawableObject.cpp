@@ -43,7 +43,11 @@ void DrawableObject::update()
 				
 				if (curAnimation == MA_SLIDE)
 					MEGAMAN->canSlide = false;
+				if (curAnimation == MA_JUMPWALL || curAnimation==MA_HIGHJUMPWALL)
+					MEGAMAN->canJump = false;
+
 			}
+		
 	}
 }
 
