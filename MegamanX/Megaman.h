@@ -11,7 +11,15 @@ enum MEGAMAN_ACTION
 	MA_WALL,
 	MA_JUMPWALL,
 	MA_HIGHJUMPWALL,
-	MA_HIGHJUMP
+	MA_HIGHJUMP,
+	MA_STAND_ATTACK,
+	MA_JUMP_ATTACK,
+	MA_RUN_ATTACK,
+	MA_SLIDE_ATTACK,
+	MA_WALL_ATTACK,
+	MA_JUMPWALL_ATTACK,
+	MA_HIGHJUMPWALL_ATTACK,
+	MA_HIGHJUMP_ATTACK,
 };
 class Megaman: public MovableObject
 {
@@ -26,6 +34,12 @@ public:
 	bool canSlide;
 	bool canMoveLeft;
 	bool canMoveRight;
+
+	GameTimeLoop timeAttack;
+	void toAttack();
+	void toNormal();
+	void statusNormal();
+	void statusAttack();
 
 	void update();
 	void updateAnimation();

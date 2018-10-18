@@ -2,7 +2,7 @@
 #define CLASS_NAME "MegamanX"
 #define TITLE_STR "MegamanX"
 
-#define ANIMATE_DELAY_TIME_DEFAULT	0.05f
+#define ANIMATE_DELAY_TIME_DEFAULT	0.08f
 #define SCREEN_WIDTH		640
 #define SCREEN_HEIGHT		725
 #define VIEWPORT_WIDTH		210

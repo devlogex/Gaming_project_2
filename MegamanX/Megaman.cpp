@@ -23,77 +23,114 @@ Megaman::Megaman()
 	canSlide = true;
 	canMoveLeft = true;
 	canMoveRight = true;
+
+
 }
 
-void Megaman::update()
+void Megaman::toAttack()
 {
-	//update move, slide khi sat tuong
-	if ((!canMoveLeft && direction == Left) || (!canMoveRight&&direction == Right))
-		canSlide = false;
-	if (!canMoveLeft && (KEY->keyRight || KEY->keyJum))
-		canMoveLeft = true;
-	if (!canMoveRight && (KEY->keyLeft || KEY->keyJum))
-		canMoveRight = true;
-
-	if (!KEY->keyJum)
-		canJump = true;
-	if (!KEY->keySlide)
-		canSlide = true;
-
-
-	//update vx,direction
-	if (KEY->keyMove)
+	if (curAnimation == MA_STAND)
 	{
-		direction = KEY->keyLeft ? Left : Right;
-
-		if (curAnimation == MA_JUMP || curAnimation == MA_RUN)
-		{
-			vx = MEGAMAN_VX_RUN * direction;
-		}
-		else
-			if (curAnimation == MA_SLIDE || curAnimation == MA_HIGHJUMP)
-			{
-				vx = MEGAMAN_VX_SLIDE * direction;
-			}
-			else
-				if (curAnimation == MA_JUMPWALL)
-				{
-					if (vy < 0)
-						vx+=direction* MEGAMAN_AX*GAME_TIME->frameTime;
-					else
-						vx = direction * MEGAMAN_VX_RUN;
-				}
-				else
-					if (curAnimation == MA_HIGHJUMPWALL)
-					{
-						if (vy < 0)
-							vx += direction* MEGAMAN_AX * GAME_TIME->frameTime;
-						else
-							vx = MEGAMAN_VX_SLIDE * direction;
-					}
-					else
-						if (curAnimation == MA_WALL)
-							vx = MEGAMAN_VX_RUN * direction;
+		curAnimation = MA_STAND_ATTACK;
+		nextAnimation = MA_STAND_ATTACK;
 	}
 	else
-		if (curAnimation == MA_SLIDE)
+		if (curAnimation == MA_JUMP)
 		{
-			vx = MEGAMAN_VX_SLIDE * direction;
+			curAnimation = MA_JUMP_ATTACK;
+			nextAnimation = MA_JUMP_ATTACK;
 		}
 		else
-			vx = 0;
-
-	updateAnimation();
-
-	MovableObject::update();
+			if (curAnimation == MA_RUN)
+			{
+				curAnimation = MA_RUN_ATTACK;
+				nextAnimation = MA_RUN_ATTACK;
+			}
+			else
+				if (curAnimation == MA_SLIDE)
+				{
+					curAnimation = MA_SLIDE_ATTACK;
+					nextAnimation = MA_SLIDE_ATTACK;
+				}
+				else
+					if (curAnimation == MA_WALL)
+					{
+						curAnimation = MA_WALL_ATTACK;
+						nextAnimation = MA_WALL_ATTACK;
+					}
+					else
+						if (curAnimation == MA_JUMPWALL)
+						{
+							curAnimation = MA_JUMPWALL_ATTACK;
+							nextAnimation = MA_JUMPWALL_ATTACK;
+						}
+						else
+							if (curAnimation == MA_HIGHJUMPWALL)
+							{
+								curAnimation = MA_HIGHJUMPWALL_ATTACK;
+								nextAnimation = MA_HIGHJUMPWALL_ATTACK;
+							}
+							else
+								if (curAnimation == MA_HIGHJUMP)
+								{
+									curAnimation = MA_HIGHJUMP_ATTACK;
+									nextAnimation = MA_HIGHJUMP_ATTACK;
+								}
 }
 
-void Megaman::updateAnimation()
+void Megaman::toNormal()
 {
-	if (curAnimation == MA_APPEAR)
-		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
-			changeAction(MA_STAND);
+	if (curAnimation == MA_STAND_ATTACK)
+	{
+		curAnimation = MA_STAND;
+		nextAnimation = MA_STAND;
+	}
+	else
+		if (curAnimation == MA_JUMP_ATTACK)
+		{
+			curAnimation = MA_JUMP;
+			nextAnimation = MA_JUMP;
+		}
+		else
+			if (curAnimation == MA_RUN_ATTACK)
+			{
+				curAnimation = MA_RUN;
+				nextAnimation = MA_RUN;
+			}
+			else
+				if (curAnimation == MA_SLIDE_ATTACK)
+				{
+					curAnimation = MA_SLIDE;
+					nextAnimation = MA_SLIDE;
+				}
+				else
+					if (curAnimation == MA_WALL_ATTACK)
+					{
+						curAnimation = MA_WALL;
+						nextAnimation = MA_WALL;
+					}
+					else
+						if (curAnimation == MA_JUMPWALL_ATTACK)
+						{
+							curAnimation = MA_JUMPWALL;
+							nextAnimation = MA_JUMPWALL;
+						}
+						else
+							if (curAnimation == MA_HIGHJUMPWALL_ATTACK)
+							{
+								curAnimation = MA_HIGHJUMPWALL;
+								nextAnimation = MA_HIGHJUMPWALL;
+							}
+							else
+								if (curAnimation == MA_HIGHJUMP_ATTACK)
+								{
+									curAnimation = MA_HIGHJUMP;
+									nextAnimation = MA_HIGHJUMP;
+								}
+}
 
+void Megaman::statusNormal()
+{
 	if (isOnGround)
 	{
 		if (curAnimation == MA_JUMP || curAnimation == MA_HIGHJUMP && vy >= 0)
@@ -141,31 +178,214 @@ void Megaman::updateAnimation()
 			if (curAnimation == MA_HIGHJUMPWALL && vy > 0)
 				changeAction(MA_HIGHJUMP);
 
-		else
-			if (curAnimation == MA_WALL)
-			{
-				if (KEY->keySlide && KEY->keyJum && canJump)
+			else
+				if (curAnimation == MA_WALL)
 				{
-					vx = -MEGAMAN_VX_WALL_H * direction;
-					vy = MEGAMAN_VY_WALL_UP_H;
-					changeAction(MA_HIGHJUMPWALL);
+					if (KEY->keySlide && KEY->keyJum && canJump)
+					{
+						vx = -MEGAMAN_VX_WALL_H * direction;
+						vy = MEGAMAN_VY_WALL_UP_H;
+						changeAction(MA_HIGHJUMPWALL);
+					}
+					else
+						if (KEY->keyJum && canJump)
+						{
+							vx = -MEGAMAN_VX_WALL * direction;
+							vy = MEGAMAN_VY_WALL_UP;
+							changeAction(MA_JUMPWALL);
+						}
 				}
 				else
-					if (KEY->keyJum && canJump)
+					if (curAnimation == MA_JUMP || curAnimation == MA_HIGHJUMP)
 					{
-						vx = -MEGAMAN_VX_WALL * direction;
-						vy = MEGAMAN_VY_WALL_UP;
-						changeAction(MA_JUMPWALL);
+						if (!KEY->keyJum && vy < 0)
+							vy = 0.0f;
 					}
+	}
+}
+
+void Megaman::statusAttack()
+{
+	if (isOnGround)
+	{
+		if (curAnimation == MA_JUMP_ATTACK || curAnimation == MA_HIGHJUMP_ATTACK && vy >= 0)
+		{
+			changeAction(MA_STAND_ATTACK);
+			return;
+		}
+
+		if (KEY->keyJum && KEY->keySlide && canJump)
+		{
+			vy = MEGAMAN_VY_JUMP;
+			changeAction(MA_HIGHJUMP_ATTACK);
+			canJump = false;
+		}
+		else
+			if (KEY->keyJum && canJump)
+			{
+				vy = MEGAMAN_VY_JUMP;
+				changeAction(MA_JUMP_ATTACK);
+				canJump = false;
 			}
 			else
-				if (curAnimation == MA_JUMP || curAnimation==MA_HIGHJUMP)
+				if (KEY->keySlide && canSlide)
 				{
-					if (!KEY->keyJum && vy < 0)
-						vy = 0.0f;
+					changeAction(MA_SLIDE_ATTACK);
 				}
+				else
+					if ((KEY->keyLeft && canMoveLeft) || (KEY->keyRight&&canMoveRight))
+					{
+						if (curAnimation != MA_RUN_ATTACK)
+							changeAction(MA_RUN_ATTACK);
+					}
+					else
+						if (curAnimation != MA_STAND_ATTACK)
+							changeAction(MA_STAND_ATTACK);
+	}
+	else
+	{
+		if ((curAnimation == MA_JUMPWALL_ATTACK || curAnimation == MA_HIGHJUMPWALL_ATTACK) && !KEY->keyJum && vy < 0)
+			vy = 0;
+
+		if ((curAnimation == MA_STAND_ATTACK || curAnimation == MA_RUN_ATTACK || curAnimation == MA_SLIDE_ATTACK) && vy > 0 || (curAnimation == MA_JUMPWALL_ATTACK && vy > 0))
+			changeAction(MA_JUMP_ATTACK);
+		else
+			if (curAnimation == MA_HIGHJUMPWALL_ATTACK && vy > 0)
+				changeAction(MA_HIGHJUMP_ATTACK);
+
+			else
+				if (curAnimation == MA_WALL_ATTACK)
+				{
+					if (KEY->keySlide && KEY->keyJum && canJump)
+					{
+						vx = -MEGAMAN_VX_WALL_H * direction;
+						vy = MEGAMAN_VY_WALL_UP_H;
+						changeAction(MA_HIGHJUMPWALL_ATTACK);
+					}
+					else
+						if (KEY->keyJum && canJump)
+						{
+							vx = -MEGAMAN_VX_WALL * direction;
+							vy = MEGAMAN_VY_WALL_UP;
+							changeAction(MA_JUMPWALL_ATTACK);
+						}
+				}
+				else
+					if (curAnimation == MA_JUMP_ATTACK || curAnimation == MA_HIGHJUMP_ATTACK)
+					{
+						if (!KEY->keyJum && vy < 0)
+							vy = 0.0f;
+					}
+	}
+}
+
+void Megaman::update()
+{
+	//update move, slide khi sat tuong
+	if ((!canMoveLeft && direction == Left) || (!canMoveRight&&direction == Right))
+		canSlide = false;
+	if (!canMoveLeft && (KEY->keyRight || KEY->keyJum))
+		canMoveLeft = true;
+	if (!canMoveRight && (KEY->keyLeft || KEY->keyJum))
+		canMoveRight = true;
+
+	if (!KEY->keyJum)
+		canJump = true;
+	if (!KEY->keySlide)
+		canSlide = true;
+	
+
+	//update vx,direction
+	if (KEY->keyMove)
+	{
+		direction = KEY->keyLeft ? Left : Right;
+
+		if (curAnimation == MA_JUMP || curAnimation == MA_RUN || curAnimation==MA_JUMP_ATTACK || curAnimation==MA_RUN_ATTACK)
+		{
+			vx = MEGAMAN_VX_RUN * direction;
+		}
+		else
+			if (curAnimation == MA_SLIDE || curAnimation == MA_HIGHJUMP ||curAnimation == MA_SLIDE_ATTACK || curAnimation == MA_HIGHJUMP_ATTACK)
+			{
+				vx = MEGAMAN_VX_SLIDE * direction;
+			}
+			else
+				if (curAnimation == MA_JUMPWALL || curAnimation == MA_JUMPWALL_ATTACK)
+				{
+					if (vy < 0)
+						vx+=direction* MEGAMAN_AX*GAME_TIME->frameTime;
+					else
+						vx = direction * MEGAMAN_VX_RUN;
+				}
+				else
+					if (curAnimation == MA_HIGHJUMPWALL || curAnimation == MA_HIGHJUMPWALL_ATTACK)
+					{
+						if (vy < 0)
+							vx += direction* MEGAMAN_AX * GAME_TIME->frameTime;
+						else
+							vx = MEGAMAN_VX_SLIDE * direction;
+					}
+					else
+						if (curAnimation == MA_WALL || curAnimation == MA_WALL_ATTACK)
+							vx = MEGAMAN_VX_RUN * direction;
+	}
+	else
+		if (curAnimation == MA_SLIDE || curAnimation == MA_SLIDE_ATTACK)
+		{
+			vx = MEGAMAN_VX_SLIDE * direction;
+		}
+		else
+			vx = 0;
+
+
+	updateAnimation();
+
+	MovableObject::update();
+}
+
+void Megaman::updateAnimation()
+{
+	if (curAnimation == MA_APPEAR)
+		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
+			changeAction(MA_STAND);
+
+	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 30)
+	{
+		if (curAnimation != MA_STAND_ATTACK && curAnimation != MA_JUMP_ATTACK && curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK
+			&& curAnimation != MA_WALL_ATTACK && curAnimation != MA_JUMPWALL_ATTACK && curAnimation != MA_HIGHJUMPWALL_ATTACK && curAnimation != MA_HIGHJUMP_ATTACK)
+			MEGAMAN->toAttack();
+		
+		statusAttack();
+
+		timeAttack.curLoop++;
+		return;
 	}
 
+	if (KEY->keyAttack)
+	{
+		timeAttack.curLoop++;
+		
+		if (timeAttack.curLoop >= 30)
+		{
+			toNormal();
+			statusNormal();
+		}
+	}
+	else
+	{
+		if (timeAttack.curLoop >= 30 && timeAttack.curLoop < 100)
+		{
+
+		}
+		else
+			if (timeAttack.curLoop >= 100)
+			{
+
+			}
+		timeAttack.start();
+		
+		statusNormal();
+	}
 }
 void Megaman::updateLocation()
 {
@@ -191,9 +411,13 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	}
 	
 	//on wall
-	if (((nx == 1 && KEY->keyLeft) || (nx == -1 && KEY->keyRight)) && curAnimation != MA_RUN && curAnimation != MA_SLIDE && curAnimation != MA_STAND && other->collisionType == CT_GROUND)
+	if (((nx == 1 && KEY->keyLeft) || (nx == -1 && KEY->keyRight)) && curAnimation != MA_RUN && curAnimation != MA_SLIDE && curAnimation != MA_STAND && other->collisionType == CT_GROUND
+		&& curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK && curAnimation != MA_STAND_ATTACK)
 	{
-		curAnimation = MA_WALL;
+		if (timeAttack.curLoop > 0 && timeAttack.curLoop < 100)
+			curAnimation = MA_WALL_ATTACK;
+		else
+			curAnimation = MA_WALL;
 		curFrame = 0;
 		vy = MEGAMAN_VY_WALL_DOWN;
 	}
@@ -202,7 +426,8 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	if (other->collisionType == CT_GROUND)
 		MovableObject::onCollision(other, nx, ny);
 
-	if (dy > 0 &&curAnimation!=MA_WALL && curAnimation!=MA_JUMPWALL && curAnimation!=MA_HIGHJUMPWALL)
+	if (dy > 0 &&curAnimation!=MA_WALL && curAnimation!=MA_JUMPWALL && curAnimation!=MA_HIGHJUMPWALL 
+		&& curAnimation != MA_WALL_ATTACK && curAnimation != MA_JUMPWALL_ATTACK && curAnimation != MA_HIGHJUMPWALL_ATTACK)
 		canJump = false;
 }
 
