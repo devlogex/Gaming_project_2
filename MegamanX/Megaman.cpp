@@ -348,7 +348,7 @@ void Megaman::updateAnimation()
 		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
 			changeAction(MA_STAND);
 
-	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 30)
+	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 20)
 	{
 		if (curAnimation != MA_STAND_ATTACK && curAnimation != MA_JUMP_ATTACK && curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK
 			&& curAnimation != MA_WALL_ATTACK && curAnimation != MA_JUMPWALL_ATTACK && curAnimation != MA_HIGHJUMPWALL_ATTACK && curAnimation != MA_HIGHJUMP_ATTACK)
@@ -375,7 +375,7 @@ void Megaman::updateAnimation()
 	{
 		timeAttack.curLoop++;
 		
-		if (timeAttack.curLoop >= 30)
+		if (timeAttack.curLoop >= 20)
 		{
 			toNormal();
 			statusNormal();
@@ -383,12 +383,12 @@ void Megaman::updateAnimation()
 	}
 	else
 	{
-		if (timeAttack.curLoop >= 30 && timeAttack.curLoop < 100)
+		if (timeAttack.curLoop >= 20 && timeAttack.curLoop < 50)
 		{
 
 		}
 		else
-			if (timeAttack.curLoop >= 100)
+			if (timeAttack.curLoop >= 50)
 			{
 
 			}
