@@ -23,8 +23,7 @@ Megaman::Megaman()
 	canSlide = true;
 	canMoveLeft = true;
 	canMoveRight = true;
-
-
+	holdingAttack = false;
 }
 
 void Megaman::toAttack()
@@ -356,8 +355,19 @@ void Megaman::updateAnimation()
 			MEGAMAN->toAttack();
 		
 		statusAttack();
-
-		timeAttack.curLoop++;
+		if (KEY->keyAttack)
+			if (holdingAttack)
+				timeAttack.curLoop++;
+			else
+			{
+				timeAttack.curLoop = 1;
+				holdingAttack = true;
+			}
+		if (!KEY->keyAttack)
+		{
+			timeAttack.curLoop++;
+			holdingAttack = false;
+		}
 		return;
 	}
 
@@ -387,6 +397,7 @@ void Megaman::updateAnimation()
 		statusNormal();
 	}
 }
+
 void Megaman::updateLocation()
 {
 	x += dx;
@@ -430,7 +441,6 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 		&& curAnimation != MA_WALL_ATTACK && curAnimation != MA_JUMPWALL_ATTACK && curAnimation != MA_HIGHJUMPWALL_ATTACK)
 		canJump = false;
 }
-
 
 Megaman::~Megaman()
 {

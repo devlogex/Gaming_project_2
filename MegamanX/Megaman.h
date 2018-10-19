@@ -34,7 +34,7 @@ public:
 	bool canSlide;
 	bool canMoveLeft;
 	bool canMoveRight;
-
+	bool holdingAttack;
 	GameTimeLoop timeAttack;
 	void toAttack();
 	void toNormal();
