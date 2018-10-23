@@ -12,7 +12,7 @@ public:
 	Sprite(const char*imageFilePath, const char*animationInfoFilePath);
 	void init(const char*imageFilePath, const char*animationInfoFilePath);
 	void initAnimation(const char* animationInfoFilePath);
-	void draw(int x, int y, int curAnimate, int curFrame);
+	void draw(int x, int y, int curAnimate, int curFrame,bool isCenter=false);
 
 	Sprite();
 	~Sprite();

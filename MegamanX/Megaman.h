@@ -36,15 +36,21 @@ public:
 	bool canMoveRight;
 	bool holdingAttack;
 	GameTimeLoop timeAttack;
+
 	void toAttack();
 	void toNormal();
 	void statusNormal();
 	void statusAttack();
+	void updateVX();
+	void updateBlock();
+	void updateBeforeHandle();
 
 	void update();
 	void updateAnimation();
 	void updateLocation();
 	void draw();
+
+	int updateY;
 
 	void onCollision(BaseObject * other, int nx, int ny);
 

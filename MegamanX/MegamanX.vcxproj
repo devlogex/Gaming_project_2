@@ -166,6 +166,7 @@
     <ClInclude Include="MovableObject.h" />
     <ClInclude Include="ObjectsCategory.h" />
     <ClInclude Include="OldRestore.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="QuadNode.h" />
     <ClInclude Include="QuadTree.h" />
     <ClInclude Include="RectF.h" />
@@ -174,6 +175,12 @@
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponLocation.h" />
+    <ClInclude Include="Weapon_Large.h" />
+    <ClInclude Include="Weapon_Medium.h" />
+    <ClInclude Include="Weapon_Simple.h" />
+    <ClInclude Include="Weapon_Status.h" />
     <ClInclude Include="WindowGame.h" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +203,7 @@
     <ClCompile Include="MovableObject.cpp" />
     <ClCompile Include="ObjectsCategory.cpp" />
     <ClCompile Include="OldRestore.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="QuadNode.cpp" />
     <ClCompile Include="QuadTree.cpp" />
     <ClCompile Include="RectF.cpp" />
@@ -204,6 +212,12 @@
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponLocation.cpp" />
+    <ClCompile Include="Weapon_Large.cpp" />
+    <ClCompile Include="Weapon_Medium.cpp" />
+    <ClCompile Include="Weapon_Simple.cpp" />
+    <ClCompile Include="Weapon_Status.cpp" />
     <ClCompile Include="WindowGame.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

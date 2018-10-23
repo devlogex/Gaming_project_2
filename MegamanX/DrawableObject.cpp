@@ -34,20 +34,7 @@ void DrawableObject::update()
 			curFrame = 0;
 		}
 		else
-			if (curFrame++ >= sprite->animates[curAnimation].nFrame - 1)
-			{
-				if (curAnimation == MA_STAND || curAnimation == MA_RUN || curAnimation == MA_STAND_ATTACK || curAnimation == MA_RUN_ATTACK)
-					curFrame = (curFrame+1) % sprite->animates[curAnimation].nFrame;
-				else
-					curFrame = sprite->animates[curAnimation].nFrame - 1;
-				
-				if (curAnimation == MA_SLIDE)
-					MEGAMAN->canSlide = false;
-				if (curAnimation == MA_JUMPWALL || curAnimation==MA_HIGHJUMPWALL)
-					MEGAMAN->canJump = false;
-
-			}
-		
+			curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
 	}
 }
 

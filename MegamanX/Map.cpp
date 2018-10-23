@@ -2,6 +2,8 @@
 #include"DrawableObject.h"
 #include"Camera.h"
 #include"Megaman.h"
+#include"Weapon.h"
+#include"Weapon_Status.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -102,6 +104,12 @@ void Map::update()
 	CAMERA->update();
 	quadtree.update();
 	MEGAMAN->update();
+	WEAPONSTATUS->update();
+
+	for (int i = 0; i < WEAPON->size(); i++)
+	{
+		WEAPON->at(i)->update();
+	}
 
 	List<BaseObject*> groundsObject = CAMERA->objectsInCamera.grounds;
 

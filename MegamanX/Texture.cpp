@@ -44,15 +44,24 @@ void Texture::Init(const char * filepath, D3DCOLOR transColor)
 	}
 }
 
-void Texture::RenderTexture(int x, int y, RECT * r)
+void Texture::RenderTexture(int x, int y, RECT * r,bool isCenter)
 {
-	GRAPHICS->GetSprite()->Draw(
-		texture,
-		r,
-		0,
-		&D3DXVECTOR3((float)x, (float)y, 0),
-		D3DCOLOR_XRGB(255, 255, 255)
-	);
+	if (isCenter)
+		GRAPHICS->GetSprite()->Draw(
+			texture,
+			r,
+			&D3DXVECTOR3((float)(r->right - r->left) / 2, (float)(r->bottom - r->top) / 2, 0),
+			&D3DXVECTOR3((float)x, (float)y, 0),
+			D3DCOLOR_XRGB(255, 255, 255)
+		);
+	else
+		GRAPHICS->GetSprite()->Draw(
+			texture,
+			r,
+			0,
+			&D3DXVECTOR3((float)x, (float)y, 0),
+			D3DCOLOR_XRGB(255, 255, 255)
+		);
 }
 
 Texture::Texture()

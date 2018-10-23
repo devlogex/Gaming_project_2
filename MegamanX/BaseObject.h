@@ -10,7 +10,9 @@ extern void* operator new(std::size_t sz); //Lấy float cho phép toán
 
 enum COLLISION_TYPE
 {
-	CT_GROUND
+	CT_GROUND,
+	CT_PLAYER,
+	CT_WEAPON
 };
 
 class BaseObject :public Box, public OldRestore

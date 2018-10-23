@@ -2,6 +2,11 @@
 #include"KeyGame.h"
 #include"Map.h"
 #include"GameTimeLoop.h"
+#include"Weapon.h"
+#include"Weapon_Simple.h"
+#include"Weapon_Medium.h"
+#include"Weapon_Large.h"
+#include"Weapon_Status.h"
 
 Megaman*Megaman::instance = 0;
 Megaman * Megaman::getInstance()
@@ -14,6 +19,8 @@ Megaman * Megaman::getInstance()
 Megaman::Megaman()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_MAIN];
+	collisionType = CT_PLAYER;
+	updateY = 0;
 	width = 30;
 	height = 34;
 	x = 367;
@@ -278,33 +285,18 @@ void Megaman::statusAttack()
 	}
 }
 
-void Megaman::update()
+void Megaman::updateVX()
 {
-	//update move, slide khi sat tuong
-	if ((!canMoveLeft && direction == Left) || (!canMoveRight&&direction == Right))
-		canSlide = false;
-	if (!canMoveLeft && (KEY->keyRight || KEY->keyJum))
-		canMoveLeft = true;
-	if (!canMoveRight && (KEY->keyLeft || KEY->keyJum))
-		canMoveRight = true;
-
-	if (!KEY->keyJum)
-		canJump = true;
-	if (!KEY->keySlide)
-		canSlide = true;
-	
-
-	//update vx,direction
 	if (KEY->keyMove)
 	{
 		direction = KEY->keyLeft ? Left : Right;
 
-		if (curAnimation == MA_JUMP || curAnimation == MA_RUN || curAnimation==MA_JUMP_ATTACK || curAnimation==MA_RUN_ATTACK)
+		if (curAnimation == MA_JUMP || curAnimation == MA_RUN || curAnimation == MA_JUMP_ATTACK || curAnimation == MA_RUN_ATTACK)
 		{
 			vx = MEGAMAN_VX_RUN * direction;
 		}
 		else
-			if (curAnimation == MA_SLIDE || curAnimation == MA_HIGHJUMP ||curAnimation == MA_SLIDE_ATTACK || curAnimation == MA_HIGHJUMP_ATTACK)
+			if (curAnimation == MA_SLIDE || curAnimation == MA_HIGHJUMP || curAnimation == MA_SLIDE_ATTACK || curAnimation == MA_HIGHJUMP_ATTACK)
 			{
 				vx = MEGAMAN_VX_SLIDE * direction;
 			}
@@ -312,7 +304,7 @@ void Megaman::update()
 				if (curAnimation == MA_JUMPWALL || curAnimation == MA_JUMPWALL_ATTACK)
 				{
 					if (vy < 0)
-						vx+=direction* MEGAMAN_AX*GAME_TIME->frameTime;
+						vx += direction * MEGAMAN_AX*GAME_TIME->frameTime;
 					else
 						vx = direction * MEGAMAN_VX_RUN;
 				}
@@ -320,7 +312,7 @@ void Megaman::update()
 					if (curAnimation == MA_HIGHJUMPWALL || curAnimation == MA_HIGHJUMPWALL_ATTACK)
 					{
 						if (vy < 0)
-							vx += direction* MEGAMAN_AX * GAME_TIME->frameTime;
+							vx += direction * MEGAMAN_AX * GAME_TIME->frameTime;
 						else
 							vx = MEGAMAN_VX_SLIDE * direction;
 					}
@@ -335,11 +327,64 @@ void Megaman::update()
 		}
 		else
 			vx = 0;
+}
 
+void Megaman::updateBlock()
+{
+	if ((!canMoveLeft && direction == Left) || (!canMoveRight&&direction == Right))
+		canSlide = false;
+	if (!canMoveLeft && (KEY->keyRight || KEY->keyJum))
+		canMoveLeft = true;
+	if (!canMoveRight && (KEY->keyLeft || KEY->keyJum))
+		canMoveRight = true;
 
+	if (!KEY->keyJum)
+		canJump = true;
+	if (!KEY->keySlide)
+		canSlide = true;
+}
+
+void Megaman::updateBeforeHandle()
+{
+	isOnGround = false;
+	updateVelocity();
+	BaseObject::update();
+	if (delayAnimation.canCreateFrame())
+	{
+		if (curAnimation != nextAnimation)
+		{
+			curAnimation = nextAnimation;
+			curFrame = 0;
+		}
+		else
+			if (curFrame++ >= sprite->animates[curAnimation].nFrame - 1)
+			{
+				if (curAnimation == MA_STAND || curAnimation == MA_RUN || curAnimation == MA_STAND_ATTACK || curAnimation == MA_RUN_ATTACK)
+					curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
+				else
+					curFrame = sprite->animates[curAnimation].nFrame - 1;
+
+				if (curAnimation == MA_SLIDE)
+					MEGAMAN->canSlide = false;
+				if (curAnimation == MA_JUMPWALL || curAnimation == MA_HIGHJUMPWALL)
+					MEGAMAN->canJump = false;
+			}
+	}
+}
+
+void Megaman::update()
+{
+	//update move, slide khi sat tuong
+	updateBlock();
+
+	//update vx,direction
+	updateVX();
+
+	//update animetion
 	updateAnimation();
 
-	MovableObject::update();
+	//update before handle event (reset)
+	updateBeforeHandle();
 }
 
 void Megaman::updateAnimation()
@@ -348,7 +393,8 @@ void Megaman::updateAnimation()
 		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
 			changeAction(MA_STAND);
 
-	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 20)
+
+	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 15)
 	{
 		if (curAnimation != MA_STAND_ATTACK && curAnimation != MA_JUMP_ATTACK && curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK
 			&& curAnimation != MA_WALL_ATTACK && curAnimation != MA_JUMPWALL_ATTACK && curAnimation != MA_HIGHJUMPWALL_ATTACK && curAnimation != MA_HIGHJUMP_ATTACK)
@@ -368,32 +414,45 @@ void Megaman::updateAnimation()
 			timeAttack.curLoop++;
 			holdingAttack = false;
 		}
+
+		if (timeAttack.curLoop == 1)
+		{
+			WEAPON->_Add(new Weapon_Simple());
+		}
+
 		return;
 	}
 
 	if (KEY->keyAttack)
 	{
 		timeAttack.curLoop++;
-		
-		if (timeAttack.curLoop >= 20)
+
+		if (timeAttack.curLoop >= 50)
 		{
 			toNormal();
 			statusNormal();
+			WEAPONSTATUS->allowDraw = true;
+			
+			if (timeAttack.curLoop >= 100)
+				WEAPONSTATUS->changeAction(WS_LARGE);
 		}
+
 	}
 	else
 	{
-		if (timeAttack.curLoop >= 20 && timeAttack.curLoop < 50)
+		if (timeAttack.curLoop >= 50 && timeAttack.curLoop < 100)
 		{
-
+			WEAPON->_Add(new Weapon_Medium());
 		}
 		else
-			if (timeAttack.curLoop >= 50)
+			if (timeAttack.curLoop >= 100)
 			{
-
+				WEAPON->_Add(new Weapon_Large());
 			}
 		timeAttack.start();
-		
+
+		WEAPONSTATUS->allowDraw = false;
+
 		statusNormal();
 	}
 }
@@ -406,7 +465,31 @@ void Megaman::updateLocation()
 
 void Megaman::draw()
 {
-	DrawableObject::draw();
+	int xInViewport, yInViewport;
+	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
+
+	updateY = sprite->animates[curAnimation].frames[curFrame].height - height;
+	yInViewport -= updateY;
+
+	int trucQuay = xInViewport + width / 2;
+
+	if (direction != sprite->image->direction)
+	{
+		D3DXMATRIX mt;
+		D3DXMatrixIdentity(&mt);
+		mt._41 = 2 * trucQuay;
+		mt._11 = -1;
+		GRAPHICS->GetSprite()->SetTransform(&mt);
+	}
+
+	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame);
+
+	if (direction != sprite->image->direction)
+	{
+		D3DXMATRIX mt;
+		D3DXMatrixIdentity(&mt);
+		GRAPHICS->GetSprite()->SetTransform(&mt);
+	}
 }
 
 void Megaman::onCollision(BaseObject * other, int nx, int ny)
@@ -437,8 +520,8 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	if (other->collisionType == CT_GROUND)
 		MovableObject::onCollision(other, nx, ny);
 
-	if (dy > 0 &&curAnimation!=MA_WALL && curAnimation!=MA_JUMPWALL && curAnimation!=MA_HIGHJUMPWALL 
-		&& curAnimation != MA_WALL_ATTACK && curAnimation != MA_JUMPWALL_ATTACK && curAnimation != MA_HIGHJUMPWALL_ATTACK)
+	//block jump
+	if (dy > 0 && curAnimation!=MA_WALL && curAnimation != MA_WALL_ATTACK)
 		canJump = false;
 }
 

@@ -37,10 +37,10 @@ void Sprite::initAnimation(const char * animationInfoInfoFilePath)
 	fs.close();
 }
 
-void Sprite::draw(int x, int y, int curAnimate, int curFrame)
+void Sprite::draw(int x, int y, int curAnimate, int curFrame,bool isCenter)
 {
 	Animate* animate = &animates[curAnimate];
-	image->RenderTexture(x, y, &animate->frames[curFrame].toRECT());
+	image->RenderTexture(x, y, &animate->frames[curFrame].toRECT(),isCenter);
 }
 
 Sprite::Sprite()

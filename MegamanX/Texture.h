@@ -17,7 +17,7 @@ public:
 	int Width, Height;
 	Texture(const char* filepath, D3DCOLOR transColor);
 	void Init(const char* filepath, D3DCOLOR transColor);
-	void RenderTexture(int x, int y, RECT *r);
+	void RenderTexture(int x, int y, RECT *r,bool isCenter=false);
 
 	Texture();
 	~Texture();
