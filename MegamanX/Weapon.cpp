@@ -23,30 +23,25 @@ void Weapon::draw()
 	int xInViewport, yInViewport;
 	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
 
-	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame,true);
+	int trucQuay = xInViewport;
 
-	//int xInViewport, yInViewport;
-	//Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
+	if (direction != sprite->image->direction)
+	{
+		D3DXMATRIX mt;
+		D3DXMatrixIdentity(&mt);
+		mt._41 = 2 * trucQuay;
+		mt._11 = -1;
+		GRAPHICS->GetSprite()->SetTransform(&mt);
+	}
 
-	//int trucQuay = xInViewport + this->sprite->animates[curAnimation].frames[curFrame].width / 2;
+	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
 
-	//if (direction != sprite->image->direction)
-	//{
-	//	D3DXMATRIX mt;
-	//	D3DXMatrixIdentity(&mt);
-	//	mt._41 = 2 * trucQuay;
-	//	mt._11 = -1;
-	//	GRAPHICS->GetSprite()->SetTransform(&mt);
-	//}
-
-	//sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
-
-	//if (direction != sprite->image->direction)
-	//{
-	//	D3DXMATRIX mt;
-	//	D3DXMatrixIdentity(&mt);
-	//	GRAPHICS->GetSprite()->SetTransform(&mt);
-	//}
+	if (direction != sprite->image->direction)
+	{
+		D3DXMATRIX mt;
+		D3DXMatrixIdentity(&mt);
+		GRAPHICS->GetSprite()->SetTransform(&mt);
+	}
 }
 
 void Weapon::updateLocation()

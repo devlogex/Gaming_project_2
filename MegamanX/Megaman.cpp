@@ -25,6 +25,11 @@ Megaman::Megaman()
 	height = 34;
 	x = 367;
 	y = 361;
+	curAnimation = MA_APPEAR;
+	curFrame = 0;
+
+	timeWeaponAppear.init(0.2, 1);
+	timeWeaponAppear.start();
 
 	canJump = true;
 	canSlide = true;
@@ -342,6 +347,7 @@ void Megaman::updateBlock()
 		canJump = true;
 	if (!KEY->keySlide)
 		canSlide = true;
+	
 }
 
 void Megaman::updateBeforeHandle()
@@ -364,7 +370,7 @@ void Megaman::updateBeforeHandle()
 				else
 					curFrame = sprite->animates[curAnimation].nFrame - 1;
 
-				if (curAnimation == MA_SLIDE)
+				if (curAnimation == MA_SLIDE ||curAnimation==MA_SLIDE_ATTACK)
 					MEGAMAN->canSlide = false;
 				if (curAnimation == MA_JUMPWALL || curAnimation == MA_HIGHJUMPWALL)
 					MEGAMAN->canJump = false;
@@ -379,6 +385,9 @@ void Megaman::update()
 
 	//update vx,direction
 	updateVX();
+
+	//time weapon
+	timeWeaponAppear.canCreateFrame();
 
 	//update animetion
 	updateAnimation();
@@ -415,9 +424,11 @@ void Megaman::updateAnimation()
 			holdingAttack = false;
 		}
 
-		if (timeAttack.curLoop == 1)
+		if (timeAttack.curLoop == 1 && timeWeaponAppear.isTerminated())
 		{
 			WEAPON->_Add(new Weapon_Simple());
+			timeWeaponAppear.start();
+
 		}
 
 		return;
@@ -450,7 +461,7 @@ void Megaman::updateAnimation()
 				WEAPON->_Add(new Weapon_Large());
 			}
 		timeAttack.start();
-
+		//timeWeaponAppear.start();
 		WEAPONSTATUS->allowDraw = false;
 
 		statusNormal();

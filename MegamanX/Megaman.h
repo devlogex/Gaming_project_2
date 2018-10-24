@@ -36,6 +36,7 @@ public:
 	bool canMoveRight;
 	bool holdingAttack;
 	GameTimeLoop timeAttack;
+	GameTimeLoop timeWeaponAppear;
 
 	void toAttack();
 	void toNormal();
