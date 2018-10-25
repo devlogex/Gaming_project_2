@@ -1,6 +1,7 @@
 #include "Enemy_Bullet.h"
 #include"Enemy_Bullet_Location.h"
 #include"Map.h"
+#include"Megaman.h"
 
 List<Enemy_Bullet*>* Enemy_Bullet::enemyBullets = 0;
 List<Enemy_Bullet*>* Enemy_Bullet::getEnemyBullets()
@@ -38,7 +39,8 @@ void Enemy_Bullet::updateLocation()
 void Enemy_Bullet::onAABBCheck(BaseObject * other)
 {
 	if (other->collisionType == CT_PLAYER)
-		ENEMYBULLET->_Remove(this);
+		if (!MEGAMAN->inviolable)
+			ENEMYBULLET->_Remove(this);
 }
 
 Enemy_Bullet::Enemy_Bullet(Enemy* enemy)

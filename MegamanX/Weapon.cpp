@@ -52,6 +52,8 @@ void Weapon::updateLocation()
 
 void Weapon::onAABBCheck(BaseObject * other)
 {
+	if (other->collisionType == CT_ENEMY)
+		WEAPON->_Remove(this);
 }
 
 Weapon::Weapon()

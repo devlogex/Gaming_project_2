@@ -1,6 +1,6 @@
 #include "Enemy.h"
 #include"Map.h"
-
+#include"Weapon.h"
 
 void Enemy::update()
 {
@@ -36,7 +36,14 @@ void Enemy::onCollision(BaseObject * other, int nx, int ny)
 
 void Enemy::onAABBCheck(BaseObject * other)
 {
-	///////////////////////////////////////
+	if (other->collisionType == CT_WEAPON)
+	{
+		Weapon* wp = (Weapon*)other;
+		life -= wp->damage;
+		if (life <= 0)
+			alive = false;
+
+	}
 }
 
 void Enemy::restore(BaseObject * obj)

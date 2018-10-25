@@ -148,6 +148,9 @@ void Map::update()
 	{
 		COLLISION->checkCollision(MEGAMAN,enemiesObject[j]);
 	}
+	for (int i = 0; i < enemiesObject.size(); i++)/////////////////////
+		for (int j = 0; j < WEAPON->size(); j++)
+			COLLISION->checkCollision(enemiesObject[i], WEAPON->at(j));
 
 	for (int j = 0; j < enemiesObject.size(); j++)//////////////
 	{
