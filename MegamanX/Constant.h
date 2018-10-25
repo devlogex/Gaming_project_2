@@ -22,6 +22,7 @@
 #define MEGAMAN_VX_WALL_H	120
 #define MEGAMAN_AX			500
 #define WEAPON_VX			210
+#define ENEMY_VX_GO			60
 
 #define WINDOW				WindowGame::getInstance()
 #define GRAPHICS			Graphics::getInstance()
@@ -36,6 +37,8 @@
 #define WEAPONLOCATION		WeaponLocation::getInstance()
 #define WEAPON				Weapon::getWeapons()
 #define WEAPONSTATUS		Weapon_Status::getInstance()
+#define ENEMYBULLETLOCATION	Enemy_Bullet_Location::getInstance()
+#define ENEMYBULLET			Enemy_Bullet::getEnemyBullets()
 
 #define FRAME_RATE			(100.0f)  // Số frame load trên một giây (frame/giây)
 #define MIN_FRAME_RATE		(90.0f)

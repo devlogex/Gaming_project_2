@@ -20,6 +20,8 @@ Megaman::Megaman()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_MAIN];
 	collisionType = CT_PLAYER;
+	life = 100;
+	alive = true;
 	updateY = 0;
 	width = 30;
 	height = 34;
@@ -27,9 +29,16 @@ Megaman::Megaman()
 	y = 361;
 	curAnimation = MA_APPEAR;
 	curFrame = 0;
+	inviolable = false;
 
-	timeWeaponAppear.init(0.2, 1);
+	timeBeDamaged.init(0.1, 11);
+	timeBeDamaged.start();
+
+	timeWeaponAppear.init(0.3, 1);
 	timeWeaponAppear.start();
+
+	timeAttack.init(1, 100);
+	timeAttack.start();
 
 	canJump = true;
 	canSlide = true;
@@ -402,6 +411,24 @@ void Megaman::updateAnimation()
 		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
 			changeAction(MA_STAND);
 
+	if (timeBeDamaged.curLoop > 0 && timeBeDamaged.curLoop < 100)
+	{
+		if (curAnimation != MA_DAMAGED)
+			changeAction(MA_DAMAGED);
+		timeBeDamaged.curLoop++;
+		return;
+	}
+	else
+		if (timeBeDamaged.curLoop >= 100 && timeBeDamaged.curLoop < 150)
+		{
+			inviolable = true;
+			timeBeDamaged.curLoop++;
+		}
+		else
+		{
+			timeBeDamaged.start();
+			inviolable = false;
+		}
 
 	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 15)
 	{
@@ -428,7 +455,6 @@ void Megaman::updateAnimation()
 		{
 			WEAPON->_Add(new Weapon_Simple());
 			timeWeaponAppear.start();
-
 		}
 
 		return;
@@ -454,14 +480,15 @@ void Megaman::updateAnimation()
 		if (timeAttack.curLoop >= 50 && timeAttack.curLoop < 100)
 		{
 			WEAPON->_Add(new Weapon_Medium());
+			timeWeaponAppear.start();
 		}
 		else
 			if (timeAttack.curLoop >= 100)
 			{
 				WEAPON->_Add(new Weapon_Large());
+				timeWeaponAppear.start();
 			}
 		timeAttack.start();
-		//timeWeaponAppear.start();
 		WEAPONSTATUS->allowDraw = false;
 
 		statusNormal();
@@ -534,6 +561,15 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	//block jump
 	if (dy > 0 && curAnimation!=MA_WALL && curAnimation != MA_WALL_ATTACK)
 		canJump = false;
+
+}
+
+void Megaman::onAABBCheck(BaseObject * other)
+{
+	if (other->collisionType == CT_ENEMY && !inviolable)
+	{
+		timeBeDamaged.curLoop++;
+	}
 }
 
 Megaman::~Megaman()

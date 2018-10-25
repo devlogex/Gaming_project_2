@@ -20,6 +20,7 @@ enum MEGAMAN_ACTION
 	MA_JUMPWALL_ATTACK,
 	MA_HIGHJUMPWALL_ATTACK,
 	MA_HIGHJUMP_ATTACK,
+	MA_DAMAGED
 };
 class Megaman: public MovableObject
 {
@@ -37,6 +38,8 @@ public:
 	bool holdingAttack;
 	GameTimeLoop timeAttack;
 	GameTimeLoop timeWeaponAppear;
+	GameTimeLoop timeBeDamaged;
+	bool inviolable;
 
 	void toAttack();
 	void toNormal();
@@ -53,7 +56,9 @@ public:
 
 	int updateY;
 
+
 	void onCollision(BaseObject * other, int nx, int ny);
+	void onAABBCheck(BaseObject*other);
 
 	~Megaman();
 };

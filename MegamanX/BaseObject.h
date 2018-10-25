@@ -12,7 +12,8 @@ enum COLLISION_TYPE
 {
 	CT_GROUND,
 	CT_PLAYER,
-	CT_WEAPON
+	CT_WEAPON,
+	CT_ENEMY
 };
 
 class BaseObject :public Box, public OldRestore

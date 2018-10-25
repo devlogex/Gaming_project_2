@@ -4,6 +4,8 @@
 #include"Megaman.h"
 #include"Weapon.h"
 #include"Weapon_Status.h"
+#include"Canon.h"
+#include"Enemy_Bullet.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -61,10 +63,11 @@ void Map::initObjects(const char * objectsPath)
 	{
 		fs >> id >> x >> y >> width >> height;
 
-		switch (id)
+		switch (id%100)
 		{
-		
-		
+		case SPR_CANON:
+			objects[i] = new Canon();
+			break;
 		default:
 			objects[i] = new BaseObject();
 			break;
@@ -76,13 +79,13 @@ void Map::initObjects(const char * objectsPath)
 		objects[i]->width = width;
 		objects[i]->height = height;
 
-	/*	if (id >= 0)
+		if (id >= 0)
 		{
 			DrawableObject* drawableObject = (DrawableObject*)objects[i];
 			drawableObject->setSprite();
-		}*/
+		}
 
-		//objects[i]->getFromObject(objects[i]);
+		objects[i]->getFromObject(objects[i]);
 	}
 
 	fs.close();
@@ -111,10 +114,53 @@ void Map::update()
 		WEAPON->at(i)->update();
 	}
 
+	for (int i = 0; i < ENEMYBULLET->size(); i++)///////////////////////
+	{
+		ENEMYBULLET->at(i)->update();
+	}
+
 	List<BaseObject*> groundsObject = CAMERA->objectsInCamera.grounds;
+	List<Enemy*> enemiesObject = CAMERA->objectsInCamera.enemies;/////////
+
+	for (int j = 0; j < enemiesObject.size(); j++)/////////
+	{
+		enemiesObject[j]->update();
+	}
+	for (int i = 0; i < ENEMYBULLET->size(); i++)
+		ENEMYBULLET->at(i)->update();
 
 	for (int i = 0; i < groundsObject.size(); i++)
+	{
 		COLLISION->checkCollision(MEGAMAN, groundsObject[i]);
+
+		for (int j = 0; j < enemiesObject.size(); j++)//////////////////
+		{
+			COLLISION->checkCollision(enemiesObject[j], groundsObject[i]);
+		}
+	}
+
+	for (int i = 0; i < ENEMYBULLET->size(); i++)///////////////////////
+	{
+		COLLISION->checkCollision(MEGAMAN, ENEMYBULLET->at(i));
+	}
+
+	for (int j = 0; j < enemiesObject.size(); j++)//////////////////
+	{
+		COLLISION->checkCollision(MEGAMAN,enemiesObject[j]);
+	}
+
+	for (int j = 0; j < enemiesObject.size(); j++)//////////////
+	{
+		enemiesObject[j]->updateLocation();
+	}
+
+	for (int i = 0; i < ENEMYBULLET->size(); i++)///////////////////////
+	{
+		ENEMYBULLET->at(i)->updateLocation();
+	}
+
+	for (int i = 0; i < ENEMYBULLET->size(); i++)
+		ENEMYBULLET->at(i)->updateLocation();
 
 	MEGAMAN->updateLocation();
 	CAMERA->updateLocation();
@@ -130,4 +176,12 @@ void Map::draw()
 	RECT r;
 	SetRect(&r, xMap, yMap, xMap + VIEWPORT_WIDTH, yMap + VIEWPORT_HEIGHT);
 	mapSheetImg.RenderTexture(0, 0,&r);
+
+	List<Enemy*> enemiesObject = CAMERA->objectsInCamera.enemies;
+	for (int j = 0; j < enemiesObject.size(); j++)
+	{
+		enemiesObject[j]->draw();
+	}
+	for (int i = 0; i < ENEMYBULLET->size(); i++)
+		ENEMYBULLET->at(i)->draw();
 }

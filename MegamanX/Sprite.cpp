@@ -10,12 +10,11 @@ Sprite::Sprite(const char * imageFilePath, const char * animationFilePath)
 void Sprite::init(const char * imageFilePath, const char * animationInfoFilePath)
 {
 	int r, g, b;
-	int n;
+	
 	fstream fs(animationInfoFilePath);
-	fs >> r >> g >> b >> n;
-	this->nAnimation = n;
-	animates = new Animate[nAnimation];
+	fs >> r >> g >> b >> nAnimation;
 
+	animates = new Animate[nAnimation];
 	for (int i = 0; i < nAnimation; i++)
 		animates[i].init(fs);
 	image = new Texture(imageFilePath, D3DCOLOR_XRGB(r, g, b));

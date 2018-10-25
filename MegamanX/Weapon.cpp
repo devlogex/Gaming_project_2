@@ -34,7 +34,7 @@ void Weapon::draw()
 		GRAPHICS->GetSprite()->SetTransform(&mt);
 	}
 
-	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
+	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame,true);
 
 	if (direction != sprite->image->direction)
 	{

@@ -7,6 +7,9 @@ void ObjectsCategory::add(BaseObject* object)
 	case CT_GROUND:
 		grounds._Add(object);
 		break;
+	case CT_ENEMY:
+		enemies._Add((Enemy*)object);
+		break;
 	default:
 		break;
 	}
@@ -19,6 +22,9 @@ void ObjectsCategory::remove(BaseObject* object)
 	{
 	case CT_GROUND:
 		grounds._Remove(object);
+		break;
+	case CT_ENEMY:
+		enemies._Remove((Enemy*)object);
 		break;
 	default:
 		break;

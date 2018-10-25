@@ -6,7 +6,7 @@
 
 void DrawableObject::setSprite()
 {
-	/*sprite = SPRITEMANAGER->sprites[id % 100];*/
+	sprite = SPRITEMANAGER->sprites[id % 100];
 }
 
 void DrawableObject::setPauseAnimation(bool pauseAnimation, int frameIndex)
@@ -25,7 +25,14 @@ void DrawableObject::changeAction(int newAction)
 
 void DrawableObject::update()
 {
+	if (!alive)
+		return;
+
+	if (sprite == 0)
+		return;
+
 	BaseObject::update();
+	
 	if (delayAnimation.canCreateFrame())
 	{
 		if (curAnimation != nextAnimation)
@@ -40,6 +47,11 @@ void DrawableObject::update()
 
 void DrawableObject::draw()
 {
+	if (!alive)
+		return;
+	if (sprite == 0)
+		return;
+
 	int xInViewport, yInViewport;
 	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
 
@@ -69,12 +81,12 @@ void DrawableObject::draw()
 
 void DrawableObject::restore(BaseObject* obj)
 {
-	//setSprite();
-	//OldRestore::restore(obj);
-	//alive = true;
-	//curAnimation = 0;
-	//nextAnimation = 0;
-	//curFrame = 0;
+	setSprite();
+	OldRestore::restore(obj);
+	alive = true;
+	curAnimation = 0;
+	nextAnimation = 0;
+	curFrame = 0;
 }
 
 DrawableObject::DrawableObject()
@@ -85,8 +97,8 @@ DrawableObject::DrawableObject()
 	curFrame = 0;
 	delayAnimation.minFrameTime = ANIMATE_DELAY_TIME_DEFAULT;
 	delayAnimation.maxFrameTime = 2 * ANIMATE_DELAY_TIME_DEFAULT;
-	//pauseAnimation = false;
-	//alive = true;
+	pauseAnimation = false;
+	alive = true;
 }
 
 DrawableObject::~DrawableObject()
