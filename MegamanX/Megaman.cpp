@@ -34,7 +34,7 @@ Megaman::Megaman()
 	timeBeDamaged.init(0.1, 11);
 	timeBeDamaged.start();
 
-	timeWeaponAppear.init(0.3, 1);
+	timeWeaponAppear.init(0.13, 1);
 	timeWeaponAppear.start();
 
 	timeAttack.init(1, 100);
@@ -459,6 +459,7 @@ void Megaman::updateAnimation()
 
 		return;
 	}
+
 
 	if (KEY->keyAttack)
 	{

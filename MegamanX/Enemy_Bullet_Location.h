@@ -10,6 +10,7 @@ public:
 	static Enemy_Bullet_Location*getInstance();
 
 	Point ptsCanon[3];
+	Point ptsBatton[4];
 
 	~Enemy_Bullet_Location();
 };

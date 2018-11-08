@@ -4,7 +4,18 @@
 
 void Enemy::update()
 {
+	if (!alive)
+		return;
 	MovableObject::update();
+}
+
+void Enemy::updateLocation()
+{
+	if (!alive)
+		return;
+
+	x += dx;
+	y += dy;
 }
 
 void Enemy::draw()
@@ -42,7 +53,6 @@ void Enemy::onAABBCheck(BaseObject * other)
 		life -= wp->damage;
 		if (life <= 0)
 			alive = false;
-
 	}
 }
 
@@ -54,7 +64,7 @@ void Enemy::restore(BaseObject * obj)
 
 Enemy::Enemy()
 {
-	timeDeath.init(0.2, 10);
+	timeDeath.init(0.2, 5);
 	timeDeath.start();
 	collisionType = CT_ENEMY;
 }

@@ -23,6 +23,7 @@
 #define MEGAMAN_AX			500
 #define WEAPON_VX			210
 #define ENEMY_VX_GO			60
+#define ENEMY_BULLET_VX		100
 
 #define WINDOW				WindowGame::getInstance()
 #define GRAPHICS			Graphics::getInstance()

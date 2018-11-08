@@ -5,6 +5,9 @@
 
 void Canon::update()
 {
+	if (!alive)
+		return;
+
 	timeBulletAppear.canCreateFrame();
 	//update direction, animation
 	if (MEGAMAN->top() < bottom() && MEGAMAN->bottom() > top() && MEGAMAN->x >= x)
@@ -60,18 +63,19 @@ void Canon::onCollision(BaseObject * other, int nx, int ny)
 void Canon::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
-	life = 5;
+	life = 10;
 }
 
 Canon::Canon()
 {
+	sprite = SPRITEMANAGER->sprites[SPR_CANON];
 	damage = 5;
 	life = 10;
 	alive = true;
 	width = 42;
 	height = 40;
 
-	timeBulletAppear.init(0.5, 1);
+	timeBulletAppear.init(0.8, 1);
 	timeBulletAppear.start();
 }
 

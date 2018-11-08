@@ -20,6 +20,8 @@ SpriteManager::SpriteManager()
 	sprites[SPR_CANON] = new Sprite("Data\\Enemy\\canon\\canon.png", "Data\\Enemy\\canon\\canon.txt");
 	sprites[SPR_CANON_BULLET] = new Sprite("Data\\Enemy\\canon\\canon.png", "Data\\Enemy\\canon\\canon_bullet.txt");
 	sprites[SPR_DELETEOBJECT] = new Sprite("Data\\Enemy\\deleteObject.png", "Data\\Enemy\\deleteObject.txt");
+	sprites[SPR_BATTON]=new Sprite("Data\\Enemy\\batton\\batton.png", "Data\\Enemy\\batton\\batton.txt");
+	sprites[SPR_BATTON_BULLET] = new Sprite("Data\\Enemy\\batton\\batton.png", "Data\\Enemy\\batton\\batton_bullet.txt");
 
 }
 

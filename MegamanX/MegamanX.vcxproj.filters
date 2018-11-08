@@ -40,6 +40,9 @@
     <Filter Include="Enemy\Canon">
       <UniqueIdentifier>{8b8dffeb-5c4e-494e-8643-f2a50bfa17dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Batton">
+      <UniqueIdentifier>{4765d36b-0ca3-4684-b452-106e8b4e9221}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowGame.h">
@@ -161,6 +164,12 @@
     <ClInclude Include="Canon_Bullet.h">
       <Filter>Enemy\Canon</Filter>
     </ClInclude>
+    <ClInclude Include="Batton.h">
+      <Filter>Enemy\Batton</Filter>
+    </ClInclude>
+    <ClInclude Include="Batton_Bullet.h">
+      <Filter>Enemy\Batton</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -280,6 +289,12 @@
     </ClCompile>
     <ClCompile Include="Canon_Bullet.cpp">
       <Filter>Enemy\Canon</Filter>
+    </ClCompile>
+    <ClCompile Include="Batton.cpp">
+      <Filter>Enemy\Batton</Filter>
+    </ClCompile>
+    <ClCompile Include="Batton_Bullet.cpp">
+      <Filter>Enemy\Batton</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

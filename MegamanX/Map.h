@@ -23,7 +23,7 @@ public:
 	void render();
 	void initObjects(const char* objectsPath);
 	void init(const char* mapSheetPath, const char* objectsPath, const char* quadtreePath);
-	void initStage(const char* stageInfoPath);
+	//void initStage(const char* stageInfoPath);
 
 	void restoreAllObject();
 	void update();

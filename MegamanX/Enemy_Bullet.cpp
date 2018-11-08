@@ -43,9 +43,12 @@ void Enemy_Bullet::onAABBCheck(BaseObject * other)
 			ENEMYBULLET->_Remove(this);
 }
 
+void Enemy_Bullet::onCollision(BaseObject * other, int nx, int ny)
+{
+}
+
 Enemy_Bullet::Enemy_Bullet(Enemy* enemy)
 {
-	
 }
 
 

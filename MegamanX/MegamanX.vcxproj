@@ -148,6 +148,8 @@
   <ItemGroup>
     <ClInclude Include="Animate.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="Batton.h" />
+    <ClInclude Include="Batton_Bullet.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Canon.h" />
@@ -191,6 +193,8 @@
   <ItemGroup>
     <ClCompile Include="Animate.cpp" />
     <ClCompile Include="BaseObject.cpp" />
+    <ClCompile Include="Batton.cpp" />
+    <ClCompile Include="Batton_Bullet.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Canon.cpp" />

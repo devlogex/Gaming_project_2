@@ -52,6 +52,9 @@ BaseObject::BaseObject()
 
 void BaseObject::updateLocation()
 {
+	if (!alive)
+		return;
+
 	x += dx;
 	y += dy;
 }

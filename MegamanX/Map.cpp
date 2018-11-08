@@ -6,6 +6,8 @@
 #include"Weapon_Status.h"
 #include"Canon.h"
 #include"Enemy_Bullet.h"
+#include"Batton.h"
+#include"Batton_Bullet.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -65,8 +67,11 @@ void Map::initObjects(const char * objectsPath)
 
 		switch (id%100)
 		{
-		case SPR_CANON:
+		/*case SPR_CANON:
 			objects[i] = new Canon();
+			break;*/
+		case SPR_BATTON:
+			objects[i] = new Batton();
 			break;
 		default:
 			objects[i] = new BaseObject();
@@ -86,6 +91,7 @@ void Map::initObjects(const char * objectsPath)
 		}
 
 		objects[i]->getFromObject(objects[i]);
+
 	}
 
 	fs.close();
@@ -134,9 +140,9 @@ void Map::update()
 		COLLISION->checkCollision(MEGAMAN, groundsObject[i]);
 
 		for (int j = 0; j < enemiesObject.size(); j++)//////////////////
-		{
 			COLLISION->checkCollision(enemiesObject[j], groundsObject[i]);
-		}
+		for (int j = 0; j < ENEMYBULLET->size(); j++)
+			COLLISION->checkCollision(ENEMYBULLET->at(j), groundsObject[i]);
 	}
 
 	for (int i = 0; i < ENEMYBULLET->size(); i++)///////////////////////

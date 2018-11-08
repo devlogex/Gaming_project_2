@@ -16,6 +16,7 @@ public:
 	virtual void updateLocation();
 
 	virtual void onAABBCheck(BaseObject* other);
+	virtual void onCollision(BaseObject* other, int nx, int ny);
 
 	Enemy_Bullet(Enemy* enemy=0);
 	~Enemy_Bullet();

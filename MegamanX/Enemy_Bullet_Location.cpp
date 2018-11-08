@@ -15,6 +15,11 @@ Enemy_Bullet_Location::Enemy_Bullet_Location()
 	ptsCanon[1].init(43, 12);
 	ptsCanon[2].init(41, 12);
 
+	ptsBatton[0].init(7, 33);
+	ptsBatton[1].init(10, 32);
+	ptsBatton[2].init(12, 30);
+	ptsBatton[3].init(11, 32);
+
 }
 
 

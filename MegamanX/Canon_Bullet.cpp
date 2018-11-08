@@ -12,11 +12,11 @@ Canon_Bullet::Canon_Bullet(Enemy* enemy)
 
 	direction = enemy->direction;
 
-	vx = WEAPON_VX * direction;
+	vx = ENEMY_BULLET_VX * direction;
 	vy = 0;
 
-	int xInSprite = enemy->id % 100 == SPR_CANON ? ENEMYBULLETLOCATION->ptsCanon[enemy->curFrame].x : 0;
-	int yInSprite = enemy->id % 100 == SPR_CANON ? ENEMYBULLETLOCATION->ptsCanon[enemy->curFrame].y : 0;
+	int xInSprite =  ENEMYBULLETLOCATION->ptsCanon[enemy->curFrame].x;
+	int yInSprite =  ENEMYBULLETLOCATION->ptsCanon[enemy->curFrame].y;
 
 	int updateY = enemy->sprite->animates[curAnimation].frames[curFrame].height - enemy->height;
 
