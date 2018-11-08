@@ -12,7 +12,6 @@ public:
 	GameTimeLoop timeBulletAppear;
 
 	void update();
-	void draw();
 	void onCollision(BaseObject* other, int nx, int ny);
 	void restore(BaseObject* obj);
 

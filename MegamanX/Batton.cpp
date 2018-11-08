@@ -23,7 +23,7 @@ void Batton::update()
 
 	//update vx
 	if (curAnimation == BA_FLY)
-		vx = direction * ENEMY_VX_GO;
+		vx = -ENEMY_VX_GO;
 	else
 		if (curAnimation == BA_ATTACK)
 			vx = 0;
@@ -84,7 +84,6 @@ Batton::Batton()
 	width = 42;
 	height = 32;
 
-	direction = Left;
 	canAttack = true;
 
 	// init batton_bullet

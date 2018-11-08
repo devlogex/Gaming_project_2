@@ -150,6 +150,8 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Batton.h" />
     <ClInclude Include="Batton_Bullet.h" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="Boss_Bullet.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Canon.h" />
@@ -182,6 +184,8 @@
     <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Trap.h" />
+    <ClInclude Include="Trap_Bullet.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponLocation.h" />
     <ClInclude Include="Weapon_Large.h" />
@@ -195,6 +199,8 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Batton.cpp" />
     <ClCompile Include="Batton_Bullet.cpp" />
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Boss_Bullet.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Canon.cpp" />
@@ -226,6 +232,8 @@
     <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Trap.cpp" />
+    <ClCompile Include="Trap_Bullet.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponLocation.cpp" />
     <ClCompile Include="Weapon_Large.cpp" />

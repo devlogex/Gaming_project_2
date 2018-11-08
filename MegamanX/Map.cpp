@@ -8,6 +8,8 @@
 #include"Enemy_Bullet.h"
 #include"Batton.h"
 #include"Batton_Bullet.h"
+#include"Trap.h"
+#include"Boss.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -67,11 +69,17 @@ void Map::initObjects(const char * objectsPath)
 
 		switch (id%100)
 		{
-		/*case SPR_CANON:
+		case SPR_CANON:
 			objects[i] = new Canon();
-			break;*/
+			break;
 		case SPR_BATTON:
 			objects[i] = new Batton();
+			break;
+		case SPR_TRAP:
+			objects[i] = new Trap();
+			break;
+		case SPR_BOSS:
+			objects[i] = new Boss();
 			break;
 		default:
 			objects[i] = new BaseObject();
@@ -88,8 +96,11 @@ void Map::initObjects(const char * objectsPath)
 		{
 			DrawableObject* drawableObject = (DrawableObject*)objects[i];
 			drawableObject->setSprite();
+			if (id % 100 == 3 && id > 100)
+				drawableObject->direction = Left;
+			else
+				drawableObject->direction = Right;
 		}
-
 		objects[i]->getFromObject(objects[i]);
 
 	}

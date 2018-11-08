@@ -20,6 +20,9 @@ Enemy_Bullet_Location::Enemy_Bullet_Location()
 	ptsBatton[2].init(12, 30);
 	ptsBatton[3].init(11, 32);
 
+	ptsTrap[0].init(43, 16);
+
+	ptsBoss[0].init(84, 26);
 }
 
 

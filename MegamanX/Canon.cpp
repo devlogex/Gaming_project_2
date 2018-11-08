@@ -46,10 +46,6 @@ void Canon::update()
 	Enemy::update();
 }
 
-void Canon::draw()
-{
-	Enemy::draw();
-}
 
 void Canon::onCollision(BaseObject * other, int nx, int ny)
 {

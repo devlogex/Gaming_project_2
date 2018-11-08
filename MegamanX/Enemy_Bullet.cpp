@@ -15,8 +15,6 @@ void Enemy_Bullet::update()
 {
 	dx = vx * GAME_TIME->frameTime;
 	dy = 0;
-
-	updateLocation();
 }
 
 void Enemy_Bullet::draw()
@@ -24,10 +22,7 @@ void Enemy_Bullet::draw()
 	int xInViewport, yInViewport;
 	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
 
-	int trucQuay = xInViewport;
-
 	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame,true);
-
 }
 
 void Enemy_Bullet::updateLocation()

@@ -1,11 +1,18 @@
-#include "Canon_Bullet.h"
-#include"SpriteManager.h"
+#include "Boss_Bullet.h"
 #include"Enemy_Bullet_Location.h"
 
-Canon_Bullet::Canon_Bullet(Enemy* enemy)
+
+void Boss_Bullet::update()
 {
-	damage = 10;
-	sprite = SPRITEMANAGER->sprites[SPR_CANON_BULLET];
+	Enemy_Bullet::update();
+	curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
+}
+
+
+Boss_Bullet::Boss_Bullet(Enemy*enemy)
+{
+	damage = 20;
+	sprite = SPRITEMANAGER->sprites[SPR_BOSS_BULLET];
 
 	collisionType = CT_ENEMY;
 	allowDelete = false;
@@ -15,8 +22,8 @@ Canon_Bullet::Canon_Bullet(Enemy* enemy)
 	vx = ENEMY_BULLET_VX * direction;
 	vy = 0;
 
-	int xInSprite =  ENEMYBULLETLOCATION->ptsCanon[enemy->curFrame].x;
-	int yInSprite =  ENEMYBULLETLOCATION->ptsCanon[enemy->curFrame].y;
+	int xInSprite = ENEMYBULLETLOCATION->ptsBoss[0].x;
+	int yInSprite = ENEMYBULLETLOCATION->ptsBoss[0].y;
 
 	int updateY = enemy->sprite->animates[enemy->curAnimation].frames[enemy->curFrame].height - enemy->height;
 
@@ -30,10 +37,9 @@ Canon_Bullet::Canon_Bullet(Enemy* enemy)
 		x = enemy->x + xInSprite;
 		y = enemy->y - updateY + yInSprite;
 	}
-
 }
 
 
-Canon_Bullet::~Canon_Bullet()
+Boss_Bullet::~Boss_Bullet()
 {
 }

@@ -22,7 +22,10 @@ SpriteManager::SpriteManager()
 	sprites[SPR_DELETEOBJECT] = new Sprite("Data\\Enemy\\deleteObject.png", "Data\\Enemy\\deleteObject.txt");
 	sprites[SPR_BATTON]=new Sprite("Data\\Enemy\\batton\\batton.png", "Data\\Enemy\\batton\\batton.txt");
 	sprites[SPR_BATTON_BULLET] = new Sprite("Data\\Enemy\\batton\\batton.png", "Data\\Enemy\\batton\\batton_bullet.txt");
-
+	sprites[SPR_TRAP] = new Sprite("Data\\Enemy\\trap\\trap.png", "Data\\Enemy\\trap\\trap.txt");
+	sprites[SPR_TRAP_BULLET] = new Sprite("Data\\Enemy\\trap\\trap.png", "Data\\Enemy\\trap\\trap_bullet.txt");
+	sprites[SPR_BOSS]=new Sprite("Data\\Enemy\\boss\\boss.png", "Data\\Enemy\\boss\\boss.txt");
+	sprites[SPR_BOSS_BULLET] = new Sprite("Data\\Enemy\\boss\\boss.png", "Data\\Enemy\\boss\\boss_bullet.txt");
 }
 
 SpriteManager::~SpriteManager()

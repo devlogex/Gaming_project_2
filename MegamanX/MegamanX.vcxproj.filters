@@ -43,6 +43,12 @@
     <Filter Include="Enemy\Batton">
       <UniqueIdentifier>{4765d36b-0ca3-4684-b452-106e8b4e9221}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Trap">
+      <UniqueIdentifier>{ee26fdbe-6de7-42f3-99cb-79b0b22308e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Boss">
+      <UniqueIdentifier>{98075583-eb71-4c8b-9cf6-3b2fe7ec0275}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowGame.h">
@@ -170,6 +176,18 @@
     <ClInclude Include="Batton_Bullet.h">
       <Filter>Enemy\Batton</Filter>
     </ClInclude>
+    <ClInclude Include="Trap_Bullet.h">
+      <Filter>Enemy\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Trap.h">
+      <Filter>Enemy\Trap</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Bullet.h">
+      <Filter>Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -295,6 +313,18 @@
     </ClCompile>
     <ClCompile Include="Batton_Bullet.cpp">
       <Filter>Enemy\Batton</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap_Bullet.cpp">
+      <Filter>Enemy\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Trap.cpp">
+      <Filter>Enemy\Trap</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Bullet.cpp">
+      <Filter>Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

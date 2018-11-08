@@ -34,6 +34,8 @@ void Enemy::draw()
 
 		int xInViewport, yInViewport;
 		Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
+		xInViewport += width / 2;
+		yInViewport += height / 2;
 		sprite->draw(xInViewport, yInViewport, curAnimation, curFrame);
 	}
 

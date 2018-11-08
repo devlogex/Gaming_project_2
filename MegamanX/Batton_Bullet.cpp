@@ -5,6 +5,11 @@
 
 void Batton_Bullet::update()
 {
+	if (!enemy->alive)
+	{
+		ENEMYBULLET->_Remove(this);
+		return;
+	}
 	if (enemy->curAnimation == BA_ATTACK)
 		block = false;
 	if (!block)
@@ -18,7 +23,7 @@ void Batton_Bullet::update()
 		int xInSprite = ENEMYBULLETLOCATION->ptsBatton[enemy->curFrame].x;
 		int yInSprite = ENEMYBULLETLOCATION->ptsBatton[enemy->curFrame].y;
 
-		int updateY = enemy->sprite->animates[curAnimation].frames[curFrame].height - enemy->height;
+		int updateY = enemy->sprite->animates[enemy->curAnimation].frames[enemy->curFrame].height - enemy->height;
 
 		x = enemy->x + xInSprite;
 		y = enemy->y - updateY + yInSprite;
@@ -34,8 +39,6 @@ void Batton_Bullet::draw()
 {
 	int xInViewport, yInViewport;
 	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
-
-	int trucQuay = xInViewport;
 
 	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame);
 }
@@ -59,9 +62,9 @@ Batton_Bullet::Batton_Bullet(Enemy*enemy)
 	int xInSprite = ENEMYBULLETLOCATION->ptsBatton[enemy->curFrame].x;
 	int yInSprite = ENEMYBULLETLOCATION->ptsBatton[enemy->curFrame].y;
 
-	int updateY = enemy->sprite->animates[curAnimation].frames[curFrame].height - enemy->height;
+	int updateY = enemy->sprite->animates[enemy->curAnimation].frames[enemy->curFrame].height - enemy->height;
 
-	x = enemy->x + xInSprite;
+	x = enemy->x + enemy->width - xInSprite;
 	y = enemy->y - updateY + yInSprite;
 
 	vx = enemy->vx;
