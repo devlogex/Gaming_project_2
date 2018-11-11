@@ -5,7 +5,7 @@
 Weapon_Simple::Weapon_Simple()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_WEAPON_SIMPLE];
-	damage = 10;
+	damage = WEAPON_DAMAGE_SIMPLE;
 }
 
 

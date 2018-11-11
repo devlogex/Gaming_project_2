@@ -6,7 +6,7 @@
 
 void DrawableObject::setSprite()
 {
-	sprite = SPRITEMANAGER->sprites[id % 100];
+	sprite = SPRITEMANAGER->sprites[id % 7];
 }
 
 void DrawableObject::setPauseAnimation(bool pauseAnimation, int frameIndex)

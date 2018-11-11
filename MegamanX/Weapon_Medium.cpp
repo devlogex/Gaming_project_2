@@ -5,7 +5,7 @@
 Weapon_Medium::Weapon_Medium()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_WEAPON_MEDIUM];
-	damage = 2;
+	damage = WEAPON_DAMAGE_MEDIUM;
 }
 
 

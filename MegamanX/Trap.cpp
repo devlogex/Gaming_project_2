@@ -39,7 +39,7 @@ void Trap::restore(BaseObject * obj)
 Trap::Trap()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_TRAP];
-	damage = 10;
+	damage = ENEMY_DAMAGE;
 	life = 10;
 	alive = true;
 	width = 41;
@@ -50,7 +50,7 @@ Trap::Trap()
 	dx = 0;
 	dy = 0;
 
-	timeBulletAppear.init(0.5, 50);
+	timeBulletAppear.init(3, 300);
 	timeBulletAppear.start();
 }
 

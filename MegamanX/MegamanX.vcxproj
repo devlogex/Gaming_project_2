@@ -150,6 +150,9 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Batton.h" />
     <ClInclude Include="Batton_Bullet.h" />
+    <ClInclude Include="Blood.h" />
+    <ClInclude Include="BloodBoss.h" />
+    <ClInclude Include="BloodMegaman.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="Boss_Bullet.h" />
     <ClInclude Include="Box.h" />
@@ -158,6 +161,7 @@
     <ClInclude Include="Canon_Bullet.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Constant.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="DrawableObject.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Bullet.h" />
@@ -166,6 +170,7 @@
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="GameTimeLoop.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KeyGame.h" />
     <ClInclude Include="List.h" />
@@ -199,6 +204,9 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Batton.cpp" />
     <ClCompile Include="Batton_Bullet.cpp" />
+    <ClCompile Include="Blood.cpp" />
+    <ClCompile Include="BloodBoss.cpp" />
+    <ClCompile Include="BloodMegaman.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Boss_Bullet.cpp" />
     <ClCompile Include="Box.cpp" />
@@ -206,6 +214,7 @@
     <ClCompile Include="Canon.cpp" />
     <ClCompile Include="Canon_Bullet.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Bullet.cpp" />
@@ -214,6 +223,7 @@
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="GameTimeLoop.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />
     <ClCompile Include="Main.cpp" />

@@ -6,6 +6,8 @@
 class Camera : public BaseObject
 {
 	static Camera* instance;
+	Camera();
+
 public:
 	static Camera* getInstance();
 
@@ -14,6 +16,5 @@ public:
 	void update();
 	void onCollision(BaseObject* other, int nx, int ny);
 
-	Camera();
 	~Camera();
 };

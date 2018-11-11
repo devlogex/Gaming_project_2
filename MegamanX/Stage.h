@@ -15,12 +15,12 @@ public:
 	bool updating;
 	float xViewportNext, yViewportNext, xViewportPrev, yViewportPrev;
 
-	virtual void loadStageNext();
-	virtual void loadStagePrev();
-	virtual bool update();
+	void loadStageNext();
+	void loadStagePrev();
+	bool update();
 	static void next();
 	static void prev();
-	virtual void onStageChange(Stage* nextStage);
+	void onStageChange(Stage* nextStage);
 
 	Stage(fstream& fs, int index);
 	~Stage();

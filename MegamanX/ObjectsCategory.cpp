@@ -10,6 +10,15 @@ void ObjectsCategory::add(BaseObject* object)
 	case CT_ENEMY:
 		enemies._Add((Enemy*)object);
 		break;
+	case CT_PREVENTMOVECAMERA:
+		preventMoveCameras._Add(object);
+		break;
+	case CT_ITEM:
+		items._Add((Item*)object);
+		break;
+	case CT_TRAP:
+		traps._Add(object);
+		break;
 	default:
 		break;
 	}
@@ -25,6 +34,15 @@ void ObjectsCategory::remove(BaseObject* object)
 		break;
 	case CT_ENEMY:
 		enemies._Remove((Enemy*)object);
+		break;
+	case CT_PREVENTMOVECAMERA:
+		preventMoveCameras._Remove(object);
+		break;
+	case CT_ITEM:
+		items._Remove((Item*)object);
+		break;
+	case CT_TRAP:
+		traps._Remove(object);
 		break;
 	default:
 		break;

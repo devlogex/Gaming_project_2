@@ -12,8 +12,8 @@ Camera* Camera::getInstance()
 
 void Camera::onCollision(BaseObject* other, int nx, int ny)
 {
-	/*if (other->collisionType == CT_PREVENTMOVECAMERA)
-		COLLISION->preventMove(this, other);*/
+	if (other->collisionType == CT_PREVENTMOVECAMERA)
+		COLLISION->preventMove(this, other);
 }
 
 void Camera::update()
@@ -22,7 +22,7 @@ void Camera::update()
 		dx = MEGAMAN->dx;
 	else
 		dx = 0;
-	if ((MEGAMAN->y + MEGAMAN->dy < yCenter() && MEGAMAN->dy < 0) || (MEGAMAN->y + MEGAMAN->dy > yCenter()+50 && MEGAMAN->dy > 0))
+	if ((MEGAMAN->y + MEGAMAN->dy < yCenter() && MEGAMAN->dy < 0) || (MEGAMAN->y + MEGAMAN->dy > yCenter() && MEGAMAN->dy > 0))
 		dy = MEGAMAN->dy;
 	else
 		dy = 0;

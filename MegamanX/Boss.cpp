@@ -2,6 +2,13 @@
 #include"Megaman.h"
 #include"Boss_Bullet.h"
 
+Boss* Boss::instance = 0;
+Boss * Boss::getInstance()
+{
+	if (instance == 0)
+		instance = new Boss();
+	return instance;
+}
 
 void Boss::update()
 {
@@ -45,20 +52,6 @@ void Boss::updateAnimation()
 			}
 		}
 
-	if (life <= 50)
-	{
-		if (curAnimation == BA_PUSH)
-		{
-			if (MEGAMAN->right() > left() && MEGAMAN->left() < right())
-			{
-				changeAction(BA_HIT);
-				if (MEGAMAN->x >= x)
-					direction = Right;
-				else
-					direction = Left;
-			}
-		}
-	}
 }
 
 void Boss::updateVX()
@@ -123,8 +116,8 @@ void Boss::restore(BaseObject * obj)
 Boss::Boss()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_CANON];
-	damage = 20;
-	life = 100;
+	damage = BOSS_DAMAGE;
+	life = BOSS_LIFE;
 	alive = true;
 	width = 60;
 	height = 74;

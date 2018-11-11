@@ -4,7 +4,7 @@
 
 Canon_Bullet::Canon_Bullet(Enemy* enemy)
 {
-	damage = 10;
+	damage = CANON_BL_DAMAGE;
 	sprite = SPRITEMANAGER->sprites[SPR_CANON_BULLET];
 
 	collisionType = CT_ENEMY;

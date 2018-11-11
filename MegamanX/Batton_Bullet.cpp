@@ -53,7 +53,7 @@ void Batton_Bullet::onCollision(BaseObject * other, int nx, int ny)
 Batton_Bullet::Batton_Bullet(Enemy*enemy)
 {
 	this->enemy = enemy;
-	damage = 20;
+	damage = BATTON_BL_DAMAGE;
 	sprite = SPRITEMANAGER->sprites[SPR_BATTON_BULLET];
 
 	collisionType = CT_ENEMY;

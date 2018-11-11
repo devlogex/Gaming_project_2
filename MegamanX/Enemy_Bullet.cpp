@@ -44,6 +44,7 @@ void Enemy_Bullet::onCollision(BaseObject * other, int nx, int ny)
 
 Enemy_Bullet::Enemy_Bullet(Enemy* enemy)
 {
+	id = -5;
 }
 
 

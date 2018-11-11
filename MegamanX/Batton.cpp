@@ -78,7 +78,7 @@ void Batton::restore(BaseObject * obj)
 Batton::Batton()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_BATTON];
-	damage = 5;
+	damage = ENEMY_DAMAGE;
 	life = 10;
 	alive = true;
 	width = 42;

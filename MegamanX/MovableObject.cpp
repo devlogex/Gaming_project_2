@@ -35,7 +35,7 @@ void MovableObject::onCollision(BaseObject * other, int nx, int ny)
 
 MovableObject::MovableObject()
 {
-	direction = Right;
+	direction = Left;
 	ay = GRAVITY;
 }
 

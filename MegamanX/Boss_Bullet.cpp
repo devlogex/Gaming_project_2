@@ -1,6 +1,6 @@
 #include "Boss_Bullet.h"
 #include"Enemy_Bullet_Location.h"
-
+#include"Megaman.h"
 
 void Boss_Bullet::update()
 {
@@ -11,7 +11,7 @@ void Boss_Bullet::update()
 
 Boss_Bullet::Boss_Bullet(Enemy*enemy)
 {
-	damage = 20;
+	damage = BOSS_BL_DAMAGE;
 	sprite = SPRITEMANAGER->sprites[SPR_BOSS_BULLET];
 
 	collisionType = CT_ENEMY;

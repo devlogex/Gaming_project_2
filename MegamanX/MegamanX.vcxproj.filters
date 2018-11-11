@@ -49,6 +49,15 @@
     <Filter Include="Enemy\Boss">
       <UniqueIdentifier>{98075583-eb71-4c8b-9cf6-3b2fe7ec0275}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{5ba3c457-8aef-4b83-932d-6c3a4ce77b70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Blood">
+      <UniqueIdentifier>{602be1bf-b780-4fc9-a007-8cc2e9e0722c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Door">
+      <UniqueIdentifier>{6c115ad9-4fbe-4867-808e-4ee7974108b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowGame.h">
@@ -188,6 +197,21 @@
     <ClInclude Include="Boss_Bullet.h">
       <Filter>Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodMegaman.h">
+      <Filter>Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodBoss.h">
+      <Filter>Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="Blood.h">
+      <Filter>Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -325,6 +349,21 @@
     </ClCompile>
     <ClCompile Include="Boss_Bullet.cpp">
       <Filter>Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodMegaman.cpp">
+      <Filter>Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodBoss.cpp">
+      <Filter>Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="Blood.cpp">
+      <Filter>Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Door</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,6 +10,11 @@
 #include"Batton_Bullet.h"
 #include"Trap.h"
 #include"Boss.h"
+#include"Item.h"
+#include"Blood.h"
+#include"BloodMegaman.h"
+#include"BloodBoss.h"
+#include"Door.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -67,7 +72,7 @@ void Map::initObjects(const char * objectsPath)
 	{
 		fs >> id >> x >> y >> width >> height;
 
-		switch (id%100)
+		switch (id%7)
 		{
 		case SPR_CANON:
 			objects[i] = new Canon();
@@ -79,8 +84,13 @@ void Map::initObjects(const char * objectsPath)
 			objects[i] = new Trap();
 			break;
 		case SPR_BOSS:
-			objects[i] = new Boss();
+			objects[i] = BOSS;
 			break;
+		case SPR_ITEM:
+			objects[i] = new Item();
+			break;
+		case SPR_DOOR:
+			objects[i] = new Door();
 		default:
 			objects[i] = new BaseObject();
 			break;
@@ -96,11 +106,23 @@ void Map::initObjects(const char * objectsPath)
 		{
 			DrawableObject* drawableObject = (DrawableObject*)objects[i];
 			drawableObject->setSprite();
-			if (id % 100 == 3 && id > 100)
+
+			// Direction for Trap
+			if (id % 7 == 3 && id > 70)
 				drawableObject->direction = Left;
 			else
 				drawableObject->direction = Right;
 		}
+		else
+		{
+			if (id == -2)
+				objects[i]->collisionType = CT_PREVENTMOVECAMERA;
+			else
+				if (id == -3)
+					objects[i]->collisionType = CT_TRAP;
+		}
+		
+
 		objects[i]->getFromObject(objects[i]);
 
 	}
@@ -138,6 +160,14 @@ void Map::update()
 
 	List<BaseObject*> groundsObject = CAMERA->objectsInCamera.grounds;
 	List<Enemy*> enemiesObject = CAMERA->objectsInCamera.enemies;/////////
+	List<BaseObject*>preventMoveCamera = CAMERA->objectsInCamera.preventMoveCameras;
+	List<Item*>itemObject = CAMERA->objectsInCamera.items;
+	List<BaseObject*>trapObject = CAMERA->objectsInCamera.traps;
+
+	for (int i = 0; i < trapObject.size(); i++)
+		COLLISION->checkCollision(trapObject[i], MEGAMAN);
+	for (int i = 0; i < itemObject.size(); i++)
+		COLLISION->checkCollision(MEGAMAN, itemObject[i]);
 
 	for (int j = 0; j < enemiesObject.size(); j++)/////////
 	{
@@ -168,6 +198,15 @@ void Map::update()
 	for (int i = 0; i < enemiesObject.size(); i++)/////////////////////
 		for (int j = 0; j < WEAPON->size(); j++)
 			COLLISION->checkCollision(enemiesObject[i], WEAPON->at(j));
+	for (int i = 0; i < preventMoveCamera.size(); i++)
+	{
+		COLLISION->checkCollision(CAMERA, preventMoveCamera[i]);
+	}
+	
+	for (int i = 0; i < BLOOD->size(); i++)
+	{
+		BLOOD->at(i)->update();
+	}
 
 	for (int j = 0; j < enemiesObject.size(); j++)//////////////
 	{
@@ -198,10 +237,23 @@ void Map::draw()
 	mapSheetImg.RenderTexture(0, 0,&r);
 
 	List<Enemy*> enemiesObject = CAMERA->objectsInCamera.enemies;
+	List<Item*>itemObject = CAMERA->objectsInCamera.items;
 	for (int j = 0; j < enemiesObject.size(); j++)
 	{
 		enemiesObject[j]->draw();
 	}
 	for (int i = 0; i < ENEMYBULLET->size(); i++)
 		ENEMYBULLET->at(i)->draw();
+	for (int i = 0; i < WEAPON->size(); i++)
+		WEAPON->at(i)->draw();
+	WEAPONSTATUS->draw();
+	for (int i = 0; i < ENEMYBULLET->size(); i++)
+	{
+		ENEMYBULLET->at(i)->draw();
+	}
+	for (int i = 0; i < itemObject.size(); i++)
+		itemObject[i]->draw();
+
+	for (int i = 0; i < BLOOD->size(); i++)
+		BLOOD->at(i)->draw();
 }

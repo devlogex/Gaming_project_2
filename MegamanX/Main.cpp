@@ -17,7 +17,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	GAME_TIME->minFrameTime = MIN_FRAME_TIME;
 	GAME_TIME->maxFrameTime = MAX_FRAME_TIME;
-
+	
 
 	MSG msg;
 	ZeroMemory(&msg, sizeof(msg));

@@ -5,7 +5,7 @@
 Weapon_Large::Weapon_Large()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_WEAPON_LARGE];
-	damage = 5;
+	damage = WEAPON_DAMAGE_LARGE;
 }
 
 

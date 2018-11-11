@@ -26,6 +26,10 @@ SpriteManager::SpriteManager()
 	sprites[SPR_TRAP_BULLET] = new Sprite("Data\\Enemy\\trap\\trap.png", "Data\\Enemy\\trap\\trap_bullet.txt");
 	sprites[SPR_BOSS]=new Sprite("Data\\Enemy\\boss\\boss.png", "Data\\Enemy\\boss\\boss.txt");
 	sprites[SPR_BOSS_BULLET] = new Sprite("Data\\Enemy\\boss\\boss.png", "Data\\Enemy\\boss\\boss_bullet.txt");
+	sprites[SPR_ITEM] = new Sprite("Data\\Item\\item.png", "Data\\Item\\item.txt");
+	sprites[SPR_BLOOD_MEGAMAN] = new Sprite("Data\\Blood\\blood_megaman.png", "Data\\Blood\\blood_megaman.txt");
+	sprites[SPR_BLOOD_BOSS] = new Sprite("Data\\Blood\\blood_boss.png", "Data\\Blood\\blood_boss.txt");
+	sprites[SPR_DOOR] = new Sprite("Data\\Door\\door.png", "Data\\Door\\door.txt");
 }
 
 SpriteManager::~SpriteManager()

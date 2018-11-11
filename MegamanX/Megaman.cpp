@@ -7,6 +7,9 @@
 #include"Weapon_Medium.h"
 #include"Weapon_Large.h"
 #include"Weapon_Status.h"
+#include"Camera.h"
+#include"Enemy.h"
+#include"Enemy_Bullet.h"
 
 Megaman*Megaman::instance = 0;
 Megaman * Megaman::getInstance()
@@ -20,15 +23,16 @@ Megaman::Megaman()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_MAIN];
 	collisionType = CT_PLAYER;
-	life = 100;
+	life = MEGAMAN_LIFE;
 	alive = true;
 	updateY = 0;
 	width = 30;
 	height = 34;
-	x = 367;
-	y = 361;
+	x = CAMERA->xCenter()-width;
+	y = CAMERA->yCenter();
 	curAnimation = MA_APPEAR;
 	curFrame = 0;
+	direction = Right;
 	inviolable = false;
 
 	timeBeDamaged.init(0.1, 11);
@@ -341,6 +345,8 @@ void Megaman::updateVX()
 		}
 		else
 			vx = 0;
+	if (curAnimation == MA_STAND)
+		vx = 0;
 }
 
 void Megaman::updateBlock()
@@ -416,12 +422,12 @@ void Megaman::updateAnimation()
 		if (curAnimation != MA_DAMAGED)
 			changeAction(MA_DAMAGED);
 		timeBeDamaged.curLoop++;
+		inviolable = true;
 		return;
 	}
 	else
-		if (timeBeDamaged.curLoop >= 100 && timeBeDamaged.curLoop < 150)
+		if (timeBeDamaged.curLoop >= 100 && timeBeDamaged.curLoop < 200)
 		{
-			inviolable = true;
 			timeBeDamaged.curLoop++;
 		}
 		else
@@ -534,7 +540,7 @@ void Megaman::draw()
 void Megaman::onCollision(BaseObject * other, int nx, int ny)
 {
 	// can't move,slide khi sat tuong
-	if (other->collisionType == CT_GROUND && nx != 0)
+	if (other->collisionType == CT_GROUND && nx != 0 && (curAnimation==MA_RUN || curAnimation==MA_SLIDE))
 	{
 		if (direction == Left && x == other->right())
 			canMoveLeft = false;
@@ -545,7 +551,7 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	
 	//on wall
 	if (((nx == 1 && KEY->keyLeft) || (nx == -1 && KEY->keyRight)) && curAnimation != MA_RUN && curAnimation != MA_SLIDE && curAnimation != MA_STAND && other->collisionType == CT_GROUND
-		&& curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK && curAnimation != MA_STAND_ATTACK)
+		&& curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK && curAnimation != MA_STAND_ATTACK && curAnimation!=MA_DAMAGED)
 	{
 		if (timeAttack.curLoop > 0 && timeAttack.curLoop < 100)
 			curAnimation = MA_WALL_ATTACK;
@@ -567,9 +573,22 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 
 void Megaman::onAABBCheck(BaseObject * other)
 {
-	if (other->collisionType == CT_ENEMY && !inviolable)
+	if ((other->collisionType == CT_ENEMY || other->collisionType==CT_TRAP) && !inviolable)
 	{
 		timeBeDamaged.curLoop++;
+		if (other->collisionType == CT_ENEMY)
+		{
+			if (id == -5)
+				life -= ((Enemy_Bullet*)other)->damage;
+			else
+				life -= ((Enemy*)other)->damage;
+		}
+		else
+			life = 0;
+	}
+	if (other->collisionType == CT_ITEM)
+	{
+		life = MEGAMAN_LIFE;
 	}
 }
 

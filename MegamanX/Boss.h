@@ -9,7 +9,12 @@ enum BOSS_ACTION {
 };
 class Boss:public Enemy
 {
+private:
+	static Boss*instance;
+	Boss();
 public:
+	static Boss*getInstance();
+
 	GameTimeLoop timeAttack;
 	GameTimeLoop timeAction;
 
@@ -20,7 +25,6 @@ public:
 	void onCollision(BaseObject* other, int nx, int ny);
 	void restore(BaseObject* obj);
 	   	 
-	Boss();
 	~Boss();
 };
 

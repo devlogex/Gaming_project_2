@@ -19,7 +19,7 @@ void Canon::update()
 		direction = Left;
 	}
 	
-	if (abs(MEGAMAN->x - x) <= VIEWPORT_WIDTH/3)
+	if (abs(MEGAMAN->x - x) <= VIEWPORT_WIDTH/2)
 		changeAction(CA_ATTACK);
 	else
 		if (curAnimation != CA_RUN)
@@ -65,7 +65,7 @@ void Canon::restore(BaseObject * obj)
 Canon::Canon()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_CANON];
-	damage = 5;
+	damage = ENEMY_DAMAGE;
 	life = 10;
 	alive = true;
 	width = 42;

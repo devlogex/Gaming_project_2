@@ -10,7 +10,7 @@ void Trap_Bullet::update()
 
 Trap_Bullet::Trap_Bullet(Enemy*enemy)
 {
-	damage = 10;
+	damage = TRAP_BL_DAMAGE;
 	sprite = SPRITEMANAGER->sprites[SPR_TRAP_BULLET];
 
 	collisionType = CT_ENEMY;
@@ -36,6 +36,16 @@ Trap_Bullet::Trap_Bullet(Enemy*enemy)
 
 	vx = MEGAMAN->xCenter() - x;
 	vy = MEGAMAN->yCenter() - y;
+	if (abs(vx) > 50)
+	{
+		vy = 50 * vy / abs(vx);
+		vx = vx > 0 ? 50 : -50;
+	}
+	if (abs(vy) > 50)
+	{
+		vx = 50 * vx / abs(vy);
+		vy = vy > 0 ? 50 : -50;
+	}
 
 	dx = vx * GAME_TIME->frameTime;
 	dy = vy * GAME_TIME->frameTime;
