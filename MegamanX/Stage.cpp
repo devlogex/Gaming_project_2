@@ -1,58 +1,47 @@
 #include "Stage.h"
 #include "Map.h"
 #include "Camera.h"
-
+#include"Megaman.h"
+#include"Door.h"
+#include"QuadTree.h"
 List<Stage*>* Stage::curStages = 0;
 Stage* Stage::curStage = 0;
-
+bool Stage::updating = false;
 Stage::Stage(fstream & fs, int index)
 {
-	fs >> x >> y >> width >> height >> xViewportNext >> yViewportNext >> xViewportPrev >> yViewportPrev;
+	fs >> x >> y >> width >> height >> xPre >> yPre;
 	this->index = index;
-	updating = false;
+}
+
+void Stage::update()
+{
+	if (!updating)
+		return;
+
+	if (CAMERA->x >= curStage->x)
+		updating = false;
 }
 
 void Stage::loadStageNext()
 {
-	Map::curMap->xMap = -xViewportNext;
-	Map::curMap->yMap = -yViewportNext;
-	CAMERA->x = xViewportNext;
-	CAMERA->y = yViewportNext;
-	CAMERA->dx = 0;
-	CAMERA->dy = 0;
+	curStage = curStages->at(curStage->index + 1);
+	updating = true;
 }
 
 void Stage::loadStagePrev()
 {
-	Map::curMap->xMap = -xViewportPrev;
-	Map::curMap->yMap = -yViewportPrev;
-	CAMERA->x = xViewportPrev;
-	CAMERA->y = yViewportPrev;
-	CAMERA->dx = 0;
-	CAMERA->dy = 0;
+	Map::curMap->quadtree.removeObjectFromCamera();
+	CAMERA->x = curStage->xPre;
+	CAMERA->y = curStage->yPre;
+	Map::curMap->xMap = curStage->xPre;
+	Map::curMap->yMap = curStage->yPre;
+	MEGAMAN->x = CAMERA->xCenter() - MEGAMAN->width;
+	MEGAMAN->y = CAMERA->yCenter();
+	MEGAMAN->restore(MEGAMAN);
+	for (int i = 0; i < Door::doors->size(); i++)
+		Door::doors->at(i)->restore(Door::doors->at(i));
 }
 
-bool Stage::update()
-{
-	if (!updating)
-		return false;
-}
-
-void Stage::next()
-{
-	curStage = curStages->at(curStage->index + 1);
-	curStage->loadStageNext();
-}
-
-void Stage::prev()
-{
-	curStage = curStages->at(curStage->index - 1);
-	curStage->loadStagePrev();
-}
-
-void Stage::onStageChange(Stage * nextStage)
-{
-}
 
 Stage::~Stage()
 {

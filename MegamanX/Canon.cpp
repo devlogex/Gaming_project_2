@@ -2,9 +2,12 @@
 #include"Megaman.h"
 #include"Enemy_Bullet.h"
 #include"Canon_Bullet.h"
+#include"Stage.h"
 
 void Canon::update()
 {
+	if (Stage::updating)
+		return;
 	if (!alive)
 		return;
 
@@ -59,7 +62,7 @@ void Canon::onCollision(BaseObject * other, int nx, int ny)
 void Canon::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
-	life = 10;
+	life = CANON_LIFE;
 }
 
 Canon::Canon()

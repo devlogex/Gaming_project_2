@@ -1,5 +1,6 @@
 #include "BloodBoss.h"
 #include"Boss.h"
+#include"Stage.h"
 
 BloodBoss* BloodBoss::instance = 0;
 BloodBoss * BloodBoss::getInstance()
@@ -16,6 +17,8 @@ BloodBoss::BloodBoss()
 
 void BloodBoss::update()
 {
+	if (Stage::curStage->index != Stage::curStages->size() - 1)
+		return;
 	if (BOSS->life > 0 && BOSS->life <= BOSS_LIFE)
 		curFrame = sprite->animates[0].nFrame - ((float)BOSS->life / (float)BOSS_LIFE)*sprite->animates[0].nFrame;
 	else
@@ -31,6 +34,8 @@ void BloodBoss::update()
 
 void BloodBoss::draw()
 {
+	if (Stage::curStage->index != Stage::curStages->size() - 1)
+		return;
 	sprite->draw(VIEWPORT_WIDTH-30, 10, 0, curFrame);
 }
 

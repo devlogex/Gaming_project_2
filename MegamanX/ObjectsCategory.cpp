@@ -19,6 +19,9 @@ void ObjectsCategory::add(BaseObject* object)
 	case CT_TRAP:
 		traps._Add(object);
 		break;
+	case CT_DOOR:
+		doors._Add((Door*)object);
+		break;
 	default:
 		break;
 	}
@@ -43,6 +46,9 @@ void ObjectsCategory::remove(BaseObject* object)
 		break;
 	case CT_TRAP:
 		traps._Remove(object);
+		break;
+	case CT_DOOR:
+		doors._Remove((Door*)object);
 		break;
 	default:
 		break;

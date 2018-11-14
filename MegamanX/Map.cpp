@@ -91,6 +91,7 @@ void Map::initObjects(const char * objectsPath)
 			break;
 		case SPR_DOOR:
 			objects[i] = new Door();
+			break;
 		default:
 			objects[i] = new BaseObject();
 			break;
@@ -121,10 +122,8 @@ void Map::initObjects(const char * objectsPath)
 				if (id == -3)
 					objects[i]->collisionType = CT_TRAP;
 		}
-		
 
 		objects[i]->getFromObject(objects[i]);
-
 	}
 
 	fs.close();
@@ -137,12 +136,33 @@ void Map::init(const char * mapSheetPath, const char * objectsPath, const char *
 	quadtree.init(quadtreePath, objects);
 }
 
+void Map::initStage(const char * stageInfoPath)
+{
+	fstream fs(stageInfoPath);
+	int nStage;
+	fs >> nStage;
+
+	for (int i = 0; i < nStage; i++)
+		stages._Add(new Stage(fs, i));
+
+	Stage::curStages = &stages;
+
+	Stage::curStage = stages[0];
+}
+
 void Map::restoreAllObject()
 {
+	for (int i = 0; i < nObjects; i++)
+		if (objects[i]->id > 0)
+		{
+			DrawableObject* drawableObject = (DrawableObject*)objects[i];
+			drawableObject->restore(objects[i]);
+		}
 }
 
 void Map::update()
 {
+	Stage::curStage->update();
 	CAMERA->update();
 	quadtree.update();
 	MEGAMAN->update();
@@ -163,6 +183,10 @@ void Map::update()
 	List<BaseObject*>preventMoveCamera = CAMERA->objectsInCamera.preventMoveCameras;
 	List<Item*>itemObject = CAMERA->objectsInCamera.items;
 	List<BaseObject*>trapObject = CAMERA->objectsInCamera.traps;
+	List<Door*>doorObject = CAMERA->objectsInCamera.doors;
+
+	for (int i = 0; i < doorObject.size(); i++)
+		doorObject[i]->update();
 
 	for (int i = 0; i < trapObject.size(); i++)
 		COLLISION->checkCollision(trapObject[i], MEGAMAN);
@@ -207,6 +231,8 @@ void Map::update()
 	{
 		BLOOD->at(i)->update();
 	}
+	for (int i = 0; i < doorObject.size(); i++)
+		COLLISION->checkCollision(MEGAMAN, doorObject[i]);
 
 	for (int j = 0; j < enemiesObject.size(); j++)//////////////
 	{
@@ -238,6 +264,8 @@ void Map::draw()
 
 	List<Enemy*> enemiesObject = CAMERA->objectsInCamera.enemies;
 	List<Item*>itemObject = CAMERA->objectsInCamera.items;
+	List<Door*>doorObject = CAMERA->objectsInCamera.doors;
+
 	for (int j = 0; j < enemiesObject.size(); j++)
 	{
 		enemiesObject[j]->draw();
@@ -253,7 +281,9 @@ void Map::draw()
 	}
 	for (int i = 0; i < itemObject.size(); i++)
 		itemObject[i]->draw();
-
+	for (int i = 0; i < doorObject.size(); i++)
+		doorObject[i]->draw();
 	for (int i = 0; i < BLOOD->size(); i++)
 		BLOOD->at(i)->draw();
+
 }

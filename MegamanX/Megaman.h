@@ -40,22 +40,25 @@ public:
 	GameTimeLoop timeWeaponAppear;
 	GameTimeLoop timeBeDamaged;
 	bool inviolable;
+	int ax;
+	int updateY;
+	int numberOfAlive;
 
+	void update();
+	void updateVX();
+	void updateBlock();
+	void updateBeforeHandle();
+	void updateAnimation();
+	void updateStage();
+	void updateLocation();
 	void toAttack();
 	void toNormal();
 	void statusNormal();
 	void statusAttack();
-	void updateVX();
-	void updateBlock();
-	void updateBeforeHandle();
 
-	void update();
-	void updateAnimation();
-	void updateLocation();
 	void draw();
 
-	int updateY;
-
+	void restore(BaseObject* obj);
 
 	void onCollision(BaseObject * other, int nx, int ny);
 	void onAABBCheck(BaseObject*other);

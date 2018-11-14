@@ -1,13 +1,15 @@
 #include "Scene.h"
+#include"MegamanXScene.h"
 
 Scene* Scene::curScene = 0;
-void Scene::changeScene(Scene* scene, bool clean)
+void Scene::changeScene(Scene* scene, bool clean,bool isInit)
 {
 	if (curScene != 0 && clean)
 		delete curScene;
 
 	curScene = scene;
-	curScene->init();
+	if (isInit)
+		curScene->init();
 }
 
 Scene::Scene(void)

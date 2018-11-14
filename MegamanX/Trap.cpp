@@ -1,9 +1,12 @@
 #include "Trap.h"
 #include"Enemy_Bullet.h"
 #include"Trap_Bullet.h"
+#include"Stage.h"
 
 void Trap::update()
 {
+	if (Stage::updating)
+		return;
 	if (!alive)
 		return;
 	   
@@ -33,7 +36,7 @@ void Trap::draw()
 void Trap::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
-	life = 10;
+	life = TRAP_LIFE;
 }
 
 Trap::Trap()

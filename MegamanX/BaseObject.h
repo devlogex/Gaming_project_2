@@ -16,7 +16,8 @@ enum COLLISION_TYPE
 	CT_ENEMY,
 	CT_PREVENTMOVECAMERA,
 	CT_TRAP,
-	CT_ITEM
+	CT_ITEM,
+	CT_DOOR
 };
 
 class BaseObject :public Box, public OldRestore

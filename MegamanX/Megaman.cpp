@@ -10,6 +10,8 @@
 #include"Camera.h"
 #include"Enemy.h"
 #include"Enemy_Bullet.h"
+#include"Door.h"
+#include"Stage.h"
 
 Megaman*Megaman::instance = 0;
 Megaman * Megaman::getInstance()
@@ -24,7 +26,6 @@ Megaman::Megaman()
 	sprite = SPRITEMANAGER->sprites[SPR_MAIN];
 	collisionType = CT_PLAYER;
 	life = MEGAMAN_LIFE;
-	alive = true;
 	updateY = 0;
 	width = 30;
 	height = 34;
@@ -34,6 +35,7 @@ Megaman::Megaman()
 	curFrame = 0;
 	direction = Right;
 	inviolable = false;
+	numberOfAlive = 3;
 
 	timeBeDamaged.init(0.1, 11);
 	timeBeDamaged.start();
@@ -208,6 +210,7 @@ void Megaman::statusNormal()
 					if (KEY->keySlide && KEY->keyJum && canJump)
 					{
 						vx = -MEGAMAN_VX_WALL_H * direction;
+						ax = direction * MEGAMAN_AX;
 						vy = MEGAMAN_VY_WALL_UP_H;
 						changeAction(MA_HIGHJUMPWALL);
 					}
@@ -215,6 +218,7 @@ void Megaman::statusNormal()
 						if (KEY->keyJum && canJump)
 						{
 							vx = -MEGAMAN_VX_WALL * direction;
+							ax = direction * MEGAMAN_AX;
 							vy = MEGAMAN_VY_WALL_UP;
 							changeAction(MA_JUMPWALL);
 						}
@@ -321,18 +325,18 @@ void Megaman::updateVX()
 			else
 				if (curAnimation == MA_JUMPWALL || curAnimation == MA_JUMPWALL_ATTACK)
 				{
-					if (vy < 0)
-						vx += direction * MEGAMAN_AX*GAME_TIME->frameTime;
+					if (vy < 0 && ax*direction>=0)
+						vx += ax*GAME_TIME->frameTime;
 					else
 						vx = direction * MEGAMAN_VX_RUN;
 				}
 				else
 					if (curAnimation == MA_HIGHJUMPWALL || curAnimation == MA_HIGHJUMPWALL_ATTACK)
 					{
-						if (vy < 0)
-							vx += direction * MEGAMAN_AX * GAME_TIME->frameTime;
+						if (vy < 0 && ax*direction >= 0)
+							vx += ax * GAME_TIME->frameTime;
 						else
-							vx = MEGAMAN_VX_SLIDE * direction;
+							vx = MEGAMAN_VX_SLIDE * 2 / 3 * direction;
 					}
 					else
 						if (curAnimation == MA_WALL || curAnimation == MA_WALL_ATTACK)
@@ -345,7 +349,7 @@ void Megaman::updateVX()
 		}
 		else
 			vx = 0;
-	if (curAnimation == MA_STAND)
+	if (curAnimation == MA_STAND || curAnimation==MA_DAMAGED)
 		vx = 0;
 }
 
@@ -395,6 +399,9 @@ void Megaman::updateBeforeHandle()
 
 void Megaman::update()
 {
+	updateStage();
+	if (Stage::updating)
+		return;
 	//update move, slide khi sat tuong
 	updateBlock();
 
@@ -417,7 +424,7 @@ void Megaman::updateAnimation()
 		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
 			changeAction(MA_STAND);
 
-	if (timeBeDamaged.curLoop > 0 && timeBeDamaged.curLoop < 100)
+	if (timeBeDamaged.curLoop > 0 && timeBeDamaged.curLoop < 50)
 	{
 		if (curAnimation != MA_DAMAGED)
 			changeAction(MA_DAMAGED);
@@ -426,7 +433,7 @@ void Megaman::updateAnimation()
 		return;
 	}
 	else
-		if (timeBeDamaged.curLoop >= 100 && timeBeDamaged.curLoop < 200)
+		if (timeBeDamaged.curLoop >= 50 && timeBeDamaged.curLoop < 100)
 		{
 			timeBeDamaged.curLoop++;
 		}
@@ -502,8 +509,32 @@ void Megaman::updateAnimation()
 	}
 }
 
+void Megaman::updateStage()
+{
+	if (x < CAMERA->x && dx < 0)
+		dx = 0;
+	if (right() > CAMERA->right() && !Stage::updating)
+		Stage::loadStageNext();
+	if (Stage::updating)
+	{
+		if (delayAnimation.canCreateFrame())
+		{
+			if (curFrame++ >= sprite->animates[curAnimation].nFrame - 1)
+			{
+				if (curAnimation == MA_STAND || curAnimation == MA_RUN || curAnimation == MA_STAND_ATTACK || curAnimation == MA_RUN_ATTACK)
+					curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
+				else
+					curFrame = sprite->animates[curAnimation].nFrame - 1;
+			}
+		}
+		dx = 0.3;
+	}
+}
+
 void Megaman::updateLocation()
 {
+	if (x <= CAMERA->x && !Stage::updating && dx<0)
+		dx = 0;
 	x += dx;
 	y += dy;
 }
@@ -537,10 +568,20 @@ void Megaman::draw()
 	}
 }
 
+void Megaman::restore(BaseObject * obj)
+{
+	life = MEGAMAN_LIFE;
+	alive = true;
+	curAnimation = 0;
+	nextAnimation = 0;
+	curFrame = 0;
+}
+
 void Megaman::onCollision(BaseObject * other, int nx, int ny)
 {
 	// can't move,slide khi sat tuong
-	if (other->collisionType == CT_GROUND && nx != 0 && (curAnimation==MA_RUN || curAnimation==MA_SLIDE))
+	if ((other->collisionType == CT_GROUND || (other->collisionType == CT_DOOR && !((Door*)other)->opening)) 
+		&& nx != 0 && (curAnimation == MA_RUN || curAnimation == MA_SLIDE))
 	{
 		if (direction == Left && x == other->right())
 			canMoveLeft = false;
@@ -564,6 +605,10 @@ void Megaman::onCollision(BaseObject * other, int nx, int ny)
 	// update .....
 	if (other->collisionType == CT_GROUND)
 		MovableObject::onCollision(other, nx, ny);
+	if (other->collisionType == CT_DOOR && !((Door*)other)->opening)
+	{
+		COLLISION->preventMove(this, other);
+	}
 
 	//block jump
 	if (dy > 0 && curAnimation!=MA_WALL && curAnimation != MA_WALL_ATTACK)
@@ -585,6 +630,12 @@ void Megaman::onAABBCheck(BaseObject * other)
 		}
 		else
 			life = 0;
+
+		if (life <= 0)
+		{
+			alive = false;
+			numberOfAlive -= 1;
+		}
 	}
 	if (other->collisionType == CT_ITEM)
 	{

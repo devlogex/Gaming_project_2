@@ -4,13 +4,15 @@
 
 void Boss_Bullet::update()
 {
-	Enemy_Bullet::update();
+	dx = vx * GAME_TIME->frameTime;
+	dy = vy * GAME_TIME->frameTime;
 	curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
 }
 
 
 Boss_Bullet::Boss_Bullet(Enemy*enemy)
 {
+	this->enemy = enemy;
 	damage = BOSS_BL_DAMAGE;
 	sprite = SPRITEMANAGER->sprites[SPR_BOSS_BULLET];
 
@@ -18,9 +20,6 @@ Boss_Bullet::Boss_Bullet(Enemy*enemy)
 	allowDelete = false;
 
 	direction = enemy->direction;
-
-	vx = ENEMY_BULLET_VX * direction;
-	vy = 0;
 
 	int xInSprite = ENEMYBULLETLOCATION->ptsBoss[0].x;
 	int yInSprite = ENEMYBULLETLOCATION->ptsBoss[0].y;
@@ -36,6 +35,20 @@ Boss_Bullet::Boss_Bullet(Enemy*enemy)
 	{
 		x = enemy->x + xInSprite;
 		y = enemy->y - updateY + yInSprite;
+	}
+
+	if (enemy->life > BOSS_LIFE / 2)
+	{
+		vx = ENEMY_BULLET_VX * direction;
+		vy = 0;
+	}
+	else
+	{
+		vx = MEGAMAN->xCenter() - x;
+		vy = MEGAMAN->yCenter() - y;
+
+		vy = 100 * vy / abs(vx);
+		vx = vx > 0 ? 100 : -100;
 	}
 }
 

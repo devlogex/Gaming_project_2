@@ -10,6 +10,7 @@ public:
 	static List<Enemy_Bullet*>*getEnemyBullets();
 
 	int damage;
+	Enemy* enemy;// khong duoc xoa enemy nay trong destructor
 
 	virtual void update();
 	virtual void draw();

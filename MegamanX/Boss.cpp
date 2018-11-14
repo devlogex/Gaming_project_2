@@ -1,6 +1,7 @@
 #include "Boss.h"
 #include"Megaman.h"
 #include"Boss_Bullet.h"
+#include"Stage.h"
 
 Boss* Boss::instance = 0;
 Boss * Boss::getInstance()
@@ -12,6 +13,9 @@ Boss * Boss::getInstance()
 
 void Boss::update()
 {
+	if (Stage::updating)
+		return;
+
 	updateVX();
 
 	timeAttack.curLoop++;
@@ -110,7 +114,7 @@ void Boss::onCollision(BaseObject * other, int nx, int ny)
 void Boss::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
-	life = 100;
+	life = BOSS_LIFE;
 }
 
 Boss::Boss()

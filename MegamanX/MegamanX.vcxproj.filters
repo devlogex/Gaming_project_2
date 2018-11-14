@@ -212,6 +212,9 @@
     <ClInclude Include="Door.h">
       <Filter>Door</Filter>
     </ClInclude>
+    <ClInclude Include="MainScreen.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="Door.cpp">
       <Filter>Door</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScreen.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

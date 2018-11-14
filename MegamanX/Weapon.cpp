@@ -2,6 +2,8 @@
 #include"Megaman.h"
 #include"WeaponLocation.h"
 #include"Map.h"
+#include"Camera.h"
+
 List<Weapon*>*Weapon::weapons = 0;
 List<Weapon*>* Weapon::getWeapons()
 {
@@ -48,6 +50,9 @@ void Weapon::updateLocation()
 {
 	x += dx;
 	y += dy;
+
+	if (x<CAMERA->left() || x>CAMERA->right())
+		WEAPON->_Remove(this);
 }
 
 void Weapon::onAABBCheck(BaseObject * other)

@@ -21,6 +21,19 @@ public:
 	bool keySlide;
 	bool keyMove;
 
+
+	bool keyUp;
+	bool keyUpPress;
+	bool isKeyUpDownPrevious;
+
+	bool keyDown;
+	bool keyDownPress;
+	bool isKeyDownDownPrevious;
+
+	bool keyEnter;
+	bool keyEnterPress;
+	bool isKeyEnterDownPrevious;
+
 	void update();
 
 	~KeyGame();

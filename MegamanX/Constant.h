@@ -3,15 +3,15 @@
 #define TITLE_STR "MegamanX"
 
 #define ANIMATE_DELAY_TIME_DEFAULT	0.08f
-#define SCREEN_WIDTH		600
+#define SCREEN_WIDTH		800
 #define SCREEN_HEIGHT		600
-#define VIEWPORT_WIDTH		150
-#define VIEWPORT_HEIGHT		150
+#define VIEWPORT_WIDTH		243
+#define VIEWPORT_HEIGHT		230
 #define BACK_WIDTH			VIEWPORT_WIDTH
 #define BACK_HEIGHT			VIEWPORT_HEIGHT
 #define GRAVITY				550
-#define X_MAP				59
-#define Y_MAP				585
+#define X_MAP				13
+#define Y_MAP				529
 #define MEGAMAN_VX_RUN		60
 #define MEGAMAN_VX_SLIDE	150
 #define MEGAMAN_VY_JUMP		-230

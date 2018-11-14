@@ -174,6 +174,7 @@
     <ClInclude Include="KeyBoard.h" />
     <ClInclude Include="KeyGame.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Megaman.h" />
     <ClInclude Include="MegamanXScene.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="KeyBoard.cpp" />
     <ClCompile Include="KeyGame.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Megaman.cpp" />
     <ClCompile Include="MegamanXScene.cpp" />

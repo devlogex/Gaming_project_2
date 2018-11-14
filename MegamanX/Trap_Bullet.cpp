@@ -10,6 +10,8 @@ void Trap_Bullet::update()
 
 Trap_Bullet::Trap_Bullet(Enemy*enemy)
 {
+	this->enemy = enemy;
+
 	damage = TRAP_BL_DAMAGE;
 	sprite = SPRITEMANAGER->sprites[SPR_TRAP_BULLET];
 

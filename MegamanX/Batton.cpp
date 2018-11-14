@@ -6,6 +6,8 @@
 
 void Batton::update()
 {
+	if (Stage::updating)
+		return;
 	if (!alive)
 		return;
 
@@ -72,7 +74,9 @@ void Batton::onCollision(BaseObject * other, int nx, int ny)
 void Batton::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
-	life = 10;
+	life = BATTON_LIFE;
+	canAttack = true;
+	ENEMYBULLET->_Add(new Batton_Bullet(this));
 }
 
 Batton::Batton()

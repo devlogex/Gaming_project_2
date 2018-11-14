@@ -4,7 +4,6 @@
 class Batton_Bullet: public Enemy_Bullet
 {
 public:
-	Enemy *enemy; // khong duoc xoa enemy nay trong destructor
 	bool block;
 
 	void update();

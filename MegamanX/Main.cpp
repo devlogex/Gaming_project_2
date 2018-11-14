@@ -7,11 +7,12 @@
 #include "GameTime.h"
 #include "Megaman.h"
 #include "MegamanXScene.h"
+#include "MainScreen.h"
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	WINDOW->initHandleWindows(hInstance, nCmdShow);
 
-	MegamanXScene::changeScene(new MegamanXScene());
+	MegamanXScene::changeScene(new MainScreen());
 
 	KeyBoard::Create(hInstance, WINDOW->getHandleWindow());
 

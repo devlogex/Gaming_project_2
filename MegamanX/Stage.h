@@ -12,15 +12,14 @@ public:
 	static Stage* curStage;
 
 	int index;
-	bool updating;
-	float xViewportNext, yViewportNext, xViewportPrev, yViewportPrev;
+	int xPre, yPre;
 
-	void loadStageNext();
-	void loadStagePrev();
-	bool update();
-	static void next();
-	static void prev();
-	void onStageChange(Stage* nextStage);
+	static bool updating;
+
+	void update();
+
+	static void loadStageNext();
+	static void loadStagePrev();
 
 	Stage(fstream& fs, int index);
 	~Stage();

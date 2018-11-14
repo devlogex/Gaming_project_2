@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include"Map.h"
 #include"Weapon.h"
+#include"Stage.h"
 
 void Enemy::update()
 {

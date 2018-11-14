@@ -18,10 +18,27 @@ void KeyGame::update()
 	keyAttack = key->IsKeyDown(DIK_C);
 	keyMove = keyLeft || keyRight;
 	keySlide = key->IsKeyDown(DIK_Z);
+
+
+	keyUp = key->IsKeyDown(DIK_UP);
+	keyUpPress = keyUp && !isKeyUpDownPrevious;
+	isKeyUpDownPrevious = keyUp;
+
+	keyDown = key->IsKeyDown(DIK_DOWN);
+	keyDownPress = keyDown && !isKeyDownDownPrevious;
+	isKeyDownDownPrevious = keyDown;
+
+	keyEnter=key->IsKeyDown(DIK_RETURN);
+	keyEnterPress = keyEnter && !isKeyEnterDownPrevious;
+	isKeyEnterDownPrevious = keyEnter;
 }
 KeyGame::KeyGame()
 {
 	key = KEYBOARD;
+
+	isKeyEnterDownPrevious = false;
+	isKeyDownDownPrevious = false;
+	isKeyUpDownPrevious = false;
 }
 
 

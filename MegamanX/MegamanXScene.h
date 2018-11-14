@@ -6,8 +6,9 @@
 class MegamanXScene :	public Scene
 {
 public:
-	Map map;
+	static MegamanXScene* megamanXScene;
 
+	Map map;
 
 	void init();
 	void update();

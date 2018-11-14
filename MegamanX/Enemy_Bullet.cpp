@@ -2,6 +2,7 @@
 #include"Enemy_Bullet_Location.h"
 #include"Map.h"
 #include"Megaman.h"
+#include"Camera.h"
 
 List<Enemy_Bullet*>* Enemy_Bullet::enemyBullets = 0;
 List<Enemy_Bullet*>* Enemy_Bullet::getEnemyBullets()
@@ -29,6 +30,11 @@ void Enemy_Bullet::updateLocation()
 {
 	x += dx;
 	y += dy;
+
+	if ((x > CAMERA->right() || x < CAMERA->left()) && enemy->id % 7 != 2)
+		ENEMYBULLET->_Remove(this);
+	if ((y > CAMERA->bottom() || y < CAMERA->top()) && enemy->id % 7 != 2)
+		ENEMYBULLET->_Remove(this);
 }
 
 void Enemy_Bullet::onAABBCheck(BaseObject * other)
@@ -46,7 +52,6 @@ Enemy_Bullet::Enemy_Bullet(Enemy* enemy)
 {
 	id = -5;
 }
-
 
 Enemy_Bullet::~Enemy_Bullet()
 {
