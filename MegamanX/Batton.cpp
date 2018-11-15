@@ -75,8 +75,9 @@ void Batton::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
 	life = BATTON_LIFE;
+	if(!canAttack)
+		ENEMYBULLET->_Add(new Batton_Bullet(this));
 	canAttack = true;
-	ENEMYBULLET->_Add(new Batton_Bullet(this));
 }
 
 Batton::Batton()

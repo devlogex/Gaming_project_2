@@ -70,6 +70,7 @@ Enemy::Enemy()
 	timeDeath.init(0.2, 5);
 	timeDeath.start();
 	collisionType = CT_ENEMY;
+	direction = Left;
 }
 
 

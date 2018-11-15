@@ -20,7 +20,9 @@ enum MEGAMAN_ACTION
 	MA_JUMPWALL_ATTACK,
 	MA_HIGHJUMPWALL_ATTACK,
 	MA_HIGHJUMP_ATTACK,
-	MA_DAMAGED
+	MA_DAMAGED,
+	MA_DISAPPEAR,
+	MA_DEATH
 };
 class Megaman: public MovableObject
 {
@@ -39,10 +41,13 @@ public:
 	GameTimeLoop timeAttack;
 	GameTimeLoop timeWeaponAppear;
 	GameTimeLoop timeBeDamaged;
+	GameTimeLoop timeDeath;
 	bool inviolable;
 	int ax;
 	int updateY;
 	int numberOfAlive;
+
+	bool isDraw;
 
 	void update();
 	void updateVX();
@@ -55,7 +60,7 @@ public:
 	void toNormal();
 	void statusNormal();
 	void statusAttack();
-
+	
 	void draw();
 
 	void restore(BaseObject* obj);

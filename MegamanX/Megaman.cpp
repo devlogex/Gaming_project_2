@@ -23,6 +23,7 @@ Megaman * Megaman::getInstance()
 
 Megaman::Megaman()
 {
+	id = 0;
 	sprite = SPRITEMANAGER->sprites[SPR_MAIN];
 	collisionType = CT_PLAYER;
 	life = MEGAMAN_LIFE;
@@ -35,6 +36,7 @@ Megaman::Megaman()
 	curFrame = 0;
 	direction = Right;
 	inviolable = false;
+	isDraw = true;
 	numberOfAlive = 3;
 
 	timeBeDamaged.init(0.1, 11);
@@ -45,6 +47,9 @@ Megaman::Megaman()
 
 	timeAttack.init(1, 100);
 	timeAttack.start();
+
+	timeDeath.init(0.2, 5);
+	timeDeath.start();
 
 	canJump = true;
 	canSlide = true;
@@ -399,9 +404,13 @@ void Megaman::updateBeforeHandle()
 
 void Megaman::update()
 {
+	if (!alive)
+		return;
+
 	updateStage();
 	if (Stage::updating)
 		return;
+
 	//update move, slide khi sat tuong
 	updateBlock();
 
@@ -420,10 +429,6 @@ void Megaman::update()
 
 void Megaman::updateAnimation()
 {
-	if (curAnimation == MA_APPEAR)
-		if (curFrame == sprite->animates[curAnimation].nFrame - 1)
-			changeAction(MA_STAND);
-
 	if (timeBeDamaged.curLoop > 0 && timeBeDamaged.curLoop < 50)
 	{
 		if (curAnimation != MA_DAMAGED)
@@ -541,6 +546,16 @@ void Megaman::updateLocation()
 
 void Megaman::draw()
 {
+	if (!alive)
+		return;
+
+	if (timeBeDamaged.curLoop > 0 && timeBeDamaged.curLoop < 100)
+		isDraw = !isDraw;
+	else
+		isDraw = true;
+	if (!isDraw)
+		return;
+
 	int xInViewport, yInViewport;
 	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
 
@@ -570,11 +585,15 @@ void Megaman::draw()
 
 void Megaman::restore(BaseObject * obj)
 {
+	setSprite();
 	life = MEGAMAN_LIFE;
 	alive = true;
 	curAnimation = 0;
 	nextAnimation = 0;
 	curFrame = 0;
+	timeAttack.start();
+	timeWeaponAppear.start();
+	timeBeDamaged.start();
 }
 
 void Megaman::onCollision(BaseObject * other, int nx, int ny)

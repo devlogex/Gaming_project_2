@@ -17,8 +17,11 @@ void MegamanXScene::update()
 {
 	if (MEGAMAN->numberOfAlive == 0 || !BOSS->alive)
 	{
-		Scene::changeScene(new MainScreen(),false);
+		Scene::changeScene(new MainScreen(), false);
 		MEGAMAN->numberOfAlive = 3;
+		if (Stage::curStage->index == Stage::curStages->size() - 1)
+			Stage::curStage = Stage::curStages->at(Stage::curStage->index - 1);
+		Stage::loadStagePrev();
 		return;
 	}
 	if (!MEGAMAN->alive)
@@ -36,7 +39,6 @@ void MegamanXScene::draw()
 {
 	map.draw();
 	MEGAMAN->draw();
-	
 }
 
 MegamanXScene::MegamanXScene()
