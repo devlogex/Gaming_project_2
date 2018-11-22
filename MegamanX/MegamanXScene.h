@@ -9,6 +9,7 @@ public:
 	static MegamanXScene* megamanXScene;
 
 	Map map;
+	GameTimeLoop timeDraw;
 
 	void init();
 	void update();

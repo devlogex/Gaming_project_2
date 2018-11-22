@@ -61,7 +61,7 @@ MainScreen::MainScreen()
 {
 	isStart = false;
 	isDraw = true;
-	timeDraw.init(0.3, 5);
+	timeDraw.init(0.3, 2);
 	timeDraw.start();
 }
 

@@ -29,7 +29,7 @@ void Camera::update()
 		if (Stage::curStage->yPre - CAMERA->y > 0)
 			dy = (Stage::curStage->yPre - CAMERA->y)*GAME_TIME->frameTime*10;
 		else
-			dy = 1;
+			dy = 0;
 		return;
 	}
 
@@ -37,22 +37,15 @@ void Camera::update()
 		dx = MEGAMAN->dx;
 	else
 		dx = 0;
-	if ((MEGAMAN->y + MEGAMAN->dy < yCenter() && MEGAMAN->dy < 0) || (MEGAMAN->y + MEGAMAN->dy > yCenter() && MEGAMAN->dy > 0))
+	if ((MEGAMAN->y + MEGAMAN->dy < yCenter() && MEGAMAN->dy < 0) || (MEGAMAN->y + MEGAMAN->dy > yCenter() + VIEWPORT_HEIGHT / 4 && MEGAMAN->dy > 0))
 		dy = MEGAMAN->dy;
 	else
 		dy = 0;
 
 	if (x + dx < Stage::curStage->left() && dx < 0)
-	{
-		x = Stage::curStage->left();
 		dx = 0;
-	}
-
 	if (right() + dx > Stage::curStage->right() && dx > 0)
-	{
-		x = Stage::curStage->right() - width;
 		dx = 0;
-	}
 }
 Camera::Camera()
 {

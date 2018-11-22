@@ -438,7 +438,7 @@ void Megaman::updateAnimation()
 		return;
 	}
 	else
-		if (timeBeDamaged.curLoop >= 50 && timeBeDamaged.curLoop < 100)
+		if (timeBeDamaged.curLoop >= 50 && timeBeDamaged.curLoop < 150)
 		{
 			timeBeDamaged.curLoop++;
 		}

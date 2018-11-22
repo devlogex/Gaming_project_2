@@ -17,6 +17,12 @@ void MegamanXScene::update()
 {
 	if (MEGAMAN->numberOfAlive == 0 || !BOSS->alive)
 	{
+		timeDraw.canCreateFrame();
+		if (!timeDraw.isTerminated())
+			return;
+		else
+			timeDraw.start();
+
 		Scene::changeScene(new MainScreen(), false);
 		MEGAMAN->numberOfAlive = 3;
 		if (Stage::curStage->index == Stage::curStages->size() - 1)
@@ -26,6 +32,12 @@ void MegamanXScene::update()
 	}
 	if (!MEGAMAN->alive)
 	{
+		timeDraw.canCreateFrame();
+		if (!timeDraw.isTerminated())
+			return;
+		else
+			timeDraw.start();
+
 		if (Stage::curStage->index == Stage::curStages->size() - 1)
 			Stage::curStage = Stage::curStages->at(Stage::curStage->index - 1);
 		Stage::loadStagePrev();
@@ -37,6 +49,9 @@ void MegamanXScene::update()
 
 void MegamanXScene::draw()
 {
+	if (timeDraw.curLoop > 0)
+		return;
+
 	map.draw();
 	MEGAMAN->draw();
 }
@@ -44,6 +59,8 @@ void MegamanXScene::draw()
 MegamanXScene::MegamanXScene()
 {
 	megamanXScene = this;
+	timeDraw.init(0.3, 5);
+	timeDraw.start();
 }
 
 

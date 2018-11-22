@@ -130,21 +130,4 @@ struct List
 	{
 		return (*this)[i];
 	}
-	void Release()
-	{
-		for (Node* p = pHead; p;)
-		{
-			Node* q = p;
-			p = p->pNext;
-			if (q->m_value)
-			{
-				q->m_value->Release();
-				q->m_value = 0;
-			}
-			delete q;
-			q = 0;
-		}
-		pHead = pTail = 0;
-		delete this;
-	}
 };

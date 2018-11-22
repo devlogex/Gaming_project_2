@@ -4,6 +4,9 @@
 #include"Megaman.h"
 #include"Door.h"
 #include"QuadTree.h"
+#include"Enemy_Bullet.h"
+#include"Weapon.h"
+
 List<Stage*>* Stage::curStages = 0;
 Stage* Stage::curStage = 0;
 bool Stage::updating = false;
@@ -30,9 +33,16 @@ void Stage::loadStageNext()
 
 void Stage::loadStagePrev()
 {
-	Map::curMap->quadtree.removeObjectFromCamera();
+	for (int i = 0; i < ENEMYBULLET->size(); i++)
+		if (ENEMYBULLET->at(i)->enemy->id % 7 != 2)
+			ENEMYBULLET->_Remove(ENEMYBULLET->at(i));
+	for (int i = 0; i < WEAPON->size(); i++)
+		WEAPON->_Remove(WEAPON->at(i));
+
 	CAMERA->x = curStage->xPre;
 	CAMERA->y = curStage->yPre;
+	Map::curMap->quadtree.update();
+
 	Map::curMap->xMap = curStage->xPre;
 	Map::curMap->yMap = curStage->yPre;
 	MEGAMAN->x = CAMERA->xCenter() - MEGAMAN->width;
@@ -40,6 +50,7 @@ void Stage::loadStagePrev()
 	MEGAMAN->restore(MEGAMAN);
 	for (int i = 0; i < Door::doors->size(); i++)
 		Door::doors->at(i)->restore(Door::doors->at(i));
+
 }
 
 

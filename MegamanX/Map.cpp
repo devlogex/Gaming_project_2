@@ -109,10 +109,11 @@ void Map::initObjects(const char * objectsPath)
 			drawableObject->setSprite();
 
 			// Direction for Trap
-			if (id % 7 == 3 && id > 70)
-				drawableObject->direction = Left;
-			else
-				drawableObject->direction = Right;
+			if (id % 7 == 3)
+				if (id > 70)
+					drawableObject->direction = Left;
+				else
+					drawableObject->direction = Right;
 		}
 		else
 		{
@@ -222,10 +223,6 @@ void Map::update()
 	for (int i = 0; i < enemiesObject.size(); i++)/////////////////////
 		for (int j = 0; j < WEAPON->size(); j++)
 			COLLISION->checkCollision(enemiesObject[i], WEAPON->at(j));
-	for (int i = 0; i < preventMoveCamera.size(); i++)
-	{
-		COLLISION->checkCollision(CAMERA, preventMoveCamera[i]);
-	}
 	
 	for (int i = 0; i < BLOOD->size(); i++)
 	{
@@ -233,6 +230,10 @@ void Map::update()
 	}
 	for (int i = 0; i < doorObject.size(); i++)
 		COLLISION->checkCollision(MEGAMAN, doorObject[i]);
+	for (int i = 0; i < preventMoveCamera.size(); i++)
+	{
+		COLLISION->checkCollision(CAMERA, preventMoveCamera[i]);
+	}
 
 	for (int j = 0; j < enemiesObject.size(); j++)//////////////
 	{
