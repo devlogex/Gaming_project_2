@@ -448,6 +448,12 @@ void Megaman::updateAnimation()
 			inviolable = false;
 		}
 
+	if (KEY->keyAttack && timeWeaponAppear.isTerminated() && timeAttack.curLoop==1)
+	{
+		WEAPON->_Add(new Weapon_Simple());
+		timeWeaponAppear.start();
+	}
+
 	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 15)
 	{
 		if (curAnimation != MA_STAND_ATTACK && curAnimation != MA_JUMP_ATTACK && curAnimation != MA_RUN_ATTACK && curAnimation != MA_SLIDE_ATTACK
@@ -467,12 +473,6 @@ void Megaman::updateAnimation()
 		{
 			timeAttack.curLoop++;
 			holdingAttack = false;
-		}
-
-		if (timeAttack.curLoop == 1 && timeWeaponAppear.isTerminated())
-		{
-			WEAPON->_Add(new Weapon_Simple());
-			timeWeaponAppear.start();
 		}
 
 		return;
