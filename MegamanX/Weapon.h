@@ -9,7 +9,7 @@ public:
 	static List<Weapon*>*getWeapons();
 
 	int damage;
-
+	GameTimeLoop timeDelay;
 	virtual void update();
 	virtual void draw();
 	virtual void updateLocation();

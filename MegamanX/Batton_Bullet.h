@@ -10,6 +10,10 @@ public:
 	void draw();
 	void onCollision(BaseObject* other, int nx, int ny);
 
+	GameTimeLoop timeDelay;
+	GameTimeLoop timeDeath;
+
+	void onAABBCheck(BaseObject* other);
 
 	Batton_Bullet(Enemy*enemy);
 	~Batton_Bullet();

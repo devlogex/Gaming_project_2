@@ -46,6 +46,10 @@ void Camera::update()
 		dx = 0;
 	if (right() + dx > Stage::curStage->right() && dx > 0)
 		dx = 0;
+	if (y + dy < Stage::curStage->top() && dy < 0)
+		dy = 0;
+	if (bottom() + dy > Stage::curStage->bottom() && dy > 0)
+		dy = 0;
 }
 Camera::Camera()
 {

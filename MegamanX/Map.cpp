@@ -147,8 +147,8 @@ void Map::initStage(const char * stageInfoPath)
 		stages._Add(new Stage(fs, i));
 
 	Stage::curStages = &stages;
-
-	Stage::curStage = stages[0];
+	if (Stage::curStage == 0)
+		Stage::curStage = stages[1];
 }
 
 void Map::restoreAllObject()

@@ -49,6 +49,17 @@ Trap_Bullet::Trap_Bullet(Enemy*enemy)
 		vy = vy > 0 ? 50 : -50;
 	}
 
+	if (abs(vx) < 10)
+	{
+		vx = vx * 50 / abs(vy);
+		vy = vy > 0 ? 50 : -50;
+	}
+	if (abs(vy) < 10)
+	{
+		vy = vy * 50 / abs(vx);
+		vx = vx > 0 ? 50 : -50;
+	}
+
 	dx = vx * GAME_TIME->frameTime;
 	dy = vy * GAME_TIME->frameTime;
 }

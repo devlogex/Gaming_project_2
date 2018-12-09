@@ -16,7 +16,7 @@ SpriteManager::SpriteManager()
 	sprites[SPR_WEAPON_SIMPLE] = new Sprite("Data\\Megaman\\weapon.png", "Data\\Megaman\\weapon_simple.txt");
 	sprites[SPR_WEAPON_MEDIUM] = new Sprite("Data\\Megaman\\weapon.png", "Data\\Megaman\\weapon_medium.txt");
 	sprites[SPR_WEAPON_LARGE] = new Sprite("Data\\Megaman\\weapon.png", "Data\\Megaman\\weapon_large.txt");
-	sprites[SPR_WEAPON_STATUS] = new Sprite("Data\\Megaman\\weapon.png", "Data\\Megaman\\weapon_status.txt");
+	sprites[SPR_WEAPON_STATUS] = new Sprite("Data\\Megaman\\weapon_status.png", "Data\\Megaman\\weapon_status.txt");
 	sprites[SPR_CANON] = new Sprite("Data\\Enemy\\canon\\canon.png", "Data\\Enemy\\canon\\canon.txt");
 	sprites[SPR_CANON_BULLET] = new Sprite("Data\\Enemy\\canon\\canon.png", "Data\\Enemy\\canon\\canon_bullet.txt");
 	sprites[SPR_DELETEOBJECT] = new Sprite("Data\\Enemy\\deleteObject.png", "Data\\Enemy\\deleteObject.txt");

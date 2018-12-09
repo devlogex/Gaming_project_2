@@ -10,8 +10,8 @@
 #define BACK_WIDTH			VIEWPORT_WIDTH
 #define BACK_HEIGHT			VIEWPORT_HEIGHT
 #define GRAVITY				550
-#define X_MAP				13
-#define Y_MAP				529
+#define X_MAP				/*13*/4062
+#define Y_MAP				/*529*/592
 #define MEGAMAN_VX_RUN		60
 #define MEGAMAN_VX_SLIDE	150
 #define MEGAMAN_VY_JUMP		-230
@@ -21,7 +21,7 @@
 #define MEGAMAN_VX_WALL		90
 #define MEGAMAN_VX_WALL_H	110
 #define MEGAMAN_AX			500
-#define WEAPON_VX			210
+#define WEAPON_VX			250
 #define ENEMY_VX_GO			60
 #define ENEMY_BULLET_VX		100
 #define BOSS_VX				150

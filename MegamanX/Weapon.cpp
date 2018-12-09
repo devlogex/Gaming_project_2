@@ -18,6 +18,24 @@ void Weapon::update()
 	dy = 0;
 
 	updateLocation();
+
+	if (this->sprite != SPRITEMANAGER->sprites[SPR_WEAPON_SIMPLE])
+		if (curAnimation == 0 && curFrame == sprite->animates[curAnimation].nFrame - 1)
+		{
+			curAnimation = 1;
+			curFrame = 0;
+		}
+		else
+			if (curAnimation == 0)
+				curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
+			else
+				if (timeDelay.curLoop == 5)
+				{
+					curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
+					timeDelay.start();
+				}
+				else
+					timeDelay.curLoop++;
 }
 
 void Weapon::draw()
@@ -63,6 +81,9 @@ void Weapon::onAABBCheck(BaseObject * other)
 
 Weapon::Weapon()
 {
+	timeDelay.init(0.5, 2);
+	timeDelay.start();
+
 	collisionType = CT_WEAPON;
 	allowDelete = false;
 

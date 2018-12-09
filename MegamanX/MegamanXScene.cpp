@@ -44,6 +44,18 @@ void MegamanXScene::update()
 		return;
 	}
 
+	if (Stage::curStage->updating && 
+		(Stage::curStage->index == 1 || Stage::curStage->index == 2 || Stage::curStage->index == 4 || Stage::curStage->index == 5))
+	{
+		timeDraw.canCreateFrame();
+		if (!timeDraw.isTerminated())
+			return;
+		else
+			timeDraw.start();
+
+		Stage::loadStagePrev();
+	}
+
 	map.update();
 }
 
