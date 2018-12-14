@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include"Sprite.h"
 
 enum SPRITE_OBJECT
@@ -11,6 +11,10 @@ enum SPRITE_OBJECT
 	SPR_BOSS = 4,
 	SPR_ITEM = 5,
 	SPR_DOOR = 6,
+	SPR_GENJIBO = 7,
+	SPR_GENJIBO_SP = 8,
+	SPR_BLASTHORNET = 9,
+	SPR_GENJIBO_SP_ENGINE,
 	SPR_BOSS_BULLET,
 	SPR_WEAPON_SIMPLE,
 	SPR_WEAPON_MEDIUM,

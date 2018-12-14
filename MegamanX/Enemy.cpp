@@ -7,12 +7,16 @@ void Enemy::update()
 {
 	if (!alive)
 		return;
+	if (Stage::curStage->updating)
+		return;
 	MovableObject::update();
 }
 
 void Enemy::updateLocation()
 {
 	if (!alive)
+		return;
+	if (Stage::curStage->updating)
 		return;
 
 	x += dx;

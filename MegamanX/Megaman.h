@@ -47,6 +47,7 @@ public:
 	int updateY;
 	int numberOfAlive;
 
+	bool isActive;
 	bool isDraw;
 
 	void update();

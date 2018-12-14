@@ -10,8 +10,8 @@
 #define BACK_WIDTH			VIEWPORT_WIDTH
 #define BACK_HEIGHT			VIEWPORT_HEIGHT
 #define GRAVITY				550
-#define X_MAP				/*13*/4062
-#define Y_MAP				/*529*/592
+#define X_MAP				4062
+#define Y_MAP				592
 #define MEGAMAN_VX_RUN		60
 #define MEGAMAN_VX_SLIDE	150
 #define MEGAMAN_VY_JUMP		-230
@@ -39,7 +39,13 @@
 #define WEAPON_DAMAGE_SIMPLE	5
 #define	WEAPON_DAMAGE_MEDIUM	10
 #define WEAPON_DAMAGE_LARGE		40
-
+#define GENJIBO_SP_VY		100
+#define GENJIBO_VX			100
+#define GENJIBO_VY			100
+#define GENJIBO_DX			1.2
+#define GENJIBO_DY			1.2
+#define GENJIBO_LIFE		300
+#define GENJIBO_DAMAGE		20
 
 #define WINDOW				WindowGame::getInstance()
 #define GRAPHICS			Graphics::getInstance()
@@ -60,6 +66,10 @@
 #define BLOOD_MEGAMAN		BloodMegaman::getInstance()
 #define BLOOD_BOSS			BloodBoss::getInstance()
 #define BOSS				Boss::getInstance()
+#define GENJIBO_SP			Genjibo_SP::getInstance()
+#define GENJIBO_SP_ENGINE	Genjibo_SP_Engine::getInstance()
+#define GENJIBO				Genjibo::getInstance()
+#define GENJIBO_SP_ENGINE_LOCATION Genjibo_SP_Engine_Location::getInstance()
 
 #define FRAME_RATE			(100.0f)  // Số frame load trên một giây (frame/giây)
 #define MIN_FRAME_RATE		(90.0f)

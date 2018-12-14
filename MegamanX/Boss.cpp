@@ -102,12 +102,12 @@ void Boss::onCollision(BaseObject * other, int nx, int ny)
 	if (other->collisionType == CT_GROUND && nx != 0)
 	{
 		direction = (Direction)nx;
-		
-			curAnimation = BA_STAND;
-			nextAnimation = BA_STAND;
-			curFrame = 0;
-			timeAction.start();
-		
+
+		curAnimation = BA_STAND;
+		nextAnimation = BA_STAND;
+		curFrame = 0;
+		timeAction.start();
+
 	}
 }
 
@@ -115,6 +115,7 @@ void Boss::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
 	life = BOSS_LIFE;
+	direction = Left;
 }
 
 Boss::Boss()

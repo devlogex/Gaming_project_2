@@ -6,6 +6,7 @@
 #include"QuadTree.h"
 #include"Enemy_Bullet.h"
 #include"Weapon.h"
+#include"Genjibo_SP.h"
 
 List<Stage*>* Stage::curStages = 0;
 Stage* Stage::curStage = 0;
@@ -34,7 +35,7 @@ void Stage::loadStageNext()
 void Stage::loadStagePrev()
 {
 	for (int i = 0; i < ENEMYBULLET->size(); i++)
-		if (ENEMYBULLET->at(i)->enemy->id % 7 != 2)
+		if (ENEMYBULLET->at(i)->enemy->id % 10 != 2)
 			ENEMYBULLET->_Remove(ENEMYBULLET->at(i));
 	for (int i = 0; i < WEAPON->size(); i++)
 		WEAPON->_Remove(WEAPON->at(i));
@@ -51,6 +52,8 @@ void Stage::loadStagePrev()
 	for (int i = 0; i < Door::doors->size(); i++)
 		Door::doors->at(i)->restore(Door::doors->at(i));
 
+	if (Stage::curStage->index == 1)
+		GENJIBO_SP->isActive = true;
 }
 
 

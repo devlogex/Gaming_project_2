@@ -169,6 +169,10 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameTime.h" />
     <ClInclude Include="GameTimeLoop.h" />
+    <ClInclude Include="Genjibo.h" />
+    <ClInclude Include="Genjibo_SP.h" />
+    <ClInclude Include="Genjibo_SP_Engine.h" />
+    <ClInclude Include="Genjibo_SP_Engine_Location.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyBoard.h" />
@@ -223,6 +227,10 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="GameTime.cpp" />
     <ClCompile Include="GameTimeLoop.cpp" />
+    <ClCompile Include="Genjibo.cpp" />
+    <ClCompile Include="Genjibo_SP.cpp" />
+    <ClCompile Include="Genjibo_SP_Engine.cpp" />
+    <ClCompile Include="Genjibo_SP_Engine_Location.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyBoard.cpp" />

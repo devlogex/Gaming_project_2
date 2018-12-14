@@ -58,6 +58,12 @@
     <Filter Include="Door">
       <UniqueIdentifier>{6c115ad9-4fbe-4867-808e-4ee7974108b0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\Genjibo">
+      <UniqueIdentifier>{bb400a23-c484-442a-8ee3-8646d83e271f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Genjibo\Genjibo_SP">
+      <UniqueIdentifier>{d077d165-2aaa-410a-b049-74b259636b98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowGame.h">
@@ -215,6 +221,18 @@
     <ClInclude Include="MainScreen.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Genjibo_SP.h">
+      <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
+    </ClInclude>
+    <ClInclude Include="Genjibo.h">
+      <Filter>Enemy\Genjibo</Filter>
+    </ClInclude>
+    <ClInclude Include="Genjibo_SP_Engine.h">
+      <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
+    </ClInclude>
+    <ClInclude Include="Genjibo_SP_Engine_Location.h">
+      <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -370,6 +388,18 @@
     </ClCompile>
     <ClCompile Include="MainScreen.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Genjibo_SP.cpp">
+      <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
+    </ClCompile>
+    <ClCompile Include="Genjibo.cpp">
+      <Filter>Enemy\Genjibo</Filter>
+    </ClCompile>
+    <ClCompile Include="Genjibo_SP_Engine.cpp">
+      <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
+    </ClCompile>
+    <ClCompile Include="Genjibo_SP_Engine_Location.cpp">
+      <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

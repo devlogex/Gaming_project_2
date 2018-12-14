@@ -15,6 +15,8 @@
 #include"BloodMegaman.h"
 #include"BloodBoss.h"
 #include"Door.h"
+#include"Genjibo_SP.h"
+#include"Genjibo.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -72,7 +74,7 @@ void Map::initObjects(const char * objectsPath)
 	{
 		fs >> id >> x >> y >> width >> height;
 
-		switch (id%7)
+		switch (id%10)
 		{
 		case SPR_CANON:
 			objects[i] = new Canon();
@@ -92,6 +94,12 @@ void Map::initObjects(const char * objectsPath)
 		case SPR_DOOR:
 			objects[i] = new Door();
 			break;
+		case SPR_GENJIBO_SP:
+			objects[i] = GENJIBO_SP;
+			break;
+		case SPR_GENJIBO:
+			objects[i] = GENJIBO;
+			break;
 		default:
 			objects[i] = new BaseObject();
 			break;
@@ -109,8 +117,8 @@ void Map::initObjects(const char * objectsPath)
 			drawableObject->setSprite();
 
 			// Direction for Trap
-			if (id % 7 == 3)
-				if (id > 70)
+			if (id % 10 == 3)
+				if (id > 100)
 					drawableObject->direction = Left;
 				else
 					drawableObject->direction = Right;

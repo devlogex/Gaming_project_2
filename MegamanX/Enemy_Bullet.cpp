@@ -31,9 +31,9 @@ void Enemy_Bullet::updateLocation()
 	x += dx;
 	y += dy;
 
-	if ((x > CAMERA->right() || x < CAMERA->left()) && enemy->id % 7 != 2)
+	if ((x > CAMERA->right() || x < CAMERA->left()) && enemy->id % 10 != 2)
 		ENEMYBULLET->_Remove(this);
-	if ((y > CAMERA->bottom() || y < CAMERA->top()) && enemy->id % 7 != 2)
+	if ((y > CAMERA->bottom() || y < CAMERA->top()) && enemy->id % 10 != 2)
 		ENEMYBULLET->_Remove(this);
 }
 

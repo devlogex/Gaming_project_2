@@ -5,6 +5,7 @@
 #include"Enemy_Bullet.h"
 #include"MainScreen.h"
 #include"Boss.h"
+#include"Genjibo_SP.h"
 
 MegamanXScene* MegamanXScene::megamanXScene = 0;
 void MegamanXScene::init()

@@ -12,6 +12,7 @@
 #include"Enemy_Bullet.h"
 #include"Door.h"
 #include"Stage.h"
+#include"Genjibo_SP.h"
 
 Megaman*Megaman::instance = 0;
 Megaman * Megaman::getInstance()
@@ -56,6 +57,8 @@ Megaman::Megaman()
 	canMoveLeft = true;
 	canMoveRight = true;
 	holdingAttack = false;
+
+	isActive = true;
 }
 
 void Megaman::toAttack()
@@ -410,6 +413,15 @@ void Megaman::update()
 	updateStage();
 	if (Stage::updating)
 		return;
+	if (!isActive)
+	{
+		KEY->keyAttack = false;
+		KEY->keySlide = false;
+		KEY->keyJum = false;
+		KEY->keyMove = false;
+		KEY->keyLeft = false;
+		KEY->keyRight = false;
+	}
 
 	//update move, slide khi sat tuong
 	updateBlock();
@@ -594,6 +606,7 @@ void Megaman::restore(BaseObject * obj)
 	timeAttack.start();
 	timeWeaponAppear.start();
 	timeBeDamaged.start();
+	isActive = true;
 }
 
 void Megaman::onCollision(BaseObject * other, int nx, int ny)

@@ -1,4 +1,4 @@
-#include "SpriteManager.h"
+﻿#include "SpriteManager.h"
 
 
 SpriteManager*SpriteManager::instance = 0;
@@ -30,6 +30,10 @@ SpriteManager::SpriteManager()
 	sprites[SPR_BLOOD_MEGAMAN] = new Sprite("Data\\Blood\\blood_megaman.png", "Data\\Blood\\blood_megaman.txt");
 	sprites[SPR_BLOOD_BOSS] = new Sprite("Data\\Blood\\blood_boss.png", "Data\\Blood\\blood_boss.txt");
 	sprites[SPR_DOOR] = new Sprite("Data\\Door\\door.png", "Data\\Door\\door.txt");
+	sprites[SPR_GENJIBO] = new Sprite("Data\\Enemy\\genjibo\\genjibo.png", "Data\\Enemy\\genjibo\\genjibo.txt");
+	sprites[SPR_GENJIBO_SP] = new Sprite("Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp.png", "Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp.txt");
+	sprites[SPR_GENJIBO_SP_ENGINE] = new Sprite("Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp.png", "Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp_engine.txt");
+
 }
 
 SpriteManager::~SpriteManager()
