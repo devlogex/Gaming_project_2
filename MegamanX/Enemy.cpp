@@ -71,7 +71,7 @@ void Enemy::restore(BaseObject * obj)
 
 Enemy::Enemy()
 {
-	timeDeath.init(0.2, 5);
+	timeDeath.init(0.3, 7);
 	timeDeath.start();
 	collisionType = CT_ENEMY;
 	direction = Left;

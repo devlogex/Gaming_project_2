@@ -1,6 +1,6 @@
 #include "BlastHornet.h"
 #include"Megaman.h"
-
+#include"Map.h"
 
 BlastHornet*BlastHornet::instance = 0;
 BlastHornet * BlastHornet::getInstance()
@@ -11,6 +11,8 @@ BlastHornet * BlastHornet::getInstance()
 }
 void BlastHornet::update()
 {
+	if (!alive)
+		return;
 
 	updateV();
 	updateAnimation();
@@ -152,7 +154,50 @@ void BlastHornet::updateLocation()
 }
 void BlastHornet::draw()
 {
-	MovableObject::draw();
+	if (!alive)
+	{
+		if (timeDeath.canCreateFrame())
+		{
+			sprite = SPRITEMANAGER->sprites[SPR_DELETEOBJECT];
+			curAnimation = 0;
+			curFrame = (curFrame + 1) % 8;
+		}
+
+		if (timeDeath.isTerminated())
+			return;
+
+		int xInViewport, yInViewport;
+		Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
+		sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
+
+		return;
+	}
+
+	int xInViewport, yInViewport;
+	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
+
+	int updateX = sprite->animates[curAnimation].frames[curFrame].width - width;
+	yInViewport -= updateX;
+
+	int trucQuay = xInViewport + width / 2;
+
+	if (direction != sprite->image->direction)
+	{
+		D3DXMATRIX mt;
+		D3DXMatrixIdentity(&mt);
+		mt._41 = 2 * trucQuay;
+		mt._11 = -1;
+		GRAPHICS->GetSprite()->SetTransform(&mt);
+	}
+
+	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame);
+
+	if (direction != sprite->image->direction)
+	{
+		D3DXMATRIX mt;
+		D3DXMatrixIdentity(&mt);
+		GRAPHICS->GetSprite()->SetTransform(&mt);
+	}
 }
 void BlastHornet::onCollision(BaseObject * other, int nx, int ny)
 {
@@ -239,6 +284,12 @@ void BlastHornet::fixV(float & vx, float & vy, float v)
 		vy = vy * v / abs(vx);
 		vx = vx > 0 ? v : -v;
 	}
+}
+
+void BlastHornet::release()
+{
+	delete instance;
+	instance = 0;
 }
 
 BlastHornet::BlastHornet()

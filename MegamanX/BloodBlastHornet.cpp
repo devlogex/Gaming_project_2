@@ -34,9 +34,9 @@ void BloodBlastHornet::update()
 
 void BloodBlastHornet::draw()
 {
-	/*if (Stage::curStage->index != 4)
+	if (Stage::curStage->index != 4)
 		return;
-	sprite->draw(VIEWPORT_WIDTH - 30, 10, 0, curFrame);*/
+	sprite->draw(VIEWPORT_WIDTH - 30, 10, 0, curFrame);
 }
 
 void BloodBlastHornet::restore(BaseObject * obj)

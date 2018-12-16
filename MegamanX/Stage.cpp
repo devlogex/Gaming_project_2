@@ -61,7 +61,11 @@ void Stage::loadStagePrev()
 		GENJIBO->release();
 		GENJIBO;
 	}
-
+	if (Stage::curStage->index == 4)
+	{
+		BLASTHORNET->release();
+		BLASTHORNET;
+	}
 }
 
 

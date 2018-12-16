@@ -236,9 +236,6 @@
     <ClInclude Include="Genjibo_SP_Engine_Location.h">
       <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
     </ClInclude>
-    <ClInclude Include="BlastHornet_Wing.h">
-      <Filter>Enemy\BlastHornet</Filter>
-    </ClInclude>
     <ClInclude Include="BlastHornet.h">
       <Filter>Enemy\BlastHornet</Filter>
     </ClInclude>
@@ -418,9 +415,6 @@
     </ClCompile>
     <ClCompile Include="Genjibo_SP_Engine_Location.cpp">
       <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
-    </ClCompile>
-    <ClCompile Include="BlastHornet_Wing.cpp">
-      <Filter>Enemy\BlastHornet</Filter>
     </ClCompile>
     <ClCompile Include="BlastHornet.cpp">
       <Filter>Enemy\BlastHornet</Filter>

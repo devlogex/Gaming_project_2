@@ -7,6 +7,7 @@
 #include"Boss.h"
 #include"Genjibo_SP.h"
 #include"Genjibo.h"
+#include"BlastHornet.h"
 
 MegamanXScene* MegamanXScene::megamanXScene = 0;
 void MegamanXScene::init()
@@ -50,7 +51,10 @@ void MegamanXScene::update()
 	{
 		Stage::loadStageNext();
 	}
-
+	if (!BLASTHORNET->alive && BLASTHORNET->timeDeath.isTerminated() && Stage::curStage->index == 4)
+	{
+		Stage::loadStageNext();
+	}
 	if (Stage::curStage->updating && 
 		(Stage::curStage->index == 1 || Stage::curStage->index == 2 || Stage::curStage->index == 4 || Stage::curStage->index == 5))
 	{

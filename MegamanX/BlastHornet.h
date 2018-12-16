@@ -42,6 +42,7 @@ public:
 	void restore(BaseObject* obj);
 
 	void fixV(float &vx, float &vy, float v);
+	void release();
 
 	~BlastHornet();
 };
