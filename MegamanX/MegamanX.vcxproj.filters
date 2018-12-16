@@ -64,6 +64,9 @@
     <Filter Include="Enemy\Genjibo\Genjibo_SP">
       <UniqueIdentifier>{d077d165-2aaa-410a-b049-74b259636b98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enemy\BlastHornet">
+      <UniqueIdentifier>{921c0924-a381-45ac-87bf-d43fc2f11e37}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowGame.h">
@@ -233,6 +236,21 @@
     <ClInclude Include="Genjibo_SP_Engine_Location.h">
       <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
     </ClInclude>
+    <ClInclude Include="BlastHornet_Wing.h">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornet.h">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornet_Bullet.h">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BlastHornet_Bullet_Direct.h">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodBlastHornet.h">
+      <Filter>Blood</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -400,6 +418,21 @@
     </ClCompile>
     <ClCompile Include="Genjibo_SP_Engine_Location.cpp">
       <Filter>Enemy\Genjibo\Genjibo_SP</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornet_Wing.cpp">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornet.cpp">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornet_Bullet.cpp">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BlastHornet_Bullet_Direct.cpp">
+      <Filter>Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="BloodBlastHornet.cpp">
+      <Filter>Blood</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

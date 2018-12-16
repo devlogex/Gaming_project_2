@@ -150,7 +150,12 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="Batton.h" />
     <ClInclude Include="Batton_Bullet.h" />
+    <ClInclude Include="BlastHornet.h" />
+    <ClInclude Include="BlastHornet_Bullet.h" />
+    <ClInclude Include="BlastHornet_Bullet_Direct.h" />
+    <ClInclude Include="BlastHornet_Wing.h" />
     <ClInclude Include="Blood.h" />
+    <ClInclude Include="BloodBlastHornet.h" />
     <ClInclude Include="BloodBoss.h" />
     <ClInclude Include="BloodMegaman.h" />
     <ClInclude Include="Boss.h" />
@@ -209,7 +214,12 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="Batton.cpp" />
     <ClCompile Include="Batton_Bullet.cpp" />
+    <ClCompile Include="BlastHornet.cpp" />
+    <ClCompile Include="BlastHornet_Bullet.cpp" />
+    <ClCompile Include="BlastHornet_Bullet_Direct.cpp" />
+    <ClCompile Include="BlastHornet_Wing.cpp" />
     <ClCompile Include="Blood.cpp" />
+    <ClCompile Include="BloodBlastHornet.cpp" />
     <ClCompile Include="BloodBoss.cpp" />
     <ClCompile Include="BloodMegaman.cpp" />
     <ClCompile Include="Boss.cpp" />

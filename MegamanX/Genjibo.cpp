@@ -11,6 +11,9 @@ Genjibo * Genjibo::getInstance()
 
 void Genjibo::update()
 {
+	if (!alive)
+		return;
+
 	updateV();
 	updateAnimation();
 	updateBeforeHandle();
@@ -37,7 +40,7 @@ void Genjibo::updateV()
 {
 	if (curAnimation == GA_ROLL_RUN || curAnimation== GA_ROTARY_RUN)
 		vx = direction * GENJIBO_VX;
-
+	
 }
 
 void Genjibo::updateBeforeHandle()
@@ -47,7 +50,11 @@ void Genjibo::updateBeforeHandle()
 
 	isOnGround = false;
 	if (curAnimation != GA_RUN)
-		updateVelocity();
+	{
+		vy += ay/1.3 * GAME_TIME->frameTime;
+		dx = vx * GAME_TIME->frameTime;
+		dy = vy * GAME_TIME->frameTime;
+	}
 	BaseObject::update();
 
 	if (delayAnimation.canCreateFrame())
@@ -122,11 +129,15 @@ void Genjibo::draw()
 		{
 			sprite = SPRITEMANAGER->sprites[SPR_DELETEOBJECT];
 			curAnimation = 0;
-			curFrame = (curFrame + 1) % 6;
+			curFrame = (curFrame + 1) % 8;
 		}
 
 		if (timeDeath.isTerminated())
 			return;
+		int xInViewport, yInViewport;
+		Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
+		sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
+		return;
 	}
 
 	if (timeDamaged.canCreateFrame())
@@ -211,6 +222,11 @@ void Genjibo::onAABBCheck(BaseObject * other)
 {
 	if (other->collisionType == CT_WEAPON)
 		timeDamaged.start();
+
+	if (curAnimation == GA_ROLL_RUN && other->collisionType == CT_WEAPON && dy <= 0 && (x - MEGAMAN->x)*direction < 0)
+		vy = GENJIBO_VY;
+
+	Enemy::onAABBCheck(other);
 }
 
 void Genjibo::restore(BaseObject * obj)
@@ -228,6 +244,12 @@ void Genjibo::restore(BaseObject * obj)
 	drawDamaged = false;
 }
 
+void Genjibo::release()
+{
+	delete instance;
+	instance = 0;
+}
+
 Genjibo::Genjibo()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_GENJIBO];
@@ -236,6 +258,8 @@ Genjibo::Genjibo()
 	alive = true;
 	width = 47;
 	height = 47;
+	x = 4208;
+	y = 715;
 
 	delayAnimation.minFrameTime = 0.012f;
 	delayAnimation.maxFrameTime = 0.015f;

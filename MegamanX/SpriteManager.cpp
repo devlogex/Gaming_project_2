@@ -33,7 +33,8 @@ SpriteManager::SpriteManager()
 	sprites[SPR_GENJIBO] = new Sprite("Data\\Enemy\\genjibo\\genjibo.png", "Data\\Enemy\\genjibo\\genjibo.txt");
 	sprites[SPR_GENJIBO_SP] = new Sprite("Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp.png", "Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp.txt");
 	sprites[SPR_GENJIBO_SP_ENGINE] = new Sprite("Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp.png", "Data\\Enemy\\genjibo\\genjibo_sp\\genjibo_sp_engine.txt");
-
+	sprites[SPR_BLASTHORNET] = new Sprite("Data\\Enemy\\blastHornet\\blastHornet.png", "Data\\Enemy\\blastHornet\\blastHornet.txt");
+	sprites[SPR_BLOOD_BLASTHORNET]=new Sprite("Data\\Blood\\blood_BlastHornet.png", "Data\\Blood\\blood_BlastHornet.txt");
 }
 
 SpriteManager::~SpriteManager()

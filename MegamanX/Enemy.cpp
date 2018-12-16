@@ -31,7 +31,7 @@ void Enemy::draw()
 		{
 			sprite = SPRITEMANAGER->sprites[SPR_DELETEOBJECT];
 			curAnimation = 0;
-			curFrame = (curFrame + 1) % 6;
+			curFrame = (curFrame + 1) % 8;
 		}
 
 		if (timeDeath.isTerminated())
@@ -40,6 +40,8 @@ void Enemy::draw()
 		int xInViewport, yInViewport;
 		Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
 		sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
+
+		return;
 	}
 
 	MovableObject::draw();

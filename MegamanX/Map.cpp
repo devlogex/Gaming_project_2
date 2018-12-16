@@ -17,6 +17,7 @@
 #include"Door.h"
 #include"Genjibo_SP.h"
 #include"Genjibo.h"
+#include"BlastHornet.h"
 
 Map* Map::curMap = 0;
 Map::Map()
@@ -100,6 +101,9 @@ void Map::initObjects(const char * objectsPath)
 		case SPR_GENJIBO:
 			objects[i] = GENJIBO;
 			break;
+		case SPR_BLASTHORNET:
+			objects[i] = BLASTHORNET;
+			break;
 		default:
 			objects[i] = new BaseObject();
 			break;
@@ -133,6 +137,7 @@ void Map::initObjects(const char * objectsPath)
 		}
 
 		objects[i]->getFromObject(objects[i]);
+		
 	}
 
 	fs.close();
@@ -156,7 +161,7 @@ void Map::initStage(const char * stageInfoPath)
 
 	Stage::curStages = &stages;
 	if (Stage::curStage == 0)
-		Stage::curStage = stages[1];
+		Stage::curStage = stages[4];
 }
 
 void Map::restoreAllObject()

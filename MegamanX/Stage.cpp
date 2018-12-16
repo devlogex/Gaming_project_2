@@ -7,6 +7,8 @@
 #include"Enemy_Bullet.h"
 #include"Weapon.h"
 #include"Genjibo_SP.h"
+#include"Genjibo.h"
+#include"BlastHornet.h"
 
 List<Stage*>* Stage::curStages = 0;
 Stage* Stage::curStage = 0;
@@ -53,7 +55,13 @@ void Stage::loadStagePrev()
 		Door::doors->at(i)->restore(Door::doors->at(i));
 
 	if (Stage::curStage->index == 1)
+	{
+		GENJIBO_SP->release();
 		GENJIBO_SP->isActive = true;
+		GENJIBO->release();
+		GENJIBO;
+	}
+
 }
 
 

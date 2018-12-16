@@ -38,6 +38,7 @@ public:
 	void onCollision(BaseObject* other, int nx, int ny);
 	void onAABBCheck(BaseObject* other);
 	void restore(BaseObject* obj);
+	void release();
 
 	~Genjibo();
 };

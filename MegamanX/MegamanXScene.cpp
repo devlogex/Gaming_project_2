@@ -6,6 +6,7 @@
 #include"MainScreen.h"
 #include"Boss.h"
 #include"Genjibo_SP.h"
+#include"Genjibo.h"
 
 MegamanXScene* MegamanXScene::megamanXScene = 0;
 void MegamanXScene::init()
@@ -43,6 +44,11 @@ void MegamanXScene::update()
 			Stage::curStage = Stage::curStages->at(Stage::curStage->index - 1);
 		Stage::loadStagePrev();
 		return;
+	}
+
+	if (!GENJIBO->alive && GENJIBO->timeDeath.isTerminated() && Stage::curStage->index==1)
+	{
+		Stage::loadStageNext();
 	}
 
 	if (Stage::curStage->updating && 

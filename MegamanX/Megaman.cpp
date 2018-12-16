@@ -607,6 +607,7 @@ void Megaman::restore(BaseObject * obj)
 	timeWeaponAppear.start();
 	timeBeDamaged.start();
 	isActive = true;
+	direction = Right;
 }
 
 void Megaman::onCollision(BaseObject * other, int nx, int ny)

@@ -109,6 +109,12 @@ void Genjibo_SP::restore(BaseObject * obj)
 	GENJIBO_SP_ENGINE->release();
 }
 
+void Genjibo_SP::release()
+{
+	delete instance;
+	instance = 0;
+}
+
 Genjibo_SP::Genjibo_SP()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_GENJIBO_SP];
@@ -117,6 +123,8 @@ Genjibo_SP::Genjibo_SP()
 	alive = true;
 	width = 22;
 	height = 22;
+	x = 4219;
+	y = 580;
 
 	direction = Right;// Right== đi xuống, Left == đi lên
 	vx = 0;

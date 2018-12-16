@@ -10,11 +10,11 @@
 #define BACK_WIDTH			VIEWPORT_WIDTH
 #define BACK_HEIGHT			VIEWPORT_HEIGHT
 #define GRAVITY				550
-#define X_MAP				4062
+#define X_MAP				4347
 #define Y_MAP				592
-#define MEGAMAN_VX_RUN		60
+#define MEGAMAN_VX_RUN		50
 #define MEGAMAN_VX_SLIDE	150
-#define MEGAMAN_VY_JUMP		-230
+#define MEGAMAN_VY_JUMP		-250
 #define MEGAMAN_VY_WALL_DOWN	10
 #define MEGAMAN_VY_WALL_UP	-200
 #define MEGAMAN_VY_WALL_UP_H -250
@@ -41,11 +41,15 @@
 #define WEAPON_DAMAGE_LARGE		40
 #define GENJIBO_SP_VY		100
 #define GENJIBO_VX			100
-#define GENJIBO_VY			100
+#define GENJIBO_VY			-300
 #define GENJIBO_DX			1.2
 #define GENJIBO_DY			1.2
-#define GENJIBO_LIFE		300
+#define GENJIBO_LIFE		250
 #define GENJIBO_DAMAGE		20
+#define BLASTHORNET_LIFE	7
+#define BLASTHORNET_DAMAGE	25
+#define BLASTHORNET_FLY_VX	70
+#define BLASTHORNET_FLY_VY	170
 
 #define WINDOW				WindowGame::getInstance()
 #define GRAPHICS			Graphics::getInstance()
@@ -65,11 +69,14 @@
 #define BLOOD				Blood::getBloods()
 #define BLOOD_MEGAMAN		BloodMegaman::getInstance()
 #define BLOOD_BOSS			BloodBoss::getInstance()
+#define BLOOD_BLASTHORNET	BloodBlastHornet::getInstance()
 #define BOSS				Boss::getInstance()
 #define GENJIBO_SP			Genjibo_SP::getInstance()
 #define GENJIBO_SP_ENGINE	Genjibo_SP_Engine::getInstance()
 #define GENJIBO				Genjibo::getInstance()
 #define GENJIBO_SP_ENGINE_LOCATION Genjibo_SP_Engine_Location::getInstance()
+#define BLASTHORNET			BlastHornet::getInstance()
+
 
 #define FRAME_RATE			(100.0f)  // Số frame load trên một giây (frame/giây)
 #define MIN_FRAME_RATE		(90.0f)
