@@ -67,6 +67,10 @@ void Enemy::restore(BaseObject * obj)
 {
 	DrawableObject::restore(obj);
 	timeDeath.start();
+	vx = 0;
+	vy = 0;
+	dx = 0;
+	dy = 0;
 }
 
 Enemy::Enemy()

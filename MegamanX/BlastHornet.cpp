@@ -1,6 +1,8 @@
 #include "BlastHornet.h"
 #include"Megaman.h"
 #include"Map.h"
+#include"Enemy_Bullet.h"
+#include"BlastHornet_Bullet.h"
 
 BlastHornet*BlastHornet::instance = 0;
 BlastHornet * BlastHornet::getInstance()
@@ -26,20 +28,45 @@ void BlastHornet::updateAnimation()
 		if (curAnimation == BHA_SHOT)
 		{
 			if (curFrame == sprite->animates[curAnimation].nFrame - 1 && !timeShot.isTerminated())
-			{
-
-
 				timeShot.canCreateFrame();
-			}
 			else
-				if (timeShot.isTerminated())
+				if (timeShot.isTerminated() && !blockBullet)
 				{
+					ENEMYBULLET->_Add(new BlastHornet_Bullet(30, 0));
+					ENEMYBULLET->_Add(new BlastHornet_Bullet(30, 10));
+					ENEMYBULLET->_Add(new BlastHornet_Bullet(30, 15));
+					ENEMYBULLET->_Add(new BlastHornet_Bullet(30, 25));
+					ENEMYBULLET->_Add(new BlastHornet_Bullet(30, 35));
+					blockBullet = true;
 					changeAction(BHA_RESHOT);
 				}
 		}
 		else
 			if (curAnimation == BHA_RESHOT && curFrame == sprite->animates[curAnimation].nFrame - 1)
+			{
 				changeAction(BHA_FLY_HALF);
+				blockBullet = false;
+			}
+			else
+				if (curAnimation == BHA_FLY_FULL)
+				{
+					if (indexFlyFull == -1 && (dx>0 && x >= ptsFly[0].x)||(dx<0 && x<=ptsFly[0].x))
+					{
+						indexFlyFull = 0;
+						dy = 5;
+						dx = 0;
+					}
+					else
+						if (indexFlyFull == 0 &&  x >= ptsFly[1].x)
+						{
+							indexFlyFull = 1;
+						}
+						else
+							if (indexFlyFull == 1 && x <= ptsFly[0].x)
+							{
+								indexFlyFull = 0;
+							}
+				}
 
 
 }
@@ -91,9 +118,26 @@ void BlastHornet::updateV()
 				else
 					if (curAnimation == BHA_FLY_FULL || curAnimation == BHA_SHOT_DIRECT)
 					{
-						
 						direction = MEGAMAN->x - x >= 0 ? Right : Left;
-
+						if (curAnimation == BHA_FLY_FULL && timeFlyFull.isTerminated())
+						{
+							changeAction(BHA_SHOT_DIRECT);
+							timeShot.start();
+							blockBullet = false;
+						}
+						else
+							if (curAnimation == BHA_SHOT_DIRECT && timeShot.isTerminated())
+							{
+								if (!blockBullet)
+								{
+									ENEMYBULLET->_Add(new BlastHornet_Bullet(0, 0, true));
+									blockBullet = true;
+								}
+								changeAction(BHA_FLY_FULL);
+								timeFlyFull.start();
+							}
+						timeFlyFull.canCreateFrame();
+						timeShot.canCreateFrame();
 					}
 
 	
@@ -106,7 +150,12 @@ void BlastHornet::updateBeforeHandle()
 	isOnGround = false;
 	if (curAnimation == BHA_FLY_FULL || curAnimation == BHA_SHOT_DIRECT )
 	{
-		
+		if (indexFlyFull == -1)
+		{
+			dx = ptsFly[0].x - x;
+			dy = ptsFly[0].y+(ptsFly[1].y-ptsFly[0].y)/2 - y;
+			fixV(dx, dy, 0.85);
+		}
 	}
 	else
 	{
@@ -144,60 +193,68 @@ void BlastHornet::updateBeforeHandle()
 					curFrame = (curFrame + 1) % sprite->animates[curAnimation].nFrame;
 			}
 
-
 		}
 	}
 }
 void BlastHornet::updateLocation()
 {
-	Enemy::updateLocation();
+	if (!alive)
+		return;
+
+	if ((curAnimation == BHA_FLY_FULL || curAnimation == BHA_SHOT_DIRECT) && indexFlyFull != -1)
+	{
+		if (indexFlyFull == 0)
+		{
+			x += 0.85;
+			y = sin((ptsFly[1].x - x) / (ptsFly[1].x - ptsFly[0].x) * 2 * PI);
+			if (-1 <= y && y <= 0)
+			{
+				y = -y * (ptsFly[1].y - (ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2)) / 1 + (ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2);
+			}
+			else
+				if ((0 <= y && y <= 1))
+				{
+					y = ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2 - y * (ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2 - ptsFly[0].y) / 1;
+				}
+		}
+		else
+		{
+			x -= 0.85;
+			y = sin((x - ptsFly[0].x) / (ptsFly[1].x - ptsFly[0].x) * 2 * PI);
+			if (-1 <= y && y <= 0)
+			{
+				y = -y * (ptsFly[1].y - (ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2)) / 1 + (ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2);
+			}
+			else
+				if ((0 <= y && y <= 1))
+				{
+					y = ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2 - y * (ptsFly[0].y + (ptsFly[1].y - ptsFly[0].y) / 2 - ptsFly[0].y) / 1;
+				}
+		}
+	}
+	else
+	{
+		x += dx;
+		y += dy;
+	}
 }
 void BlastHornet::draw()
 {
 	if (!alive)
 	{
-		if (timeDeath.canCreateFrame())
-		{
-			sprite = SPRITEMANAGER->sprites[SPR_DELETEOBJECT];
-			curAnimation = 0;
-			curFrame = (curFrame + 1) % 8;
-		}
-
 		if (timeDeath.isTerminated())
 			return;
+		else
+			timeDeath.canCreateFrame();
 
 		int xInViewport, yInViewport;
 		Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
-		sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);
+		sprite->draw(xInViewport, yInViewport, BHA_DEATH, 0, true);
 
 		return;
 	}
 
-	int xInViewport, yInViewport;
-	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
-
-	int updateX = sprite->animates[curAnimation].frames[curFrame].width - width;
-	yInViewport -= updateX;
-
-	int trucQuay = xInViewport + width / 2;
-
-	if (direction != sprite->image->direction)
-	{
-		D3DXMATRIX mt;
-		D3DXMatrixIdentity(&mt);
-		mt._41 = 2 * trucQuay;
-		mt._11 = -1;
-		GRAPHICS->GetSprite()->SetTransform(&mt);
-	}
-
-	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame);
-
-	if (direction != sprite->image->direction)
-	{
-		D3DXMATRIX mt;
-		D3DXMatrixIdentity(&mt);
-		GRAPHICS->GetSprite()->SetTransform(&mt);
-	}
+	MovableObject::draw();
 }
 void BlastHornet::onCollision(BaseObject * other, int nx, int ny)
 {
@@ -244,12 +301,21 @@ void BlastHornet::onCollision(BaseObject * other, int nx, int ny)
 		else
 			if (curAnimation == BHA_FLY_HALF && other->collisionType == CT_GROUND && nx != 0)
 			{
-				curAnimation = BHA_PRICK;
-				nextAnimation = BHA_PRICK;
-				curFrame = 0;
+				if (life >= BLASTHORNET_LIFE / 2)
+				{
+					curAnimation = BHA_PRICK;
+					nextAnimation = BHA_PRICK;
+					curFrame = 0;
 
-				direction = direction == Left ? Right : Left;
-
+					direction = direction == Left ? Right : Left;
+				}
+				else
+				{
+					changeAction(BHA_FLY_FULL);
+					indexFlyFull = -1;
+					timeFlyFull.start();
+					direction = MEGAMAN->x - x >= 0 ? Right : Left;
+				}
 			}
 }
 void BlastHornet::onAABBCheck(BaseObject * other)
@@ -258,7 +324,16 @@ void BlastHornet::onAABBCheck(BaseObject * other)
 }
 void BlastHornet::restore(BaseObject * obj)
 {
-	
+	Enemy::restore(obj);
+	direction = Left;
+	timeAppear.start();
+	timeShot.init(0.09, 10);
+	timeFlyFull.init(0.3, 10);
+
+	indexDRetire = 0;
+	indexFlyFull = -1;
+	blockBullet = false;
+	life = BLASTHORNET_LIFE;
 }
 
 void BlastHornet::fixV(float & vx, float & vy, float v)
@@ -306,7 +381,9 @@ BlastHornet::BlastHornet()
 	
 	timeAppear.init(0.25, 10);
 	timeAppear.start();
-	timeShot.init(0.15, 10);
+	timeShot.init(0.09, 10);
+	timeFlyFull.init(0.3, 10);
+
 
 	dRetire[0].x = 4530;
 	dRetire[0].y = 623;
@@ -316,11 +393,13 @@ BlastHornet::BlastHornet()
 	dRetire[2].y = 623;
 	indexDRetire = 0;
 
-	ptsFly[0].x = 4366;
-	ptsFly[0].y = 651;
-	ptsFly[1].x = 4530;
-	ptsFly[1].y = 651;
+	ptsFly[0].x = 4368;
+	ptsFly[0].y = 617;
+	ptsFly[1].x = 4526;
+	ptsFly[1].y = 680;
 	indexFlyFull = -1;
+
+	blockBullet = false;
 }
 
 BlastHornet::~BlastHornet()

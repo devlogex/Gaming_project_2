@@ -24,12 +24,13 @@ public:
 
 	GameTimeLoop timeAppear;
 	GameTimeLoop timeShot;
+	GameTimeLoop timeFlyFull;
 	Point dRetire[3];
 	int indexDRetire;
 
 	Point ptsFly[2];
 	int indexFlyFull;
-
+	bool blockBullet;
 
 	void update();
 	void updateAnimation();

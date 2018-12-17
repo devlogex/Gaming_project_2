@@ -227,6 +227,8 @@ void Map::update()
 	for (int i = 0; i < ENEMYBULLET->size(); i++)///////////////////////
 	{
 		COLLISION->checkCollision(MEGAMAN, ENEMYBULLET->at(i));
+		for (int j = 0; j < WEAPON->size(); j++)
+			COLLISION->checkCollision(WEAPON->at(j), ENEMYBULLET->at(i));
 	}
 
 	for (int j = 0; j < enemiesObject.size(); j++)//////////////////
@@ -247,7 +249,7 @@ void Map::update()
 	{
 		COLLISION->checkCollision(CAMERA, preventMoveCamera[i]);
 	}
-
+	
 	for (int j = 0; j < enemiesObject.size(); j++)//////////////
 	{
 		enemiesObject[j]->updateLocation();
@@ -283,6 +285,7 @@ void Map::draw()
 	for (int j = 0; j < enemiesObject.size(); j++)
 	{
 		enemiesObject[j]->draw();
+
 	}
 	for (int i = 0; i < ENEMYBULLET->size(); i++)
 		ENEMYBULLET->at(i)->draw();

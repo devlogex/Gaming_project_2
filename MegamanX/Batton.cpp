@@ -45,7 +45,7 @@ void Batton::draw()
 		{
 			sprite = SPRITEMANAGER->sprites[SPR_DELETEOBJECT];
 			curAnimation = 0;
-			curFrame = (curFrame + 1) % 6;
+			curFrame = (curFrame + 1) % 8;
 		}
 
 		if (timeDeath.isTerminated())
@@ -84,7 +84,7 @@ Batton::Batton()
 {
 	sprite = SPRITEMANAGER->sprites[SPR_BATTON];
 	damage = ENEMY_DAMAGE;
-	life = 10;
+	life = BATTON_LIFE;
 	alive = true;
 	width = 42;
 	height = 32;

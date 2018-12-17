@@ -2,6 +2,7 @@
 #define CLASS_NAME "MegamanX"
 #define TITLE_STR "MegamanX"
 
+#define PI 3.14159265358979323846f
 #define ANIMATE_DELAY_TIME_DEFAULT	0.08f
 #define SCREEN_WIDTH		800
 #define SCREEN_HEIGHT		600
@@ -50,6 +51,7 @@
 #define BLASTHORNET_DAMAGE	25
 #define BLASTHORNET_FLY_VX	70
 #define BLASTHORNET_FLY_VY	170
+#define BLASTHORNET_BULLET_DAMAGE	20
 
 #define WINDOW				WindowGame::getInstance()
 #define GRAPHICS			Graphics::getInstance()
@@ -78,7 +80,7 @@
 #define BLASTHORNET			BlastHornet::getInstance()
 
 
-#define FRAME_RATE			(100.0f)  // Số frame load trên một giây (frame/giây)
-#define MIN_FRAME_RATE		(90.0f)
+#define FRAME_RATE			(80.0f)  // Số frame load trên một giây (frame/giây)
+#define MIN_FRAME_RATE		(60.0f)
 #define MIN_FRAME_TIME		(1.0f/FRAME_RATE)	// thời gian load một frame (giây/frame)
 #define MAX_FRAME_TIME		(1.0f/MIN_FRAME_TIME)

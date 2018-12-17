@@ -38,9 +38,16 @@ void Stage::loadStagePrev()
 {
 	for (int i = 0; i < ENEMYBULLET->size(); i++)
 		if (ENEMYBULLET->at(i)->enemy->id % 10 != 2)
+		{
 			ENEMYBULLET->_Remove(ENEMYBULLET->at(i));
+			i--;
+		}
+
 	for (int i = 0; i < WEAPON->size(); i++)
+	{
 		WEAPON->_Remove(WEAPON->at(i));
+		i--;
+	}
 
 	CAMERA->x = curStage->xPre;
 	CAMERA->y = curStage->yPre;
@@ -56,15 +63,19 @@ void Stage::loadStagePrev()
 
 	if (Stage::curStage->index == 1)
 	{
-		GENJIBO_SP->release();
-		GENJIBO_SP->isActive = true;
-		GENJIBO->release();
-		GENJIBO;
+		GENJIBO_SP->x = GENJIBO_SP->oldX;
+		GENJIBO_SP->y = GENJIBO_SP->oldY;
+		GENJIBO_SP->restore(GENJIBO_SP);
+		GENJIBO->x = GENJIBO->oldX;
+		GENJIBO->y = GENJIBO->oldY;
+		GENJIBO->restore(GENJIBO);
 	}
 	if (Stage::curStage->index == 4)
 	{
-		BLASTHORNET->release();
-		BLASTHORNET;
+		BLASTHORNET->x=BLASTHORNET->oldX;
+		BLASTHORNET->y = BLASTHORNET->oldY;
+
+		BLASTHORNET->restore(BLASTHORNET);
 	}
 }
 

@@ -23,6 +23,8 @@ Enemy_Bullet_Location::Enemy_Bullet_Location()
 	ptsTrap[0].init(43, 16);
 
 	ptsBoss[0].init(84, 26);
+
+	ptsBlastHornet[0].init(45, 21);
 }
 
 

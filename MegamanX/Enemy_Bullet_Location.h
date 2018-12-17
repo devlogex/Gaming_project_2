@@ -13,6 +13,7 @@ public:
 	Point ptsBatton[4];
 	Point ptsTrap[1];
 	Point ptsBoss[1];
+	Point ptsBlastHornet[1];
 	~Enemy_Bullet_Location();
 };
 
