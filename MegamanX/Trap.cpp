@@ -53,7 +53,7 @@ Trap::Trap()
 	dx = 0;
 	dy = 0;
 
-	timeBulletAppear.init(3, 300);
+	timeBulletAppear.init(4, 300);
 	timeBulletAppear.start();
 }
 

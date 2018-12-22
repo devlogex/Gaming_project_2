@@ -123,6 +123,8 @@ float CollisionManager::sweptAABB(Box * M, RectF * S, int & normalX, int & norma
 
 void CollisionManager::checkCollision(BaseObject * M, BaseObject * S)
 {
+	if (S == NULL || M == NULL)
+		return;
 	if (!S->alive || !M->alive)
 		return;
 

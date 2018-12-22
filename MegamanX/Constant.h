@@ -45,7 +45,7 @@
 #define GENJIBO_VY			-300
 #define GENJIBO_DX			1.2
 #define GENJIBO_DY			1.2
-#define GENJIBO_LIFE		250
+#define GENJIBO_LIFE		100
 #define GENJIBO_DAMAGE		20
 #define BLASTHORNET_LIFE	100
 #define BLASTHORNET_DAMAGE	25
@@ -78,6 +78,8 @@
 #define GENJIBO				Genjibo::getInstance()
 #define GENJIBO_SP_ENGINE_LOCATION Genjibo_SP_Engine_Location::getInstance()
 #define BLASTHORNET			BlastHornet::getInstance()
+#define BLASTHORNET_WING	BlastHornet_Wing::getInstance()
+#define BLASTHORNET_WING_LOCATION	BlastHornet_Wing_Location::getInstance()
 
 
 #define FRAME_RATE			(80.0f)  // Số frame load trên một giây (frame/giây)

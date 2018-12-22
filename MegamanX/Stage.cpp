@@ -66,6 +66,7 @@ void Stage::loadStagePrev()
 		GENJIBO_SP->x = GENJIBO_SP->oldX;
 		GENJIBO_SP->y = GENJIBO_SP->oldY;
 		GENJIBO_SP->restore(GENJIBO_SP);
+		GENJIBO_SP->isActive = true;
 		GENJIBO->x = GENJIBO->oldX;
 		GENJIBO->y = GENJIBO->oldY;
 		GENJIBO->restore(GENJIBO);

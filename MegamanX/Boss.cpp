@@ -120,7 +120,7 @@ void Boss::restore(BaseObject * obj)
 
 Boss::Boss()
 {
-	sprite = SPRITEMANAGER->sprites[SPR_CANON];
+	sprite = SPRITEMANAGER->sprites[SPR_BOSS];
 	damage = BOSS_DAMAGE;
 	life = BOSS_LIFE;
 	alive = true;

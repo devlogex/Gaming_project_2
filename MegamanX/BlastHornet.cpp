@@ -3,6 +3,7 @@
 #include"Map.h"
 #include"Enemy_Bullet.h"
 #include"BlastHornet_Bullet.h"
+#include"BlastHornet_Wing.h"
 
 BlastHornet*BlastHornet::instance = 0;
 BlastHornet * BlastHornet::getInstance()
@@ -19,6 +20,8 @@ void BlastHornet::update()
 	updateV();
 	updateAnimation();
 	updateBeforeHandle();
+
+	BLASTHORNET_WING->update();
 }
 void BlastHornet::updateAnimation()
 {
@@ -255,6 +258,8 @@ void BlastHornet::draw()
 	}
 
 	MovableObject::draw();
+
+	BLASTHORNET_WING->draw();
 }
 void BlastHornet::onCollision(BaseObject * other, int nx, int ny)
 {
@@ -334,6 +339,8 @@ void BlastHornet::restore(BaseObject * obj)
 	indexFlyFull = -1;
 	blockBullet = false;
 	life = BLASTHORNET_LIFE;
+
+	BLASTHORNET_WING->release();
 }
 
 void BlastHornet::fixV(float & vx, float & vy, float v)
@@ -365,6 +372,8 @@ void BlastHornet::release()
 {
 	delete instance;
 	instance = 0;
+
+	BLASTHORNET_WING->release();
 }
 
 BlastHornet::BlastHornet()
