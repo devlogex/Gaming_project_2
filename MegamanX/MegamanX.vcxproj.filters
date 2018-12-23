@@ -251,9 +251,6 @@
     <ClInclude Include="BlastHornet_Wing.h">
       <Filter>Enemy\BlastHornet</Filter>
     </ClInclude>
-    <ClInclude Include="BlastHornet_Wing_Location.h">
-      <Filter>Enemy\BlastHornet</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -435,9 +432,6 @@
       <Filter>Blood</Filter>
     </ClCompile>
     <ClCompile Include="BlastHornet_Wing.cpp">
-      <Filter>Enemy\BlastHornet</Filter>
-    </ClCompile>
-    <ClCompile Include="BlastHornet_Wing_Location.cpp">
       <Filter>Enemy\BlastHornet</Filter>
     </ClCompile>
   </ItemGroup>

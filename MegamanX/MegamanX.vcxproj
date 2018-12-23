@@ -154,7 +154,6 @@
     <ClInclude Include="BlastHornet_Bullet.h" />
     <ClInclude Include="BlastHornet_Bullet_Direct.h" />
     <ClInclude Include="BlastHornet_Wing.h" />
-    <ClInclude Include="BlastHornet_Wing_Location.h" />
     <ClInclude Include="Blood.h" />
     <ClInclude Include="BloodBlastHornet.h" />
     <ClInclude Include="BloodBoss.h" />
@@ -219,7 +218,6 @@
     <ClCompile Include="BlastHornet_Bullet.cpp" />
     <ClCompile Include="BlastHornet_Bullet_Direct.cpp" />
     <ClCompile Include="BlastHornet_Wing.cpp" />
-    <ClCompile Include="BlastHornet_Wing_Location.cpp" />
     <ClCompile Include="Blood.cpp" />
     <ClCompile Include="BloodBlastHornet.cpp" />
     <ClCompile Include="BloodBoss.cpp" />

@@ -1,5 +1,4 @@
 #include "BlastHornet_Wing.h"
-#include"BlastHornet_Wing_Location.h"
 #include"BlastHornet.h"
 #include"Map.h"
 
@@ -23,14 +22,14 @@ void BlastHornet_Wing::draw()
 	if (!BLASTHORNET->alive)
 		return;
 
-	x = BLASTHORNET->x;
-	y = BLASTHORNET->y;
+	x = BLASTHORNET->x + BLASTHORNET->width / 2;
+	y = BLASTHORNET->y + 23;
 
-	x -= sprite->animates[curAnimation].frames[curFrame].width/2;
+	x -= sprite->animates[curAnimation].frames[curFrame].width / 2;
 	y -= sprite->animates[curAnimation].frames[curFrame].height;
 
 	int xInViewport, yInViewport;
-	Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
+	Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);
 	sprite->draw(xInViewport, yInViewport, curAnimation, curFrame);
 }
 
@@ -42,7 +41,6 @@ void BlastHornet_Wing::release()
 {
 	delete instance;
 	instance = 0;
-	BLASTHORNET_WING_LOCATION->release();
 }
 
 BlastHornet_Wing::BlastHornet_Wing()

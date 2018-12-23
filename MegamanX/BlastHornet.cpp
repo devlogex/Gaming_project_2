@@ -243,6 +243,9 @@ void BlastHornet::updateLocation()
 }
 void BlastHornet::draw()
 {
+	if (alive)
+		BLASTHORNET_WING->draw();
+
 	if (!alive)
 	{
 		if (timeDeath.isTerminated())
@@ -259,7 +262,6 @@ void BlastHornet::draw()
 
 	MovableObject::draw();
 
-	BLASTHORNET_WING->draw();
 }
 void BlastHornet::onCollision(BaseObject * other, int nx, int ny)
 {

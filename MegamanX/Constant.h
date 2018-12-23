@@ -79,7 +79,6 @@
 #define GENJIBO_SP_ENGINE_LOCATION Genjibo_SP_Engine_Location::getInstance()
 #define BLASTHORNET			BlastHornet::getInstance()
 #define BLASTHORNET_WING	BlastHornet_Wing::getInstance()
-#define BLASTHORNET_WING_LOCATION	BlastHornet_Wing_Location::getInstance()
 
 
 #define FRAME_RATE			(80.0f)  // Số frame load trên một giây (frame/giây)
