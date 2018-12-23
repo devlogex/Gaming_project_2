@@ -161,7 +161,7 @@ void Map::initStage(const char * stageInfoPath)
 
 	Stage::curStages = &stages;
 	if (Stage::curStage == 0)
-		Stage::curStage = stages[4];
+		Stage::curStage = stages[0];
 }
 
 void Map::restoreAllObject()

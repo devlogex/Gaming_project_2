@@ -10,6 +10,7 @@ void Scene::changeScene(Scene* scene, bool clean,bool isInit)
 	curScene = scene;
 	if (isInit)
 		curScene->init();
+
 }
 
 Scene::Scene(void)

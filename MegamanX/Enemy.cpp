@@ -2,6 +2,7 @@
 #include"Map.h"
 #include"Weapon.h"
 #include"Stage.h"
+#include"GameSound.h"
 
 void Enemy::update()
 {
@@ -35,7 +36,10 @@ void Enemy::draw()
 		}
 
 		if (timeDeath.isTerminated())
+		{
+			GAMESOUND->stop(AUDIO_CREP_DIE);
 			return;
+		}
 
 		int xInViewport, yInViewport;
 		Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
@@ -59,7 +63,10 @@ void Enemy::onAABBCheck(BaseObject * other)
 		Weapon* wp = (Weapon*)other;
 		life -= wp->damage;
 		if (life <= 0)
+		{
 			alive = false;
+			GAMESOUND->play(AUDIO_CREP_DIE,true);
+		}
 	}
 }
 

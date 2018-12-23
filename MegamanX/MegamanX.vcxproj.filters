@@ -67,6 +67,9 @@
     <Filter Include="Enemy\BlastHornet">
       <UniqueIdentifier>{921c0924-a381-45ac-87bf-d43fc2f11e37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FrameWork\Sound">
+      <UniqueIdentifier>{7442bc53-c318-4e8a-9539-de7f35f1d1ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowGame.h">
@@ -251,6 +254,15 @@
     <ClInclude Include="BlastHornet_Wing.h">
       <Filter>Enemy\BlastHornet</Filter>
     </ClInclude>
+    <ClInclude Include="CWaveFile.h">
+      <Filter>FrameWork\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSound.h">
+      <Filter>FrameWork\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>FrameWork\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WindowGame.cpp">
@@ -433,6 +445,15 @@
     </ClCompile>
     <ClCompile Include="BlastHornet_Wing.cpp">
       <Filter>Enemy\BlastHornet</Filter>
+    </ClCompile>
+    <ClCompile Include="CWaveFile.cpp">
+      <Filter>FrameWork\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSound.cpp">
+      <Filter>FrameWork\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>FrameWork\Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

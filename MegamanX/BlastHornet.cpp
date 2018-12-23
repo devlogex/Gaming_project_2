@@ -4,6 +4,7 @@
 #include"Enemy_Bullet.h"
 #include"BlastHornet_Bullet.h"
 #include"BlastHornet_Wing.h"
+#include"Weapon.h"
 
 BlastHornet*BlastHornet::instance = 0;
 BlastHornet * BlastHornet::getInstance()
@@ -249,7 +250,10 @@ void BlastHornet::draw()
 	if (!alive)
 	{
 		if (timeDeath.isTerminated())
+		{
+			GAMESOUND->stop(AUDIO_BOSS_DIE);
 			return;
+		}
 		else
 			timeDeath.canCreateFrame();
 
@@ -327,7 +331,16 @@ void BlastHornet::onCollision(BaseObject * other, int nx, int ny)
 }
 void BlastHornet::onAABBCheck(BaseObject * other)
 {
-	Enemy::onAABBCheck(other);
+	if (other->collisionType == CT_WEAPON)
+	{
+		Weapon* wp = (Weapon*)other;
+		life -= wp->damage;
+		if (life <= 0)
+		{
+			alive = false;
+			GAMESOUND->play(AUDIO_BOSS_DIE, true);
+		}
+	}
 }
 void BlastHornet::restore(BaseObject * obj)
 {

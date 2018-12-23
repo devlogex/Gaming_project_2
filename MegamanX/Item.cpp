@@ -2,6 +2,7 @@
 #include"SpriteManager.h"
 #include"MovableObject.h"
 #include"Map.h"
+#include "GameSound.h"
 
 void Item::draw()
 {
@@ -21,7 +22,10 @@ void Item::update()
 void Item::onAABBCheck(BaseObject * other)
 {
 	if (other->collisionType == CT_PLAYER && alive)
+	{
 		alive = false;
+		GAMESOUND->play(AUDIO_ITEM);
+	}
 }
 
 void Item::onCollision(BaseObject * other, int nx, int ny)

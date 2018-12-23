@@ -13,6 +13,7 @@
 #include"Door.h"
 #include"Stage.h"
 #include"Genjibo_SP.h"
+#include"GameSound.h"
 
 Megaman*Megaman::instance = 0;
 Megaman * Megaman::getInstance()
@@ -178,6 +179,8 @@ void Megaman::statusNormal()
 			vy = MEGAMAN_VY_JUMP;
 			changeAction(MA_HIGHJUMP);
 			canJump = false;
+
+			GAMESOUND->play(AUDIO_JUMP);
 		}
 		else
 			if (KEY->keyJum && canJump)
@@ -185,11 +188,15 @@ void Megaman::statusNormal()
 				vy = MEGAMAN_VY_JUMP;
 				changeAction(MA_JUMP);
 				canJump = false;
+
+				GAMESOUND->play(AUDIO_JUMP);
 			}
 			else
 				if (KEY->keySlide && canSlide)
 				{
 					changeAction(MA_SLIDE);
+
+					GAMESOUND->play(AUDIO_SLIDE);
 				}
 				else
 					if ((KEY->keyLeft && canMoveLeft) || (KEY->keyRight&&canMoveRight))
@@ -221,6 +228,8 @@ void Megaman::statusNormal()
 						ax = direction * MEGAMAN_AX;
 						vy = MEGAMAN_VY_WALL_UP_H;
 						changeAction(MA_HIGHJUMPWALL);
+
+						GAMESOUND->play(AUDIO_JUMP);
 					}
 					else
 						if (KEY->keyJum && canJump)
@@ -229,6 +238,8 @@ void Megaman::statusNormal()
 							ax = direction * MEGAMAN_AX;
 							vy = MEGAMAN_VY_WALL_UP;
 							changeAction(MA_JUMPWALL);
+
+							GAMESOUND->play(AUDIO_JUMP);
 						}
 				}
 				else
@@ -255,6 +266,8 @@ void Megaman::statusAttack()
 			vy = MEGAMAN_VY_JUMP;
 			changeAction(MA_HIGHJUMP_ATTACK);
 			canJump = false;
+
+			GAMESOUND->play(AUDIO_JUMP);
 		}
 		else
 			if (KEY->keyJum && canJump)
@@ -262,11 +275,15 @@ void Megaman::statusAttack()
 				vy = MEGAMAN_VY_JUMP;
 				changeAction(MA_JUMP_ATTACK);
 				canJump = false;
+
+				GAMESOUND->play(AUDIO_JUMP);
 			}
 			else
 				if (KEY->keySlide && canSlide)
 				{
 					changeAction(MA_SLIDE_ATTACK);
+
+					GAMESOUND->play(AUDIO_SLIDE);
 				}
 				else
 					if ((KEY->keyLeft && canMoveLeft) || (KEY->keyRight&&canMoveRight))
@@ -297,6 +314,8 @@ void Megaman::statusAttack()
 						vx = -MEGAMAN_VX_WALL_H * direction;
 						vy = MEGAMAN_VY_WALL_UP_H;
 						changeAction(MA_HIGHJUMPWALL_ATTACK);
+
+						GAMESOUND->play(AUDIO_JUMP);
 					}
 					else
 						if (KEY->keyJum && canJump)
@@ -304,6 +323,8 @@ void Megaman::statusAttack()
 							vx = -MEGAMAN_VX_WALL * direction;
 							vy = MEGAMAN_VY_WALL_UP;
 							changeAction(MA_JUMPWALL_ATTACK);
+
+							GAMESOUND->play(AUDIO_JUMP);
 						}
 				}
 				else
@@ -463,8 +484,12 @@ void Megaman::updateAnimation()
 	if (KEY->keyAttack && timeWeaponAppear.isTerminated() && timeAttack.curLoop==1)
 	{
 		WEAPON->_Add(new Weapon_Simple());
+		GAMESOUND->play(AUDIO_SHOT);		////////////////////////////////
 		timeWeaponAppear.start();
 	}
+	
+	if(!KEY->keyAttack)
+		GAMESOUND->stop(AUDIO_CHARGE);
 
 	if (timeAttack.curLoop > 0 && timeAttack.curLoop < 15)
 	{
@@ -503,6 +528,8 @@ void Megaman::updateAnimation()
 			
 			if (timeAttack.curLoop >= 100)
 				WEAPONSTATUS->changeAction(WS_LARGE);
+
+			GAMESOUND->play(AUDIO_CHARGE,false,false);		////////////////////////////////
 		}
 
 	}
@@ -518,6 +545,8 @@ void Megaman::updateAnimation()
 			{
 				WEAPON->_Add(new Weapon_Large());
 				timeWeaponAppear.start();
+
+				GAMESOUND->stop(AUDIO_SHOT);			////////////////////////////
 			}
 		timeAttack.start();
 		WEAPONSTATUS->allowDraw = false;

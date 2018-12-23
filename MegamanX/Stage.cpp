@@ -9,6 +9,7 @@
 #include"Genjibo_SP.h"
 #include"Genjibo.h"
 #include"BlastHornet.h"
+#include"GameSound.h"
 
 List<Stage*>* Stage::curStages = 0;
 Stage* Stage::curStage = 0;
@@ -77,6 +78,31 @@ void Stage::loadStagePrev()
 		BLASTHORNET->y = BLASTHORNET->oldY;
 
 		BLASTHORNET->restore(BLASTHORNET);
+	}
+
+	if (Stage::curStage->index == 4)
+	{
+		GAMESOUND->stop(AUDIO_JUMP);
+		GAMESOUND->stop(AUDIO_SHOT);
+		GAMESOUND->stop(AUDIO_CHARGE);
+		GAMESOUND->stop(AUDIO_BOSS_DIE);
+		GAMESOUND->stop(AUDIO_CREP_DIE);
+		GAMESOUND->stop(AUDIO_ITEM);
+		GAMESOUND->stop(AUDIO_FIRST_STAGE);
+		GAMESOUND->stop(AUDIO_BLASTHORNET_STAGE);
+		GAMESOUND->play(AUDIO_BLASTHORNET_STAGE, true);
+	}
+	else
+	{
+		GAMESOUND->stop(AUDIO_JUMP);
+		GAMESOUND->stop(AUDIO_SHOT);
+		GAMESOUND->stop(AUDIO_CHARGE);
+		GAMESOUND->stop(AUDIO_BOSS_DIE);
+		GAMESOUND->stop(AUDIO_CREP_DIE);
+		GAMESOUND->stop(AUDIO_ITEM);
+		GAMESOUND->stop(AUDIO_FIRST_STAGE);
+		GAMESOUND->stop(AUDIO_BLASTHORNET_STAGE);
+		GAMESOUND->play(AUDIO_FIRST_STAGE, true);
 	}
 }
 

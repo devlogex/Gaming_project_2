@@ -133,7 +133,11 @@ void Genjibo::draw()
 		}
 
 		if (timeDeath.isTerminated())
+		{
+			GAMESOUND->stop(AUDIO_CREP_DIE);
 			return;
+		}
+
 		int xInViewport, yInViewport;
 		Map::curMap->convertToViewportPos(xCenter(), yCenter(), xInViewport, yInViewport);
 		sprite->draw(xInViewport, yInViewport, curAnimation, curFrame, true);

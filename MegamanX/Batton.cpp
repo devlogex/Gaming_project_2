@@ -49,7 +49,10 @@ void Batton::draw()
 		}
 
 		if (timeDeath.isTerminated())
+		{
+			GAMESOUND->stop(AUDIO_CREP_DIE);
 			return;
+		}
 
 		int xInViewport, yInViewport;
 		Map::curMap->convertToViewportPos(x, y, xInViewport, yInViewport);

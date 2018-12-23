@@ -11,8 +11,8 @@
 #define BACK_WIDTH			VIEWPORT_WIDTH
 #define BACK_HEIGHT			VIEWPORT_HEIGHT
 #define GRAVITY				550
-#define X_MAP				4347
-#define Y_MAP				592
+#define X_MAP				13
+#define Y_MAP				529
 #define MEGAMAN_VX_RUN		50
 #define MEGAMAN_VX_SLIDE	150
 #define MEGAMAN_VY_JUMP		-250
@@ -26,8 +26,8 @@
 #define ENEMY_VX_GO			60
 #define ENEMY_BULLET_VX		100
 #define BOSS_VX				150
-#define MEGAMAN_LIFE		100
-#define BOSS_LIFE			500
+#define MEGAMAN_LIFE		150
+#define BOSS_LIFE			300
 #define TRAP_LIFE			20
 #define BATTON_LIFE			20
 #define	CANON_LIFE			35
@@ -79,7 +79,27 @@
 #define GENJIBO_SP_ENGINE_LOCATION Genjibo_SP_Engine_Location::getInstance()
 #define BLASTHORNET			BlastHornet::getInstance()
 #define BLASTHORNET_WING	BlastHornet_Wing::getInstance()
+#define GAMESOUND			GameSound::getInstance()
 
+#define AUDIO_FORMAT_TAG		WAVE_FORMAT_PCM
+#define	AUDIO_NUM_OF_CHANNEL	2
+#define AUDIO_SAMPLE_SPEED		22050
+#define AUDIO_BITS_PER_SAMPLE	16
+#define AUDIO_FLAGS				0
+#define AUDIO_BUFFER_SIZE		640000
+#define AUDIO_GUID				GUID_NULL
+#define AUDIO_BLOCK_ALIGN(bitPerSample, nChannels)		(WORD)(bitPerSample / 8 * nChannels)
+#define AUDIO_AVERAGE_BPS(samplesPerSec, blockAlign)	(DWORD)(samplesPerSec * blockAlign)
+
+#define AUDIO_FIRST_STAGE	"Data\\Sound\\First_Stage.wav"		///
+#define AUDIO_JUMP			"Data\\Sound\\Jump.wav"				///
+#define AUDIO_SHOT			"Data\\Sound\\Shot.wav"				///
+#define AUDIO_CHARGE		"Data\\Sound\\Charge.wav"			///
+#define AUDIO_BLASTHORNET_STAGE	"Data\\Sound\\BlastHornet.wav"	///
+#define AUDIO_BOSS_DIE		"Data\\Sound\\Boss_die.wav"
+#define AUDIO_CREP_DIE		"Data\\Sound\\Crep_die.wav"
+#define AUDIO_ITEM			"Data\\Sound\\Pick_up_item.wav"		///
+#define	AUDIO_SLIDE			"Data\\Sound\\Slide.wav"			///
 
 #define FRAME_RATE			(80.0f)  // Số frame load trên một giây (frame/giây)
 #define MIN_FRAME_RATE		(60.0f)

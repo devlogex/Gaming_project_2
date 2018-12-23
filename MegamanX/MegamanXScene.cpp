@@ -8,12 +8,14 @@
 #include"Genjibo_SP.h"
 #include"Genjibo.h"
 #include"BlastHornet.h"
+#include"GameSound.h"
 
 MegamanXScene* MegamanXScene::megamanXScene = 0;
 void MegamanXScene::init()
 {
 	map.init("Data\\Map\\map\\map.png", "Data\\Map\\map\\objectsMap.txt","Data\\Map\\map\\quadtree.txt");
 	map.initStage("Data\\Map\\map\\stage.txt");
+	GAMESOUND->play(AUDIO_FIRST_STAGE, true);
 }
 
 void MegamanXScene::update()
@@ -27,10 +29,24 @@ void MegamanXScene::update()
 			timeDraw.start();
 
 		Scene::changeScene(new MainScreen(), false);
-		MEGAMAN->numberOfAlive = 3;
 		if (Stage::curStage->index == Stage::curStages->size() - 1)
 			Stage::curStage = Stage::curStages->at(Stage::curStage->index - 1);
 		Stage::loadStagePrev();
+
+		if (MEGAMAN->numberOfAlive == 0)
+		{
+			GAMESOUND->stop(AUDIO_JUMP);
+			GAMESOUND->stop(AUDIO_SHOT);
+			GAMESOUND->stop(AUDIO_CHARGE);
+			GAMESOUND->stop(AUDIO_BOSS_DIE);
+			GAMESOUND->stop(AUDIO_CREP_DIE);
+			GAMESOUND->stop(AUDIO_ITEM);
+			GAMESOUND->stop(AUDIO_FIRST_STAGE);
+			GAMESOUND->stop(AUDIO_BLASTHORNET_STAGE);
+
+			MEGAMAN->numberOfAlive = 3;
+		}
+
 		return;
 	}
 	if (!MEGAMAN->alive)

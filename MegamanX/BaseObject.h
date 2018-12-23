@@ -4,6 +4,7 @@
 #include"Constant.h"
 #include"GameTime.h"
 #include"Sprite.h"
+#include"GameSound.h"
 
 
 extern void* operator new(std::size_t sz); //Lấy float cho phép toán
