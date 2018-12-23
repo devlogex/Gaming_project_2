@@ -236,7 +236,7 @@ void Genjibo::onAABBCheck(BaseObject * other)
 void Genjibo::restore(BaseObject * obj)
 {
 	Enemy::restore(obj);
-	life = BOSS_LIFE;
+	life = GENJIBO_LIFE;
 	direction = Left;
 	indexRun = -1;
 	timeAppear.init(0.23, 10);

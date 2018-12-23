@@ -33,20 +33,16 @@ void MegamanXScene::update()
 			Stage::curStage = Stage::curStages->at(Stage::curStage->index - 1);
 		Stage::loadStagePrev();
 
-		if (MEGAMAN->numberOfAlive == 0)
-		{
-			GAMESOUND->stop(AUDIO_JUMP);
-			GAMESOUND->stop(AUDIO_SHOT);
-			GAMESOUND->stop(AUDIO_CHARGE);
-			GAMESOUND->stop(AUDIO_BOSS_DIE);
-			GAMESOUND->stop(AUDIO_CREP_DIE);
-			GAMESOUND->stop(AUDIO_ITEM);
-			GAMESOUND->stop(AUDIO_FIRST_STAGE);
-			GAMESOUND->stop(AUDIO_BLASTHORNET_STAGE);
+		GAMESOUND->stop(AUDIO_JUMP);
+		GAMESOUND->stop(AUDIO_SHOT);
+		GAMESOUND->stop(AUDIO_CHARGE);
+		GAMESOUND->stop(AUDIO_BOSS_DIE);
+		GAMESOUND->stop(AUDIO_CREP_DIE);
+		GAMESOUND->stop(AUDIO_ITEM);
+		GAMESOUND->stop(AUDIO_FIRST_STAGE);
+		GAMESOUND->stop(AUDIO_BLASTHORNET_STAGE);
 
-			MEGAMAN->numberOfAlive = 3;
-		}
-
+		MEGAMAN->numberOfAlive = 3;
 		return;
 	}
 	if (!MEGAMAN->alive)

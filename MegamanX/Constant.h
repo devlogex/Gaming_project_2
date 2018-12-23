@@ -27,7 +27,7 @@
 #define ENEMY_BULLET_VX		100
 #define BOSS_VX				150
 #define MEGAMAN_LIFE		150
-#define BOSS_LIFE			300
+#define BOSS_LIFE			150
 #define TRAP_LIFE			20
 #define BATTON_LIFE			20
 #define	CANON_LIFE			35
