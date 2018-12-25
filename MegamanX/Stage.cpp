@@ -56,8 +56,7 @@ void Stage::loadStagePrev()
 
 	Map::curMap->xMap = curStage->xPre;
 	Map::curMap->yMap = curStage->yPre;
-	MEGAMAN->x = CAMERA->xCenter() - MEGAMAN->width;
-	MEGAMAN->y = CAMERA->yCenter();
+
 	MEGAMAN->restore(MEGAMAN);
 	for (int i = 0; i < Door::doors->size(); i++)
 		Door::doors->at(i)->restore(Door::doors->at(i));

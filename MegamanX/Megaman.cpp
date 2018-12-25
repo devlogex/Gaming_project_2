@@ -637,6 +637,8 @@ void Megaman::restore(BaseObject * obj)
 	timeBeDamaged.start();
 	isActive = true;
 	direction = Right;
+	x = CAMERA->xCenter() - MEGAMAN->width;
+	y = CAMERA->yCenter();
 }
 
 void Megaman::onCollision(BaseObject * other, int nx, int ny)

@@ -27,7 +27,7 @@
 #define ENEMY_BULLET_VX		100
 #define BOSS_VX				150
 #define MEGAMAN_LIFE		150
-#define BOSS_LIFE			150
+#define BOSS_LIFE			1
 #define TRAP_LIFE			20
 #define BATTON_LIFE			20
 #define	CANON_LIFE			35
@@ -45,9 +45,9 @@
 #define GENJIBO_VY			-300
 #define GENJIBO_DX			1.2
 #define GENJIBO_DY			1.2
-#define GENJIBO_LIFE		100
+#define GENJIBO_LIFE		1
 #define GENJIBO_DAMAGE		20
-#define BLASTHORNET_LIFE	100
+#define BLASTHORNET_LIFE	1
 #define BLASTHORNET_DAMAGE	25
 #define BLASTHORNET_FLY_VX	70
 #define BLASTHORNET_FLY_VY	170

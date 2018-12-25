@@ -22,6 +22,7 @@ void MainScreen::update()
 			if (MegamanXScene::megamanXScene != 0)
 				delete MegamanXScene::megamanXScene;
 			Scene::changeScene(new MegamanXScene());
+			MEGAMAN->restore(MEGAMAN);
 		}
 		else
 			if (button->curAnimation == BUTTON_CONTINUE && timeDraw.isTerminated())
