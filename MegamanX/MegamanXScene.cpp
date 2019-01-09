@@ -91,6 +91,12 @@ void MegamanXScene::draw()
 	MEGAMAN->draw();
 }
 
+void MegamanXScene::release()
+{
+	delete megamanXScene;
+	megamanXScene = 0;
+}
+
 MegamanXScene::MegamanXScene()
 {
 	megamanXScene = this;
